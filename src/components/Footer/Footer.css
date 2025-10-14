@@ -1,0 +1,39 @@
+.footer{
+    width: 100%;
+    background-color: #6BE070;
+    color: #FFFFFF;
+    padding: 53px 200px 19px 80px;
+    font-size: 21px;
+}
+
+.icons{
+    width: 28px;
+    height: 28px;
+}
+
+.footer-text{
+    gap: 70px;
+}
+
+.footer-icons{
+    gap: 37.67px;
+}
+
+.icons-list{
+    gap: 78.48px;
+}
+
+.language {
+    appearance: none; /* removes native arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    background-image: url('/images/arrow.png');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-color: #FFFFFF;
+    color: #2C2C2C;
+    border-radius: 10px;
+    width: 140px;
+    padding: 15px 25px 14px 19.33px; /* ձախից ու arrow-ից ազատ տարածություն */
+}
