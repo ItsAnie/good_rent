@@ -1,0 +1,81 @@
+.start{
+    width: 100%;
+}
+
+.bg_img{
+    background-image: url('/images/bg_img.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 206px 0 209px;
+}
+
+.bg_img2{
+    background-image: url('/images/bg_img2.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 1505px;
+    height: 784px;
+}
+
+.bg{
+    width: 1115px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 0 0 50px 50px;
+    padding: 116px 51px 17px 51px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.grid_items{
+    width: 320px;
+    height: 250px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    text-align: center;
+    color: #333333;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.grid_items p{
+    opacity: 0.8;
+    max-width: 272px;
+}
+
+.grid_items img{
+    width: 100px;
+    height: 100px;
+}
+
+h1{
+    font-size: 64px;
+    font-weight: 500;
+    color: #4F4F4F;
+}
+
+.logo{
+    width: 218px;
+    height: 260px;
+}
+
+.download{
+    width: 200px;
+    height: 57.41088104248047px;
+}
+
+.register-actions{
+    gap: 8px;
+}
+
+.register-btn{
+    width: 355px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #27AE60;
+}
+
