@@ -1,7 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
+import Register from "../Register/Register";
+import SignUp from "../SignUp/SignUp";
+
 import './Start.css'
 
 function Start(){
+    const [showForm, setShowForm] = useState(false);
+
     return (
         <div className="start">
             <div className="bg_img flex flex-col">
@@ -40,17 +45,11 @@ function Start(){
                         </div>
                     </div>
 
-                    <div className="register flex">
-                        <img src="/images/app_store.png" className="download" />
-                        <div className="register-actions flex flex-col">
-                            <button className="register-btn">Зарегистрироваться через e-mail</button>
-                            <button className="register-btn">Продолжить через Facebook</button>
-                            <button className="register-btn">Продолжить через Google</button>
-                            <button className="register-btn">Войти через e-mail</button>
-                            <button className="register-btn">Продолжить без регистрации</button>
-                        </div>
-                        <img src="/images/google-play.png" className="download" />
+                    <div className="auth-page">
+                        {!showForm && <Register setShowForm={setShowForm} />}
+                        {showForm && <SignUp setShowForm={setShowForm} />}
                     </div>
+                    
                 </div>    
             </div>
         </div>

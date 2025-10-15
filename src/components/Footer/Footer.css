@@ -2,8 +2,19 @@
     width: 100%;
     background-color: #6BE070;
     color: #FFFFFF;
-    padding: 53px 200px 19px 80px;
     font-size: 21px;
+    padding: 53px 0 19px;
+}
+
+.footer-container {
+  max-width: 1600px; 
+  width: 100%;
+  margin: 0 auto; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  gap: 24px; 
+  flex-wrap: wrap; 
 }
 
 .icons{
@@ -24,7 +35,7 @@
 }
 
 .language {
-    appearance: none; /* removes native arrow */
+    appearance: none; 
     -webkit-appearance: none;
     -moz-appearance: none;
     
@@ -34,6 +45,11 @@
     background-color: #FFFFFF;
     color: #2C2C2C;
     border-radius: 10px;
-    width: 140px;
-    padding: 15px 25px 14px 19.33px; /* ձախից ու arrow-ից ազատ տարածություն */
+    padding: 15px 25px 14px 19.33px;
+    box-shadow: 0px 4px 0px 4px rgba(0, 0, 0, 0.16);
+    font-size: 16px;
+}
+
+.language-list{
+    gap: 15px;
 }
