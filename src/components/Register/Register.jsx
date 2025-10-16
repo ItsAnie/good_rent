@@ -3,7 +3,7 @@ import './Register.css'
 
 function Register({ onSignUpClick, onSignInClick }) {
   return (
-    <div className="register flex">
+    <div className="register flex ">
       <img src="/images/app_store.png" className="download" />
 
       <div className="register-actions flex flex-col">

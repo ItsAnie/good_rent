@@ -19,15 +19,13 @@
     background-repeat: no-repeat;
     background-size: contain;
     width: 1505px;
-    margin-top: 30px;
 }
 
 .bg{
     width: 1115px;
-    height: 704px;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 0 0 50px 50px;
-    padding: 75px 51px 16px 51px;
+    padding: 60px 51px 16px 51px;
     position: absolute;
     top: 0;
     left: 50%;
@@ -51,12 +49,16 @@
 
 .grid_items p{
     opacity: 0.8;
-    max-width: 272px;
+    font-family: 'Montserrat';
 }
 
 .grid_items img{
     width: 100px;
     height: 100px;
+}
+
+.items-box{
+    gap: 25px;
 }
 
 h1{
@@ -71,3 +73,44 @@ h1{
     height: 260px;
 }
 
+@media(max-width: 768px){
+    .bg_img{
+        background-image: url('/images/mobile-back.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .bg_img2{
+        background-image: none;
+        width: 100%;
+    }
+    
+    .grid_items{
+        display: none;
+    }
+
+    .bg{
+        background-color: rgba(255, 255, 255, 0);
+        width: 100%;
+    }
+
+    .logo-header{
+       position: absolute;
+       top: 42px;
+    }
+
+    .logo{
+        width: 256px;
+        height: 305px;
+    }
+
+    .logo-header p{
+        font-size: 18px;
+        font-weight: 400;
+        font-family: 'Roboto';
+        max-width: 267px;
+        text-align: center;
+        color: #4F4F4F;
+    }
+    
+}

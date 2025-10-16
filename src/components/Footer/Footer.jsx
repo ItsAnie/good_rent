@@ -34,7 +34,7 @@ function Footer(){
                     </div>
                 </div>
 
-                <p style={{color: '#F2F2F2', fontSize: '16px', textAlign: 'center'}}>ООО “Гудрент”. (c) Все права защищены. 2020</p>
+                <p className="footer-txt">ООО “Гудрент”. (c) Все права защищены. 2020</p>
             </div>    
         </footer>
     );

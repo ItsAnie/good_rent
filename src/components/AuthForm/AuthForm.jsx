@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import "./AuthForm.css"; // օգտագործում ենք նույն CSS
+import "./AuthForm.css"; 
 
-function AuthForm({ isSignUp }) {
+function AuthForm({ isSignUp, onBack, onSuccess }) {
   const [passwordValue, setPasswordValue] = useState("");
-  const [confirmValue, setConfirmValue] = useState("");
   const [forget, setForget] = useState(false);
 
   return (
@@ -13,15 +12,20 @@ function AuthForm({ isSignUp }) {
       </div>
 
       {!forget ? (
-        <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (onSuccess) onSuccess(); 
+          }}
+        >
           <div className="txt_field">
             <label>Email</label>
             <input type="email" name="email" required />
             <span></span>
           </div>
 
-          <div className="txt_field">
-            <label>Password</label>
+          <div className="txt_field pass">
+            <label>Пароль</label>
             <input
               type="password"
               name="password"
@@ -33,7 +37,7 @@ function AuthForm({ isSignUp }) {
 
             {!isSignUp && passwordValue && (
               <span className="forgot" onClick={() => setForget(true)}>
-                forgot password?
+                Забыли пароль?
               </span>
             )}
           </div>
@@ -52,7 +56,9 @@ function AuthForm({ isSignUp }) {
               <input type="email" name="email" required />
               <span></span>
             </div>
-            <button className="forgot-btn" type="submit">Введите почтовый адрес, который использовали при регистрации, мы пришлем новый пароль</button>
+            <button className="forgot-btn" type="submit">
+              Введите почтовый адрес, который использовали при регистрации, мы пришлем новый пароль
+            </button>
           </form>
         )
       )}
