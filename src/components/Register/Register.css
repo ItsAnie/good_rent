@@ -5,6 +5,9 @@
 
 .register-actions{
     gap: 8px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .register-btn{
@@ -20,15 +23,36 @@
 }
 
 .register {
-  position: relative;
-  z-index: 0;
-  margin-top: 667px; 
+  position: absolute;
+  top: 50px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 37px;
   color: #FFFFFF;
-  margin-bottom: 53px;
+  height: 900px;
+}
+
+/* .download-btn{
+    gap: 37px;
+} */
+
+.logo {
+  width: 218px;
+  height: 260px;
+}
+
+.logo-register{
+    width: 100%;   
+    height: 100%;
+}
+
+.logo-header p{
+    text-align: center;
+    color: #4F4F4F;
+    font-weight: 400;
+    font-size: 18px;
+    max-width: 267px;
+    font-family: 'Roboto';
 }
 
 .goog-fb{
@@ -46,6 +70,24 @@
     }
 
     .register{
-        margin-top: 491; 
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo-register{
+        align-items: center;
+        justify-content: center;
+        gap: 45px;
+    }
+
+    .logo {
+        width: 256px;
+        height: 305px;
+    }
+}
+
+@media(max-width: 320px){
+    .register-btn{
+        width: 300px;
     }
 }

@@ -3,7 +3,7 @@ import Register from "../Register/Register";
 import AuthForm from "../AuthForm/AuthForm"; 
 import Header from "../Header/Header";
 
-import './Start.css';
+import './Start.css'
 
 function Start() {
   const [view, setView] = useState("register");
@@ -20,10 +20,29 @@ function Start() {
                   <p>Находи то, что тебе нужно в любой точке мира!</p>
                 </div>
 
-                <div className="logo-header flex items-center justify-center flex-col">
-                  <img src="/images/logo.png" className="logo" />
-                  <h1>GoodRent.</h1>
-                  <p className="flex lg:hidden">Сервис поиска услуг и товаров для аренды рядом с Вами!</p>
+                <div className="auth-page">
+                  {view === "register" && (
+                    <Register
+                      onSignUpClick={() => setView("signup")}
+                      onSignInClick={() => setView("signin")}
+                    />
+                  )}
+
+                  {view === "signup" && (
+                    <AuthForm
+                      isSignUp={true}
+                      onBack={() => setView("register")}
+                      onSuccess={() => setView("dashboard")}
+                    />
+                  )}
+
+                  {view === "signin" && (
+                    <AuthForm
+                      isSignUp={false}
+                      onBack={() => setView("register")}
+                      onSuccess={() => setView("dashboard")}
+                    />
+                  )}
                 </div>
 
                 <div className="grid_items flex items-center justify-center flex-col">
@@ -46,32 +65,7 @@ function Start() {
                   <p>Находи в аренду любую вещь или оборудование!</p>
                 </div>
               </div>
-            </div>
-
-            <div className="auth-page">
-              {view === "register" && (
-                <Register
-                  onSignUpClick={() => setView("signup")}
-                  onSignInClick={() => setView("signin")}
-                />
-              )}
-
-              {view === "signup" && (
-                <AuthForm
-                  isSignUp={true}
-                  onBack={() => setView("register")}
-                  onSuccess={() => setView("dashboard")}
-                />
-              )}
-
-              {view === "signin" && (
-                <AuthForm
-                  isSignUp={false}
-                  onBack={() => setView("register")}
-                  onSuccess={() => setView("dashboard")}
-                />
-              )}
-            </div>
+            </div> 
           </div>
         </div>
       )}

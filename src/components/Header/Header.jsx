@@ -6,7 +6,7 @@ function Header(){
         <header className="header">
             <div className="header-container">
                 <div className="header-wrapper flex">
-                    <img src="/images/logo.png" className="logo" />
+                    <img src="/images/logo.png" className="header-logo" />
                     <div className="title">
                         <h2>GoodRent.</h2>
                         <p>Сервис поиска услуг и товаров для аренды рядом с Вами!</p>
