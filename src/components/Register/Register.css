@@ -24,12 +24,13 @@
 
 .register {
   position: absolute;
-  top: 50px;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   color: #FFFFFF;
-  height: 900px;
+  min-height: 874px;
+  height: 930px;
 }
 
 /* .download-btn{

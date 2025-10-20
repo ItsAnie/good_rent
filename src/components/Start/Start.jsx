@@ -13,8 +13,8 @@ function Start() {
       {view !== "dashboard" && (
         <div className="bg_img flex flex-col">
           <div className="bg_img2">
-            <div className="bg">
-              <div className="items-box grid grid-cols-3 place-items-center">
+            <div className="bg grid grid-cols-3 place-items-center">
+              
                 <div className="grid_items flex items-center justify-center flex-col">
                   <img src="/images/Vector.png" />
                   <p>Находи то, что тебе нужно в любой точке мира!</p>
@@ -64,7 +64,7 @@ function Start() {
                   <img src="/images/Vector5.png"/>
                   <p>Находи в аренду любую вещь или оборудование!</p>
                 </div>
-              </div>
+              
             </div> 
           </div>
         </div>
