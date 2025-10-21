@@ -1,11 +1,13 @@
 .start {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  flex: 1;
 }
 
 .bg_img {
+  flex: 1;
   width: 100%;
-  min-height: 100vh;
-  height: auto;
   background-image: url("/images/bg_img.png");
   background-repeat: no-repeat;
   background-size: cover;

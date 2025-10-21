@@ -4,8 +4,6 @@ import './Register.css'
 function Register({ onSignUpClick, onSignInClick }) {
   return (
     <div className="register flex">
-      
-
       <div className="logo-register flex flex-col justify-between">
         <div className="logo-header flex items-center justify-center flex-col">
           <img src="/images/logo.png" className="logo" />

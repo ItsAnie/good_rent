@@ -5,14 +5,15 @@ header{
 
 .header-container{
     background: linear-gradient(to bottom, #65E36A, #33C742, #C2FFC5);
-    width: 100%;
     padding: 15px 0 15px 0;
     border-radius: 0 0 20px 20px;
 }
 
 .header-wrapper{
-    justify-content: center;
+    margin: 0 auto;
     align-items: center;
+    max-width: 1920px;
+    justify-content: space-between;
 }
 
 .header-logo{
@@ -40,7 +41,13 @@ header{
     max-width: 207px;
 }
 
+.list{
+    width: 60%;
+}
+
 .nav-list{
+    justify-content: space-between;
+    width: 100%;
     list-style: none;
     font-size: 18px;
     font-weight: 500;

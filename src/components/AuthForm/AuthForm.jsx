@@ -7,9 +7,14 @@ function AuthForm({ isSignUp, onBack, onSuccess }) {
 
   return (
     <div className="sign-in flex">
-      <div className="flex items-start">
-        <img src="/images/app_store.png" className="download" />
-      </div>
+      <img src="/images/app_store.png" className="download" />
+
+      <div className="logo-form flex flex-col items-center">
+        <div className="logo-header flex items-center justify-center flex-col">
+          <img src="/images/logo.png" className="logo" />
+          <h1>GoodRent.</h1>
+          <p className="flex lg:hidden">Сервис поиска услуг и товаров для аренды рядом с Вами!</p>
+        </div>
 
       {!forget ? (
         <form
@@ -42,30 +47,34 @@ function AuthForm({ isSignUp, onBack, onSuccess }) {
             )}
           </div>
 
-          <div className="flex items-center">
+          <div>           
             <button type="submit" className="register-btn cursor-pointer">
               {isSignUp ? "Зарегистрироваться" : "Войти"}
             </button>
           </div>
+
         </form>
       ) : (
         !isSignUp && (
-          <form>
+          <form className="forgot-form">
             <div className="txt_field">
               <label>Email</label>
               <input type="email" name="email" required />
               <span></span>
             </div>
-            <button className="forgot-btn" type="submit">
+            <p className="forgot-txt">
               Введите почтовый адрес, который использовали при регистрации, мы пришлем новый пароль
+            </p>
+            <button type="submit" className="register-btn cursor-pointer">
+              Восстановить пароль
             </button>
           </form>
         )
       )}
+  </div>
 
-      <div className="flex items-start">
-        <img src="/images/google-play.png" className="download" />
-      </div>
+    <img src="/images/google-play.png" className="download" />
+
     </div>
   );
 }
