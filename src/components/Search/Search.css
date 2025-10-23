@@ -2,10 +2,10 @@
     background: linear-gradient(to bottom, #3CC742, #C2FFC5);
     border-radius: 0 0 20px 20px;
     margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-    padding-top: 31px;
-    padding-bottom: 22px;
+    align-items: flex-start;
+    padding: 31px 50px;
+    max-width: 1520px;
+    max-height: 246px;
 }
 
 .search-container h2{
@@ -21,8 +21,9 @@
 }
 
 .search-icon {
+  margin-top: 23px;
   position: absolute;
-  left: 10px;
+  left: 20px;
   color: #BDBDBD;
   font-size: 14px;
 }
@@ -36,10 +37,12 @@
   width: 531px;
   height: 50px;
   font-size: 14px;
+  margin-top: 23px;
 }
 
 .search-input::placeholder{
   color: #BDBDBD;
+  padding: 4px;
 }
 
 .radio-option{
@@ -57,7 +60,6 @@ label{
 
 .placeholder-img{
     gap: 5.7px;
-    align-items: center;
     font-size: 14px;
 }
 
@@ -123,61 +125,42 @@ input[type="radio"] + label span, input[type="radio"]:checked + label span {
     color: black;
     width: 94px;
     height: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Montserrat';
     border-radius: 19px;
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.07);
     padding-left: 27px;
+}
+
+.radius-inp:focus{
+    outline: none;
 }
 
 .km-m{
     gap: 9px;
 }
 
-/* harcakan 
 .km-m-input {
-    display: none;
-}
-.km-m-input + label {
-    font-weight: 400;
-    font-size: 10px;
-}
-.km-m-input + label span {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    margin: -2px 10px 0 0;
-    vertical-align: middle;
-    cursor: pointer;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    border: 3px solid #ffffff;
-}
-.km-m-input + label span {
-    background-color: #fff;
+  display: none;
 }
 
-.km-m-input:checked + label span {
-    background-color: #219653;
-    border: 3px solid #ffffff;
-}
-.km-m-input + label span, .km-m-input:checked + label span {
-    -webkit-transition: background-color 0.24s linear;
-    -o-transition: background-color 0.24s linear;
-    -moz-transition: background-color 0.24s linear;
-    transition: background-color 0.24s linear;
-}
-*/
-
-select{
-    width: 222px;
-    height: 50px;
-    border-radius: 19px;
-    background-color: #F6F6F6;
-    color: black;
-    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.07);
+label input.km-m-input + span {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-left: 10px;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  background-color: #fff;
+  transition: background-color 0.24s linear;
 }
 
-select:focus{
-    outline: none;
+label input.km-m-input:checked + span {
+  background-color: #219653;
+  border: 3px solid #ffffff;
 }
 
 .search-btn{
@@ -186,4 +169,64 @@ select:focus{
     width: 228px;
     font-size: 14px;
     cursor: pointer;
+}
+
+.custom-select {
+  width: 222px;
+  max-height: 259px;
+  font-family: 'Montserrat';
+}
+
+.selected {
+  background: #F6F6F6;
+  padding: 10px 15px;
+  border-radius: 19px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    border-radius: 19px;
+    list-style: none;
+    padding: 0;
+    max-height: 259px;
+    overflow-y: none;
+    padding: 5px 15px;
+}
+
+.options li {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+}
+
+.options li:hover {
+  background-color: #f0f0f0;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.category{
+    width: 222px;
+    background-color: #F6F6F6;
+    border-radius: 19px;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+.dropdwn-select{
+    align-items: center;
+    gap: 30px;
 }

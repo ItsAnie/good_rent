@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-height: 1150px;
   flex: 1;
 }
 
 .bg_img {
-  flex: 1;
   width: 100%;
   background-image: url("/images/bg_img.png");
   background-repeat: no-repeat;
@@ -14,6 +14,8 @@
   background-position: center;
   align-items: center;
   justify-content: flex-start;
+  flex: 1;
+  min-height: 1150px;
 }
 
 .bg_img2 {
