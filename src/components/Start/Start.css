@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 1150px;
+  min-height: 1002px;
   flex: 1;
 }
 
@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: flex-start;
   flex: 1;
-  min-height: 1150px;
+  min-height: 1002px;
 }
 
 .bg_img2 {
