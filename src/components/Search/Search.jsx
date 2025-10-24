@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import Recomendation from "../Recomendation/Recomendation";
 import './Search.css';
 
 const options = [
@@ -29,11 +30,12 @@ function Search() {
   const [open1, setOpen1] = useState(false);
 
   return (
-    <div className="search-container flex justify-between">
+    <div>
+      <div className="search-container flex justify-between">
       <div>
         <h2>Что вы ищете?</h2>
         <div className="search-box">
-          <FaSearch className="search-icon" />
+          <img src="/images/Shape.png" className="search-icon" />
           <input type="text" className="search-input" placeholder="Поиск" />
         </div>
 
@@ -97,85 +99,85 @@ function Search() {
         </div>
       </div>
 
-      {/* Dropdowns */}
-      <div className="dropdwn-select flex">
-        <div>
-          <p>Тип объявления</p>
-          <div 
-            className="category"
-            style={{height: open ? '228px' : '50px'}}
-            >
-            <div className="custom-select">
-                <div className="selected" onClick={() => setOpen(!open)}>
-                {selectedOption ? (
-                    <>
-                    <img src={selectedOption.icon} alt="" className="icon" />
-                    {selectedOption.label}
-                    </>
-                ) : (
-                    " "
-                )}
-                </div>
-                {open && (
-                <ul className="options">
-                    {options.map((opt) => (
-                    <li
-                        key={opt.value}
-                        onClick={() => {
-                        setSelectedOption(opt);
-                        setOpen(false);
-                        }}
-                    >
-                        <img src={opt.icon} alt="" className="icon" />
-                        {opt.label}
-                    </li>
-                    ))}
-                </ul>
-                )}
+        {/* Dropdowns */}
+        <div className="dropdown-select flex">
+          <div className="gap-1.75 flex flex-col">
+            <p>Тип объявления</p>
+            <div 
+              className="category"
+              style={{height: open ? '228px' : '50px'}}
+              >
+              <div className="custom-select">
+                  <div className="selected" onClick={() => setOpen(!open)}>
+                  {selectedOption ? (
+                      <>
+                      <img src={selectedOption.icon} alt="" className="icon" />
+                      {selectedOption.label}
+                      </>
+                  ) : (
+                      " "
+                  )}
+                  </div>
+                  {open && (
+                  <ul className="options">
+                      {options.map((opt) => (
+                      <li
+                          key={opt.value}
+                          onClick={() => {
+                          setSelectedOption(opt);
+                          setOpen(false);
+                          }}
+                      >
+                          <img src={opt.icon} alt="" className="icon" />
+                          {opt.label}
+                      </li>
+                      ))}
+                  </ul>
+                  )}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div>
-          <p>Категория</p>
-          <div 
-            className="category"
-            style={{height: open1 ? '259px' : '50px'}}
-            >
-            <div className="custom-select">
-                <div className="selected" onClick={() => setOpen1(!open1)}>
-                {selectedCategory ? (
-                    <>
-                    <img src={selectedCategory.icon} alt="" className="icon" />
-                    {selectedCategory.label}
-                    </>
-                ) : (
-                    " "
-                )}
-                </div>
-                {open1 && (
-                <ul className="options">
-                    {options1.map((opt) => (
-                    <li
-                        key={opt.value}
-                        onClick={() => {
-                        setSelectedCategory(opt);
-                        setOpen1(false);
-                        }}
-                    >
-                        <img src={opt.icon} alt="" className="icon" />
-                        {opt.label}
-                    </li>
-                    ))}
-                </ul>
-                )}
+          <div className="gap-1.75 flex flex-col">
+            <p>Категория</p>
+            <div 
+              className="category"
+              style={{height: open1 ? '259px' : '50px'}}
+              >
+              <div className="custom-select">
+                  <div className="selected" onClick={() => setOpen1(!open1)}>
+                  {selectedCategory ? (
+                      <>
+                      <img src={selectedCategory.icon} alt="" className="icon" />
+                      {selectedCategory.label}
+                      </>
+                  ) : (
+                      " "
+                  )}
+                  </div>
+                  {open1 && (
+                  <ul className="options">
+                      {options1.map((opt) => (
+                      <li
+                          key={opt.value}
+                          onClick={() => {
+                          setSelectedCategory(opt);
+                          setOpen1(false);
+                          }}
+                      >
+                          <img src={opt.icon} alt="" className="icon" />
+                          {opt.label}
+                      </li>
+                      ))}
+                  </ul>
+                  )}
+              </div>
             </div>
           </div>
+          <button className="register-btn search-btn">Искать</button>
         </div>
-
-        <button className="register-btn search-btn">Искать</button>
-       
       </div>
+      <Recomendation />
     </div>
   );
 }

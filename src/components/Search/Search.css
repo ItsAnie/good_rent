@@ -25,7 +25,6 @@
   position: absolute;
   left: 20px;
   color: #BDBDBD;
-  font-size: 14px;
 }
 
 .search-input {
@@ -40,9 +39,13 @@
   margin-top: 23px;
 }
 
+.search-input:focus{
+  outline: none;
+}
+
 .search-input::placeholder{
   color: #BDBDBD;
-  padding: 4px;
+  padding-left: 4px;
 }
 
 .radio-option{
@@ -196,7 +199,6 @@ label input.km-m-input:checked + span {
     border-radius: 19px;
     list-style: none;
     padding: 0;
-    max-height: 259px;
     overflow-y: none;
     padding: 5px 15px;
 }
@@ -226,7 +228,9 @@ label input.km-m-input:checked + span {
     transition: height 0.3s ease;
 }
 
-.dropdwn-select{
+.dropdown-select{
     align-items: center;
     gap: 30px;
+    margin-top: 23px;
 }
+

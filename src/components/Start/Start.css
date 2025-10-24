@@ -3,7 +3,6 @@
   flex-direction: column;
   width: 100%;
   min-height: 1002px;
-  flex: 1;
 }
 
 .bg_img {
@@ -12,10 +11,9 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  min-height: 1002px;
   align-items: center;
   justify-content: flex-start;
-  flex: 1;
-  min-height: 1002px;
 }
 
 .bg_img2 {
