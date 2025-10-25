@@ -1,68 +1,80 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Search(){
-    const locatiuonList = ([
-        {location: 'Локация из профиля', street: 'Краснодар, ул. Тургенева 150'},
-        {location: 'Текущая локация', street: 'Краснодар, ул Красная 121'},
-        {location: 'Указать локацию', street: 'Указать локацию'}
-    ]);
+function Search({ label, options, onChange }) {
+  const [inputValue, setInputValue] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
-    return(
-        <div>
-            {/* es divy harcakan */}
-            <div>
-                <div>
-                    <h2>Что вы ищете?</h2>
-                    <input type="text" className="search-input"  />
-                </div>
+  // Ֆիլտրում ենք ըստ գրած տեքստի
+  const filteredOptions = options.filter((opt) =>
+    opt.toLowerCase().includes(inputValue.toLowerCase())
+  );
 
-                <div>
-                    <div>
-                        <input type="radio" />
-                    </div>
+  const handleSelect = (value) => {
+    setInputValue(value);
+    setIsOpen(false);
+    onChange(value);
+  };
 
-                    <div>
-                        <p>Радиус поиска</p>
-                        <div>
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    setIsOpen(true);
+    onChange(value); // նաև փոխանցում ենք value-ն վերև
+  };
 
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            {/* minchev stex */}
-
-            <div>
-                <p> Тип объявления </p>
-
-                {/* dropdwn select petqa lini 2n el */}               
-                <select>
-                    <option>Аренда</option>
-                    <option>Услуга</option>
-                    <option>Обмен</option>
-                    <option>Продажа</option>
-                    <option>Даром</option>
-                    <option>Ищут</option>
-                    <option></option>
-                </select>
-            </div>
-
-            <div>
-                <p>Категория</p>
-                <select>
-                    <option> Личные вещи </option>
-                    <option> Недвижимость </option>
-                    <option>Хобби и развлечения</option>
-                    <option>Для дома</option>
-                    <option>Гаджеты и техника</option>
-                    <option>Питомцы</option>
-                </select>
-            </div>
-
-            <button>Искать</button>
-
-        </div>
-    );
+  return (
+    <div style={{ marginBottom: "15px", position: "relative" }}>
+      <p>{label}</p>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={handleInputChange}
+        onFocus={() => setIsOpen(true)}
+        placeholder={`Введите ${label.toLowerCase()}...`}
+        style={{
+          width: "100%",
+          padding: "8px",
+          border: "1px solid #ccc",
+          borderRadius: "6px",
+        }}
+      />
+      {isOpen && filteredOptions.length > 0 && (
+        <ul
+          style={{
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            width: "100%",
+            background: "white",
+            border: "1px solid #ccc",
+            borderRadius: "6px",
+            listStyle: "none",
+            margin: 0,
+            padding: 0,
+            maxHeight: "150px",
+            overflowY: "auto",
+            zIndex: 10,
+          }}
+        >
+          {filteredOptions.map((option, i) => (
+            <li
+              key={i}
+              onClick={() => handleSelect(option)}
+              style={{
+                padding: "8px",
+                cursor: "pointer",
+                borderBottom: "1px solid #eee",
+              }}
+              onMouseEnter={(e) => (e.target.style.background = "#f2f2f2")}
+              onMouseLeave={(e) => (e.target.style.background = "white")}
+            >
+              {option}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 }
 
-export default Search
+export default Search;

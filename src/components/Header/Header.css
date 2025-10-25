@@ -41,10 +41,6 @@ header{
     max-width: 207px;
 }
 
-.list{
-    width: 60%;
-}
-
 .nav-list{
     justify-content: space-between;
     width: 100%;
