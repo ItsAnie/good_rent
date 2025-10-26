@@ -4,18 +4,12 @@
     color: #FFFFFF;
     font-size: 21px;
     font-weight: 400;
-    padding: 53px 0 19px;
+    padding: 54px 0 19px;
 }
 
 .footer-container {
-  max-width: 1600px; 
   width: 100%;
-  margin: 0 auto; 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; 
-  gap: 24px; 
-  flex-wrap: wrap; 
+  margin: 0 auto;
 }
 
 .footer-txt{
@@ -28,18 +22,6 @@
 .icons{
     width: 28px;
     height: 28px;
-}
-
-.footer-text{
-    gap: 70px;
-}
-
-.footer-icons{
-    gap: 37.67px;
-}
-
-.icons-list{
-    gap: 78.48px;
 }
 
 .language {
@@ -56,10 +38,6 @@
     padding: 15px 25px 14px 19.33px;
     box-shadow: 0px 4px 0px 4px rgba(0, 0, 0, 0.16);
     font-size: 16px;
-}
-
-.language-list{
-    gap: 15px;
 }
 
 @media(max-width: 768px){

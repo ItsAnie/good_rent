@@ -25,7 +25,7 @@ function AuthForm({ isSignUp, onBack, onSuccess }) {
         >
           <div className="txt_field">
             <label>Email</label>
-            <input type="email" name="email" required />
+            <input type="email" name="email"  /> {/*heto dnel required */}
             <span></span>
           </div>
 
@@ -34,10 +34,10 @@ function AuthForm({ isSignUp, onBack, onSuccess }) {
             <input
               type="password"
               name="password"
-              required
+              
               value={passwordValue}
               onChange={(e) => setPasswordValue(e.target.value)}
-            />
+            />    {/*heto dnel required */}
             <span></span>
 
             {!isSignUp && passwordValue && (
