@@ -17,6 +17,11 @@
   justify-content: flex-start;
 }
 
+.downloads{
+  position: absolute;
+  top: 845px;
+}
+
 .bg_img2 {
   background-image: url("/images/bg_img2.png");
   background-repeat: no-repeat;
@@ -101,6 +106,10 @@ h1 {
 
 /* Mobile */
 @media(max-width: 768px) {
+  .downloads{
+    display: none;
+  }
+
   .bg_img {
     background-image: url("/images/mobile-back.png");
     background-repeat: no-repeat;

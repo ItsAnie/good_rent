@@ -1,20 +1,18 @@
 header{
     margin: 0;
     width: 100%;
-}
-
-.header-container{
     background-color: #65E36A;
-    background: linear-gradient(#3CC742, #65E36A, #C2FFC5);
-    padding: 15px 0 15px 0;
+    background: linear-gradient(#3CC742, #65E36A, #C2FFC5);  
     border-radius: 0 0 20px 20px;
 }
 
-.header-wrapper{
+.header-container{ 
+    padding: 15px 0 15px 0;
     margin: 0 auto;
+}
+
+.header-wrapper{
     align-items: center;
-    width: 100%;
-    max-width: 1920px;
     justify-content: space-between;
 }
 
@@ -70,6 +68,10 @@ header{
 .exit{
     width: 20px;
     height: 20px;
+}
+
+.profile{
+    max-width: 337px;
 }
 
 .profile-btn{

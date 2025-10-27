@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Recomendation from "../Recomendation/Recomendation";
+import Result from "../Result/Result";
 import './Search.css';
 
 const options = [
@@ -12,13 +13,23 @@ const options = [
 ];
 
 const options1 = [
-  { value: "Аренда", label: "Личные вещи", icon: "/images/clothes.png" },
-  { value: "Услуга", label: "Недвижимость", icon: "/images/buildings.png" },
-  { value: "Обмен", label: "Транспорт", icon: "/images/car.png" },
-  { value: "Продажа", label: "Хобби и развлечения", icon: "/images/games.png" },
+  { value: "Личные вещи", label: "Личные вещи", icon: "/images/clothes.png" },
+  { value: "Недвижимость", label: "Недвижимость", icon: "/images/buildings.png" },
+  { value: "Транспорт", label: "Транспорт", icon: "/images/car.png" },
+  { value: "Хобби", label: "Хобби и развлечения", icon: "/images/games.png" },
   { value: "Для дома", label: "Для дома", icon: "/images/house.png" },
   { value: "Гаджеты", label: "Гаджеты и техника", icon: "/images/phone.png" },
   { value: "Питомцы", label: "Питомцы", icon: "/images/pets.png" },
+];
+
+const service = [
+  { value: "Бытовые услуги", label: "Бытовые услуги", icon: "/images/needle.png" },
+  { value: "Юридические услуги", label: "Юридические услуги", icon: "/images/case2.png" },
+  { value: "Красота и здоровье", label: "Красота и здоровье", icon: "/images/beauty.png" },
+  { value: "IT-услуги", label: "IT-услуги", icon: "/images/computer.png" },
+  { value: "Фото- и видеосъемка", label: "Фото- и видеосъемка", icon: "/images/photo.png" },
+  { value: "Ремонт и строительство", label: "Ремонт и строительство", icon: "/images/hummer.png" },
+  { value: "Другое", label: "Другое", icon: "/images/other.png" },
 ];
 
 function Search() {
@@ -27,6 +38,13 @@ function Search() {
   const [selectedCategory, setSelectedCategory] = useState(null); // second dropdown
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
+
+  const [openSub, setOpenSub] = useState(false);
+  const [selectedSubOption, setSelectedSubOption] = useState(null);
+
+  const subOptions = selectedOption?.value === "Ищут"
+    ? options.filter(opt => opt.value !== "Ищут")
+    : [];
 
   return (
     <div>
@@ -102,81 +120,111 @@ function Search() {
         <div className="dropdown-select flex">
           <div className="gap-1.75 flex flex-col">
             <p>Тип объявления</p>
-            <div 
-              className="category"
-              style={{height: open ? '228px' : '50px'}}
-              >
-              <div className="custom-select">
-                  <div className="selected" onClick={() => setOpen(!open)}>
-                  {selectedOption ? (
-                      <>
-                      <img src={selectedOption.icon} alt="" className="icon" />
-                      {selectedOption.label}
-                      </>
-                  ) : (
-                      " "
-                  )}
-                  </div>
-                  {open && (
-                  <ul className="options">
-                      {options.map((opt) => (
-                      <li
-                          key={opt.value}
-                          onClick={() => {
-                          setSelectedOption(opt);
-                          setOpen(false);
-                          }}
-                      >
-                          <img src={opt.icon} alt="" className="icon" />
-                          {opt.label}
-                      </li>
-                      ))}
-                  </ul>
-                  )}
+              <div className="category">
+                <div className="custom-select">
+                    <div className="selected" onClick={() => setOpen(!open)}>
+                    {selectedOption ? (
+                        <>
+                        <img src={selectedOption.icon} alt="" className="icon" />
+                        {selectedOption.label}
+                        </>
+                    ) : (
+                        " "
+                    )}
+                    </div>
+                    {open && (
+                    <ul className="options">
+                        {options.map((opt) => (
+                        <li
+                            key={opt.value}
+                            onClick={() => {
+                            setSelectedOption(opt);
+                            setOpen(false);
+
+                            if (opt.value === 'Ищут') setOpenSub(true);
+                            else setOpenSub(false);
+                            setSelectedSubOption(null);
+                            }}                         
+                        >
+                            <img src={opt.icon} alt="" className="icon" />
+                            {opt.label}
+                        </li>
+                        ))}
+                    </ul>
+                    )}  
+
+                     <div>
+                      {/* new dropdown */}
+                          {selectedOption?.value === "Ищут" && (
+                            <div className="sub-dropdown">
+                              <div className="selected" onClick={() => setOpenSub(!openSub)}>
+                                {selectedSubOption ? selectedSubOption.label : " "}
+                                </div>
+                                {openSub && (
+                                  <ul className="options">
+                                    {subOptions.map(opt => (
+                                      <li
+                                        key={opt.value}
+                                        onClick={() => {
+                                          setSelectedSubOption(opt);
+                                          setOpenSub(false);
+                                        }}
+                                      >
+                                        <img src={opt.icon} alt="" className="icon" />
+                                        {opt.label}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
+                              </div>
+                            )}
+                    </div> 
+                </div>
               </div>
             </div>
-          </div>
 
+          {/* stexic */}
           <div className="gap-1.75 flex flex-col">
             <p>Категория</p>
-            <div 
-              className="category"
-              style={{height: open1 ? '259px' : '50px'}}
-              >
+            <div className="category">
               <div className="custom-select">
-                  <div className="selected" onClick={() => setOpen1(!open1)}>
+                <div className="selected" onClick={() => setOpen1(!open1)}>
                   {selectedCategory ? (
-                      <>
+                    <>
                       <img src={selectedCategory.icon} alt="" className="icon" />
                       {selectedCategory.label}
-                      </>
+                    </>
                   ) : (
-                      " "
+                    " "
                   )}
-                  </div>
-                  {open1 && (
+                </div>
+
+                {open1 && (
                   <ul className="options">
-                      {options1.map((opt) => (
+                    {(selectedOption?.value === "Услуга" ? service : options1).map((opt) => (
                       <li
-                          key={opt.value}
-                          onClick={() => {
+                        key={opt.value}
+                        onClick={() => {
                           setSelectedCategory(opt);
                           setOpen1(false);
-                          }}
+                        }}
                       >
-                          <img src={opt.icon} alt="" className="icon" />
-                          {opt.label}
+                        <img src={opt.icon} alt="" className="icon" />
+                        {opt.label}
                       </li>
-                      ))}
+                    ))}
                   </ul>
-                  )}
+                )}
               </div>
             </div>
           </div>
+          {/* minchev stex */}
+      
           <button className="register-btn search-btn">Искать</button>
         </div>
       </div>
       <Recomendation />
+      <Result />
     </div>
   );
 }

@@ -12,9 +12,12 @@ function Start() {
     <div className="start">
       {view !== "dashboard" && (
         <div className="bg_img flex flex-col">
+          <div className="downloads flex justify-between" style={{width: '900px'}}>
+            <img src="/images/app_store.png" />
+            <img src="/images/google-play.png" />
+          </div>
           <div className="bg_img2">
             <div className="bg grid grid-cols-3 place-items-center">
-              
                 <div className="grid_items flex items-center justify-center flex-col">
                   <img src="/images/Vector.png" />
                   <p>Находи то, что тебе нужно в любой точке мира!</p>

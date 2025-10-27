@@ -6,9 +6,9 @@ function Header(){
     return (
         <div>
             <header className="header">
-                <div className="header-container">
+                <div className="header-container container">
                     <div className="header-wrapper flex">
-                        <div className="flex">
+                        <div className="flex items-center">
                             <img src="/images/logo.png" className="header-logo" />
                             <div className="title">
                                 <h2>GoodRent.</h2>

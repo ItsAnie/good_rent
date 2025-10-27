@@ -1,0 +1,105 @@
+.result{
+    margin: 0 auto;
+}
+
+.card-group{
+    border: 1px solid #18A615;
+    border-radius: 20px;
+    padding: 28px 92px 21px;
+    height: 704px;
+    width: 825px;
+}
+
+.cards{
+    gap: 30px;
+}
+
+.header h2{
+    font-size: 24px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 16px;
+    margin-bottom: 15px;
+}
+
+.header p{
+    font-size: 20px;
+    color: #4F4F4F;
+    line-height: 16px;
+}
+
+.view{
+    color: #BDBDBD;
+    font-weight: 400;
+    font-size: 12px;
+    max-width: 175px;
+}
+
+.card-group h3{
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.profile-img{
+    width: 50px;
+    height: 50px;
+}
+
+.remember{
+    margin: 0 auto;
+}
+
+.remember button{
+    color: white;
+    background-color: #27AE60;
+    font-size: 14px;
+    width: 355px;
+    height: 50px;
+    border-radius: 25px;
+    border: none;
+    margin-top: 14px;
+}
+
+.map{
+    margin-top: 56px;
+}
+
+.search-card{
+    margin-top: 30px;
+    box-shadow: 0 10px 2px 0 rgba(0, 0, 0, 0.07);
+    border-radius: 8px;
+    height: auto;
+    width: 496px;
+    padding: 15px;
+    font-size: 12px;
+}
+
+.bitmap{
+    width: 70px;
+    height: 70px;
+    border-right: 1px solid #EDEEF3;
+}
+
+.search-result h3{
+    color: #18A615;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Montserrat';
+}
+
+.search-result {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.star{
+    width: 11px;
+    height: 10px;
+}
+
+.item-view{
+    font-size: 10px;
+    color: #BDBDBD;
+    max-width: 204px;
+}

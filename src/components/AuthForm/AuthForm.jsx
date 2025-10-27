@@ -7,7 +7,6 @@ function AuthForm({ isSignUp, onBack, onSuccess }) {
 
   return (
     <div className="sign-in flex">
-      <img src="/images/app_store.png" className="download" />
 
       <div className="logo-form flex flex-col items-center">
         <div className="logo-header flex items-center justify-center flex-col">
@@ -72,8 +71,6 @@ function AuthForm({ isSignUp, onBack, onSuccess }) {
         )
       )}
   </div>
-
-    <img src="/images/google-play.png" className="download" />
 
     </div>
   );

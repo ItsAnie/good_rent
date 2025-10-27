@@ -175,7 +175,8 @@ label input.km-m-input:checked + span {
 }
 
 .custom-select {
-  width: 222px;
+  position: relative;
+  width: 100%;
   max-height: 259px;
   font-family: 'Montserrat';
 }
@@ -193,14 +194,20 @@ label input.km-m-input:checked + span {
 }
 
 .options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
     display: flex;
     flex-direction: column;
     gap: 9px;
-    border-radius: 19px;
+    border-radius: 0 0 19px 19px;
     list-style: none;
     padding: 0;
     overflow-y: none;
     padding: 5px 15px;
+    background-color: #F6F6F6;
 }
 
 .options li {
@@ -221,11 +228,11 @@ label input.km-m-input:checked + span {
 }
 
 .category{
-    width: 222px;
-    background-color: #F6F6F6;
-    border-radius: 19px;
-    overflow: hidden;
-    transition: height 0.3s ease;
+  position: relative;
+  width: 222px;
+  background-color: #F6F6F6;
+  border-radius: 19px;
+  transition: height 0.3s ease;
 }
 
 .dropdown-select{
@@ -234,3 +241,9 @@ label input.km-m-input:checked + span {
     margin-top: 23px;
 }
 
+.sub-dropdown{
+  position: absolute;
+  top: 72px;
+  left: 0;
+  width: 100%;
+}
