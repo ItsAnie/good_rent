@@ -5,15 +5,15 @@ function Footer(){
     return(
         <footer className="footer">
             <div className="footer-container container">
-                <div className="flex flex-col md:flex-row md:justify-between md:items-center">
-                    <div className="footer-text flex flex-col sm:flex-row items-center">
+                <div className="flex justify-between w-full">
+                    <div className="footer-text flex items-center justify-between" style={{width: '593px'}}>
                         <p>Условия использования</p>
                         <p>Оферта</p>
                         <p>Соглашение</p>
                     </div>
 
-                    <div className="icons-list flex flex-col md:flex-row justify-between">
-                        <div className="footer-icons flex flex-wrap items-center">
+                    <div className="icons-list flex [@media(min-width:768px)_and_(max-width:1024px)]:flex-col [@media(min-width:768px)_and_(max-width:1024px)]:gap-6 justify-between">
+                        <div className="footer-icons flex items-center justify-between" style={{width: '427px'}}>
                             <img src="/images/instagram.png" className="icons" />
                             <img src="/images/fb.png" className="icons" />
                             <img src="/images/in.png" className="icons" />
@@ -23,8 +23,8 @@ function Footer(){
                             <img src="/images/whatsapp.png" className="icons" />
                         </div>
 
-                        <div className="language-list flex flex-col items-start mt-2 md:mt-0">
-                            <p>Язык интерфейса</p>
+                        <div className="language-list flex flex-col items-center gap-3.75 justify-between">
+                            <p style={{fontSize: '16px'}}>Язык интерфейса</p>
                             <select className="language">
                                 <option>Русский</option>
                                 <option>Английский</option>

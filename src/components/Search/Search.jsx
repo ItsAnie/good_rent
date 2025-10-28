@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Recomendation from "../Recomendation/Recomendation";
 import Result from "../Result/Result";
 import './Search.css';
@@ -46,6 +46,20 @@ function Search() {
     ? options.filter(opt => opt.value !== "Ищут")
     : [];
 
+  const [showResult, setShowResult] = useState(false);
+
+  useEffect(() => {
+  if (
+    selectedOption?.value === "Аренда" ||
+    selectedCategory?.value === "Хобби"
+  ) {
+    setShowResult(true); // բացում է Result
+  } else {
+    setShowResult(false); // վերադարձնում է Recommendation
+  }
+}, [selectedOption, selectedCategory]);
+
+
   return (
     <div>
       <div className="search-container flex justify-between">
@@ -67,7 +81,7 @@ function Search() {
                   value={loc}
                   checked={selectedLocation === loc}
                   onChange={(e) => setSelectedLocation(e.target.value)}
-                  className="location-input"
+                  className="search-radio"
                 />
                 <label htmlFor={loc} className="flex">
                   <div className="location-name flex">
@@ -223,8 +237,8 @@ function Search() {
           <button className="register-btn search-btn">Искать</button>
         </div>
       </div>
-      <Recomendation />
-      <Result />
+      {showResult ? <Result /> : <Recomendation />}
+      <h2 className="question">Хотите быстрее найти клиентов? Разместите <b>рекламный баннер</b>!</h2>
     </div>
   );
 }

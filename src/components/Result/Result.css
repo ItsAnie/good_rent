@@ -1,5 +1,6 @@
 .result{
     margin: 0 auto;
+    padding-top: 73px;
 }
 
 .card-group{
@@ -47,6 +48,11 @@
 
 .remember{
     margin: 0 auto;
+    font-size: 12px;
+    font-weight: 400;
+    color: #BDBDBD;
+    line-height: 16px;
+    align-items: center;
 }
 
 .remember button{
@@ -58,6 +64,13 @@
     border-radius: 25px;
     border: none;
     margin-top: 14px;
+    cursor: pointer;
+}
+
+.remember h3{
+    margin-bottom: 28px;   
+    font-size: 14px;
+    color: #18A615;
 }
 
 .map{
@@ -87,12 +100,6 @@
     font-family: 'Montserrat';
 }
 
-.search-result {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
 .star{
     width: 11px;
     height: 10px;
@@ -103,3 +110,33 @@
     color: #BDBDBD;
     max-width: 204px;
 }
+
+.search-result {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-height: 1452px;
+}
+
+.search-scroll {
+  max-height: 1452px; 
+  overflow-y: auto;
+  padding-right: 15px;
+  scroll-behavior: smooth;
+  
+  mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+}
+
+.search-scroll::-webkit-scrollbar-thumb {
+  background-color: #219653;
+  border-radius: 5px;     
+  width: 10px;     
+}
+
+.search-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+

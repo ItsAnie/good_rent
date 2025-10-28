@@ -1,0 +1,46 @@
+.profile-full{
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.profile-image{
+    width: 100px;
+    height: 100px;
+}
+
+.data-icons{
+    width: 15px;
+    height: 15px;
+}
+
+.user-data{
+    gap: 22px;
+}
+
+.media-icons{
+    gap: 27px;
+}
+
+.payment{
+    width: 732px;
+    height: 80px;
+    border: 1px solid #DEE2EC;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.cart-img{
+    width: 59px;
+    height: 36px;
+}
+
+
+.basket{
+    width: 20.209980010986328px;
+    height: 24.883525848388672px;
+}
+
+.profile-details{
+    border-left: 1px solid #D7E3F1;
+    padding-left: 82px;
+}

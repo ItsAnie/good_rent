@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Register from "../Register/Register";
 import AuthForm from "../AuthForm/AuthForm"; 
 import Header from "../Header/Header";
+import Profile from "../Profile/Profile";
 
 import './Start.css'
 

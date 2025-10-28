@@ -7,13 +7,13 @@ header{
 }
 
 .header-container{ 
-    padding: 15px 0 15px 0;
-    margin: 0 auto;
+    padding: 15px 0 15px 0;  
 }
 
 .header-wrapper{
     align-items: center;
     justify-content: space-between;
+    margin: 0 auto;
 }
 
 .header-logo{
@@ -24,6 +24,7 @@ header{
 .title{
     display: flex;
     flex-direction: column;
+    line-height: 16px;
 }
 
 .title h2{
@@ -47,11 +48,15 @@ header{
     list-style: none;
     font-size: 18px;
     font-weight: 500;
+    padding-top: 63px;
+}
+
+.list{
+    width: 800px;
 }
 
 .nav-list li{
     cursor: pointer;
-    position: relative;
     padding-bottom: 51px;
 }
 
@@ -93,4 +98,6 @@ header{
 
 .about-profile p{
     max-width: 212px;
+    font-size: 16px;
+    font-weight: 500;
 }

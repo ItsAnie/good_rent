@@ -66,7 +66,7 @@ function Recomendation() {
             </div>
             <img src="./images/Map.png" alt="Map" />
         </div>
-        <h2 className="question">Хотите быстрее найти клиентов? Разместите рекламный баннер!</h2>
+        
     </div>
   );
 }
