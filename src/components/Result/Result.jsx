@@ -11,7 +11,7 @@ function Result(){
                 <div className="card-group flex flex-col justify-between">
                     <div className="cards flex flex-col">
                         <div className="flex justify-between w-full">
-                            <div className="header">
+                            <div className="vernagir">
                                 <h2>Приставка Xbox 360</h2>
                                 <p>5 000₽ в день</p>
                             </div>
@@ -69,7 +69,7 @@ function Result(){
             <div className="search-result">
                 <h3>Результаты поиска</h3>
 
-                <div className="search-scroll flex flex-col" style={{gap: '18px'}}>
+                <div className="search-scroll flex flex-col gap-[18px]">
                     {Array(repeatCount).fill(resultList[0]).map((item, index) => (
                     <div className="search-card" key={index}>
                         <div className="flex justify-between">

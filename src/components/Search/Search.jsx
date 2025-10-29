@@ -62,12 +62,16 @@ function Search() {
 
   return (
     <div>
-      <div className="search-container flex justify-between">
+      <div className="search-container flex justify-between bg-gradient-to-b from-[#3CC742] to-[#C2FFC5] rounded-b-[20px] mx-auto items-start max-w-[1520px] max-h-[246px] py-[31px] px-[50px]">
       <div>
-        <h2>Что вы ищете?</h2>
-        <div className="search-box">
-          <img src="/images/Shape.png" className="search-icon" />
-          <input type="text" className="search-input" placeholder="Поиск" />
+        <h2 className="text-center font-medium text-2xl">Что вы ищете?</h2>
+        <div className="search-box relative flex items-center">
+          <img src="/images/Shape.png" className="mt-[23px] absolute left-[20px] text-[#BDBDBD]" />
+          <input 
+            type="text" 
+            className="w-full rounded-[19px] border-none bg-[#F6F6F6] w-[531px] h-[50px] text-sm mt-[23px] pt-[8px] pr-[8px] pb-[8px] pl-[35px]" 
+            placeholder="Поиск" 
+          />
         </div>
 
         <div className="flex items-start justify-between">

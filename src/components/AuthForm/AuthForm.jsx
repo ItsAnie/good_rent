@@ -11,7 +11,7 @@ function AuthForm({ isSignUp, onBack, onSuccess }) {
       <div className="logo-form flex flex-col items-center">
         <div className="logo-header flex items-center justify-center flex-col">
           <img src="/images/logo.png" className="logo" />
-          <h1>GoodRent.</h1>
+          <h1 className="text-[64px] text-[#4f4f4f] font-medium font-[Roboto]">GoodRent.</h1>
           <p className="flex lg:hidden">Сервис поиска услуг и товаров для аренды рядом с Вами!</p>
         </div>
 
