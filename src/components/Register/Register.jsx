@@ -3,38 +3,41 @@ import './Register.css'
 
 function Register({ onSignUpClick, onSignInClick }) {
   return (
-    <div className="register flex">
-      <div className="logo-register flex flex-col justify-between">
+    <div className="register flex absolute top-[45px] justify-center items-center text-[#FFFFFF] min-h-[874px] h-[874px]">
+      <div className="logo-register flex flex-col justify-between w-full h-full">
         <div className="logo-header flex items-center flex-col">
-          <img src="/images/logo.png" className="logo" />
-          <h1 className="text-[64px] text-[#4f4f4f] font-medium font-[Roboto]">GoodRent.</h1>
-          <p className="flex lg:hidden">Сервис поиска услуг и товаров для аренды рядом с Вами!</p>
+          <img src="/images/logo.png" className="logo w-[218px] h-[260px]" />
+          <h1 className="text-[64px] text-[#4f4f4f] font-medium font-[Roboto] leading-[16px]">GoodRent.</h1>
+          <p className="flex lg:hidden text-center text-[#4F4F4F] font-normal text-lg
+                        max-w-[267px] font-[Roboto] leading-[24px] mt-[14px]">
+            Сервис поиска услуг и товаров для аренды рядом с Вами!
+          </p>
         </div>    
       
-          <div className="register-actions flex flex-col">
+          <div className="register-actions flex flex-col gap-[8px] justify-center items-center w-full">
             <button
-              className="register-btn cursor-pointer"
+              className="register-btn w-[355px] h-[50px] rounded-[25px] bg-[#27AE60] text-sm font-normal cursor-pointer"
               onClick={onSignUpClick}
             >
               Зарегистрироваться через e-mail
             </button>
 
-            <button className="flex items-center justify-center register-btn register-icon-btn cursor-pointer">
-              <img src="images/fb.png" className="goog-fb" />
+            <button className="flex items-center justify-center register-btn w-[355px] h-[50px] rounded-[25px] bg-[#27AE60] text-sm font-normal gap-[8px] cursor-pointer">
+              <img src="images/fb.png" className="w-[20px] h-20px" />
               Продолжить через Facebook
             </button>
 
-            <button className="flex items-center justify-center register-btn register-icon-btn cursor-pointer">
-              <img src="images/google.png" className="goog-fb" />
+            <button className="flex items-center justify-center register-btn w-[355px] h-[50px] rounded-[25px] bg-[#27AE60] text-sm font-normal gap-[8px] cursor-pointer">
+              <img src="images/google.png" className="w-[20px] h-20px" />
               Продолжить через Google
             </button>
 
             <button 
-              className="register-btn cursor-pointer"
+              className="register-btn w-[355px] h-[50px] rounded-[25px] bg-[#27AE60] text-sm font-normal cursor-pointer"
               onClick={onSignInClick}
               >Войти через e-mail</button>
 
-            <button className="register-btn cursor-pointer">Продолжить без регистрации</button>
+            <button className="register-btn register-btn w-[355px] h-[50px] rounded-[25px] bg-[#27AE60] text-sm font-normal cursor-pointer">Продолжить без регистрации</button>
           </div>
       </div>  
     </div>

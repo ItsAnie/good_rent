@@ -78,7 +78,7 @@ function Profile(){
                                 <div>
                                     <input id="option-one" name="radio" value="one" checked type="radio" className="cart-radio" />
                                     <label htmlFor="option-one">
-                                        <span></span>
+                                        <span className="bg-[#F2F2F2]"></span>
                                     </label>
                                 </div>
                                 <img src="/images/basket.png" className="w-[20.21px] h-[24.88px]" />
@@ -97,7 +97,7 @@ function Profile(){
                                 <div>
                                     <input id="option-one" name="radio" value="one" type="radio" className="cart-radio" />
                                     <label htmlFor="option-one">
-                                        <span></span>
+                                        <span className="bg-[#F2F2F2]"></span>
                                     </label>
                                 </div>
                                 <img src="/images/basket.png" className="w-[20.21px] h-[24.88px]" />

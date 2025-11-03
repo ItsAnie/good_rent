@@ -31,7 +31,7 @@ function Start() {
                                 font-[Montserrat]"
                 >
                   <img src="/images/Vector.png" />
-                  <p className="opacity-80 mt-[10px] max-w-[272px]">Находи то, что тебе нужно в любой точке мира!</p>
+                  <p className="opacity-80 mt-[10px] max-w-[286px]">Находи то, что тебе нужно в любой точке мира!</p>
                 </div>
 
                 <div className="auth-page flex justify-center w-full">
@@ -64,7 +64,7 @@ function Start() {
                                 rounded-[20px] text-center text-[#333333] font-semibold text-2xl
                                 font-[Montserrat]">
                   <img src="/images/Vector2.png" className="w-[100px] h-[100px] object-contain" />
-                  <p className="opacity-80 mt-[10px] max-w-[272px]">Исполняй свои желания, благодаря покупкам в твоем городе!</p>
+                  <p className="opacity-80 mt-[10px] max-w-[320px]">Исполняй свои желания, благодаря покупкам в твоем городе!</p>
                 </div>
 
                 <div className="grid_items flex items-center justify-center flex-col
@@ -72,7 +72,7 @@ function Start() {
                                 rounded-[20px] text-center text-[#333333] font-semibold text-2xl
                                 font-[Montserrat]">
                   <img src="/images/Vector3.png" className="w-[100px] h-[100px] object-contain" />
-                  <p className="opacity-80 mt-[10px] max-w-[272px]">Участвуй в наших благотворительных проектах!</p>
+                  <p className="opacity-80 mt-[10px] max-w-[290px]">Участвуй в наших благотворительных проектах!</p>
                 </div>
 
                 <div className="grid_items flex items-center justify-center flex-col
