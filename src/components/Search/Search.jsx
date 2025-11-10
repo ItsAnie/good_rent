@@ -1,51 +1,96 @@
 import React, { useState, useEffect } from "react";
+import { useMemo } from "react";
 import Recomendation from "../Recomendation/Recomendation";
 import Result from "../Result/Result";
 import './Search.css';
-
-const options = [
-  { value: "Аренда", label: "Аренда", icon: "/images/Vector5.png" },
-  { value: "Услуга", label: "Услуга", icon: "/images/case.png" },
-  { value: "Обмен", label: "Обмен", icon: "/images/Vector4.png" },
-  { value: "Продажа", label: "Продажа", icon: "/images/money.png" },
-  { value: "Даром", label: "Даром", icon: "/images/Vector2.png" },
-  { value: "Ищут", label: "Ищут", icon: "/images/search_icon.png" },
-];
-
-const options1 = [
-  { value: "Личные вещи", label: "Личные вещи", icon: "/images/clothes.png" },
-  { value: "Недвижимость", label: "Недвижимость", icon: "/images/buildings.png" },
-  { value: "Транспорт", label: "Транспорт", icon: "/images/car.png" },
-  { value: "Хобби", label: "Хобби и развлечения", icon: "/images/games.png" },
-  { value: "Для дома", label: "Для дома", icon: "/images/house.png" },
-  { value: "Гаджеты", label: "Гаджеты и техника", icon: "/images/phone.png" },
-  { value: "Питомцы", label: "Питомцы", icon: "/images/pets.png" },
-];
-
-const service = [
-  { value: "Бытовые услуги", label: "Бытовые услуги", icon: "/images/needle.png" },
-  { value: "Юридические услуги", label: "Юридические услуги", icon: "/images/case2.png" },
-  { value: "Красота и здоровье", label: "Красота и здоровье", icon: "/images/beauty.png" },
-  { value: "IT-услуги", label: "IT-услуги", icon: "/images/computer.png" },
-  { value: "Фото- и видеосъемка", label: "Фото- и видеосъемка", icon: "/images/photo.png" },
-  { value: "Ремонт и строительство", label: "Ремонт и строительство", icon: "/images/hummer.png" },
-  { value: "Другое", label: "Другое", icon: "/images/other.png" },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRecomendation, selectCard } from "../../store/slice/recomendationSlice";
+import { fetchOptions } from "../../store/slice/optionsSlice";
+import { fetchLocation } from "../../store/slice/locationSlice";
+import Popular from "../Popular/Popular";
 
 function Search() {
-  const [selectedLocation, setSelectedLocation] = useState("location");
-  const [selectedOption, setSelectedOption] = useState(null); // first dropdown
-  const [selectedCategory, setSelectedCategory] = useState(null); // second dropdown
-  const [open, setOpen] = useState(false);
-  const [open1, setOpen1] = useState(false);
+  const dispatch = useDispatch();
 
-  const [openSub, setOpenSub] = useState(false);
+  const location = [
+  { id: 1, name: "Локация из профиля", address: "Краснодар, ул. Тургенева 150" },
+  { id: 2, name: "Текущая локация", address: "Краснодар, ул Красная 121" },
+  { id: 3, name: "Указать локацию", address: "Указать локацию" }
+]
+
+  //REDUX STATE
+  const { data: recomendation, selectedCard, loading } = useSelector(state => state.recomendation);
+  const { options, options1, service } = useSelector(state => state.options);
+
+  //LOCAL STATE
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubOption, setSelectedSubOption] = useState(null);
 
-  const subOptions = selectedOption?.value === "Ищут"
-    ? options.filter(opt => opt.value !== "Ищут")
-    : [];
+  const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
+  const [openSub, setOpenSub] = useState(false);
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [applyFilter, setApplyFilter] = useState(false);
+
+  //DERIVED VALUES
+  const allItems = useMemo(() => recomendation.flat(), [recomendation]);
+
+  const filteredResult = useMemo(() => {
+    if (!applyFilter) return [];
+    return allItems.filter(item => {
+      const matchesSearch = searchTerm
+        ? item.title.toLowerCase().includes(searchTerm.toLowerCase())
+        : true;
+      const matchesType = selectedOption
+        ? item.type === selectedOption.value
+        : true;
+      const matchesCategory = selectedCategory
+        ? item.category === selectedCategory.label || item.category === selectedCategory.value
+        : true;
+      const matchesAddress = selectedLocation 
+        ? item.address === selectedLocation
+        : true;
+        
+      return matchesSearch && matchesType && matchesCategory && matchesAddress;
+    });
+  }, [applyFilter, allItems, searchTerm, selectedOption, selectedCategory]);
+
+  const subOptions = useMemo(() => {
+    return selectedOption?.value === "Ищут"
+      ? options.filter(opt => opt.value !== "Ищут")
+      : [];
+  }, [selectedOption, options]);
+
+  //DATA FETCHING
+  useEffect(() => {
+    if (!recomendation.length) dispatch(fetchRecomendation(null));
+    dispatch(fetchOptions());
+    dispatch(fetchLocation());
+  }, [dispatch]);
+
+  //DEFAULT SELECTED CARD
+  useEffect(() => {
+    if (!selectedCard && allItems.length > 0) {
+      dispatch(selectCard(allItems[0]));
+    }
+  }, [allItems, selectedCard, dispatch]);
+
+  //AUTO SELECT FIRST FILTERED CARD
+  useEffect(() => {
+    if (filteredResult.length > 0) {
+      dispatch(selectCard(filteredResult[0]));
+    }
+  }, [filteredResult, dispatch]);
+
+  //location
+  useEffect(() => {
+    if(location.length && !selectedLocation){
+      setSelectedLocation(location[0].address)
+    }
+  },[location, selectedLocation])
 
   return (
     <div>
@@ -60,6 +105,8 @@ function Search() {
             <img src="/images/Shape.png" className="absolute left-[20px] text-[#BDBDBD]" />
             <input 
               type="text" 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className="focus:outline-none w-full rounded-[19px] border-none bg-[#F6F6F6] w-[531px] 
                         h-[50px] text-sm pt-[8px] pr-[8px] pb-[8px] pl-[35px] placeholder-[#BDBDBD]" 
               placeholder="Поиск" 
@@ -68,37 +115,25 @@ function Search() {
 
           <div className="flex items-start justify-between">
             <div className="location-container flex flex-col mt-[10px]">
-              {["location", "current", "specify"].map((loc) => (
-                <div className="radio-option flex items-center" key={loc}>
+              {location && location.map((loc) => (
+                <div className="radio-option flex items-center" key={loc.id}>
                   <input
                     type="radio"
-                    id={loc}
+                    id={loc.id}
                     name="location"
-                    value={loc}
-                    checked={selectedLocation === loc}
-                    onChange={(e) => setSelectedLocation(e.target.value)}
+                    value={loc.address}
+                    checked={selectedLocation === loc.address}
+                    onChange={(e) => setSelectedLocation(loc.address)}
                     className="search-radio"
                   />
-                  <label htmlFor={loc} className="flex gap-[11px]">
+                  <label htmlFor={loc.id} className="flex gap-[11px]">
                     <div className="location-name flex">
                       <span></span>
-                      <p className="max-w-[65px]">
-                        {loc === "location"
-                          ? "Локация из профиля"
-                          : loc === "current"
-                          ? "Текущая локация"
-                          : "Указать локацию"}
-                      </p>
+                      <p className="max-w-[65px]">{loc.name}</p>
                     </div>
                     <div className="placeholder-img flex gap-[5.7px] text-sm">
                       <img src="/images/placeholder.png" alt="" className="w-[16.3px] h-[20px]" />
-                      <p>
-                        {loc === "location"
-                          ? "Краснодар, ул. Тургенева 150"
-                          : loc === "current"
-                          ? "Краснодар, ул Красная 121"
-                          : "Указать локацию"}
-                      </p>
+                      <p>{loc.address}</p>
                     </div>
                   </label>
                 </div>
@@ -146,7 +181,7 @@ function Search() {
                           onClick={() => setOpen(!open)}>
                     {selectedOption ? (
                         <>
-                        <img src={selectedOption.icon} alt="" className="w-[20px] h-[20px]" />
+                        <img src={selectedOption.icon} alt="" className="h-[20px]" />
                         {selectedOption.label}
                         </>
                     ) : (
@@ -157,7 +192,7 @@ function Search() {
                     <ul className="absolute top-[100%] left-0 w-full z-[9999] flex flex-col gap-[9px] 
                                   rounded-b-[19px] list-none p-0 overflow-y-hidden py-[5px] px-[15px]
                                   bg-[#F6F6F6]">
-                        {options.map((opt) => (
+                        {options && options.map((opt) => (
                         <li
                             className="cursor-pointer flex items-center gap-[16px] text-xs hover:bg-[#f0f0f0]"
                             key={opt.value}
@@ -170,7 +205,7 @@ function Search() {
                             setSelectedSubOption(null);
                             }}                         
                         >
-                            <img src={opt.icon} alt="" className="w-[20px] h-[20px]" />
+                            <img src={opt.icon} alt="" className="h-[20px]" />
                             {opt.label}
                         </li>
                         ))}
@@ -212,8 +247,6 @@ function Search() {
                 </div>
               </div>
             </div>
-
-          {/* stexic */}
           <div className="gap-1.75 flex flex-col">
             <p>Категория</p>
             <div className="relative w-[222px] bg-[#F6F6F6] rounded-[19px] 
@@ -256,11 +289,29 @@ function Search() {
               </div>
             </div>
           </div>
-          {/* minchev stex */}
-          <button className="shadow-none text-white font-normal bg-[#27AE60] rounded-[25px] w-[228px] h-[50px] text-sm cursor-pointer mt-[23px]">Искать</button>
+          <button 
+            className="shadow-none text-white font-normal bg-[#27AE60] rounded-[25px] 
+                      w-[228px] h-[50px] text-sm cursor-pointer mt-[23px]"
+                      onClick={() => setApplyFilter(true)}>
+                        Искать
+          </button>
         </div>
       </div>
-      <Recomendation />
+      
+      {filteredResult.length === 0 && <Recomendation />}
+      <div className="flex justify-between container mx-auto pt-[73px]">
+      {filteredResult.length > 0 && (
+        <>
+        <Popular selectCard={selectedCard} />
+          <Result 
+            recomendation={filteredResult}
+            onClick={(item) => dispatch(selectCard(item))}
+            selectedCard={selectedCard}
+          />
+          
+        </>
+      )}
+    </div>
       <h2 className="mt-[40px] mb-[49px] text-center text-xl font-medium text-[#18A615]">Хотите быстрее найти клиентов? Разместите <b>рекламный баннер</b>!</h2>
     </div>
   );  

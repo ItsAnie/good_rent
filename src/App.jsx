@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -12,13 +12,18 @@ import AuthForm from "./components/AuthForm/AuthForm";
 import Search from "./components/Search/Search";
 import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
-import Result from "./components/Result/Result";
+import Popular from "./components/Popular/Popular";
 import Footer from "./components/Footer/Footer";
+import { addOptionsToDB } from "./data"; 
 import "./App.css";
 
 function App() {
   const location = useLocation();
   const hideHeader = location.pathname === "/";
+
+  useEffect(() => {
+    addOptionsToDB();
+  }, []);
 
   return (
     <>
@@ -28,10 +33,11 @@ function App() {
         <Route path="/" element={<Start />} />
         <Route path="/auth" element={<AuthForm />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/profile" element={<Profile />} /> 
-        <Route path="/result/:id" element={<Result />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/popular/:id" element={<Popular />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+
       <Footer />
     </>
   );

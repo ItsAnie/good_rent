@@ -4,3 +4,26 @@
     text-decoration: underline;
 }
 
+@media(max-width: 1024px){
+    .title{
+        font-size: 2.25rem;
+    }
+    .service-txt{
+        font-size: 10px;
+        max-width: 180px;
+    }
+
+    .nav-list{
+        font-size: 1rem;
+    }
+    .profile{
+        max-width: 300px;
+        gap: 20px;
+    }
+    .profile-btn{
+        width: 220px;
+    }
+    .name{
+        font-size: 14px;
+    }
+}

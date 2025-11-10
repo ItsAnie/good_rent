@@ -3,3 +3,8 @@ form {
 }
 
 
+@media(max-width: 768px){
+  .logo-form{
+    margin-top: 93px;
+  }
+}

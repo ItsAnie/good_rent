@@ -1,0 +1,19 @@
+.popular-sections {
+    mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+}
+
+.popular-sections::-webkit-scrollbar-thumb {
+  background-color: #219653;
+  border-radius: 5px;     
+  width: 10px;     
+}
+
+.popular-sections::-webkit-scrollbar {
+  width: 6px;
+}
+
+
+.search-card{
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.07);
+}

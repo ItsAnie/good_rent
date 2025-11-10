@@ -3,13 +3,13 @@ import './Register.css'
 
 function Register({ onSignUpClick, onSignInClick }) {
   return (
-    <div className="register flex absolute top-[45px] justify-center items-center text-[#FFFFFF] min-h-[874px] h-[874px]">
-      <div className="logo-register flex flex-col justify-between w-full h-full">
+    <div className="register flex absolute top-[45px] justify-center items-center text-[#FFFFFF] h-screen lg:h-[874px]">
+      <div className="logo-register flex flex-col lg:justify-between w-full h-full md:justify-start">
         <div className="logo-header flex items-center flex-col">
-          <img src="/images/logo.png" className="logo w-[218px] h-[260px]" />
+          <img src="/images/logo.png" className="logo lg:w-[218px] lg:h-[260px]" />
           <h1 className="text-[64px] text-[#4f4f4f] font-medium font-[Roboto] leading-[16px]">GoodRent.</h1>
           <p className="flex lg:hidden text-center text-[#4F4F4F] font-normal text-lg
-                        max-w-[267px] font-[Roboto] leading-[24px] mt-[14px]">
+                        max-w-[267px] font-[Roboto] mt-4">
             Сервис поиска услуг и товаров для аренды рядом с Вами!
           </p>
         </div>    
@@ -33,7 +33,7 @@ function Register({ onSignUpClick, onSignInClick }) {
             </button>
 
             <button 
-              className="register-btn w-[355px] h-[50px] rounded-[25px] bg-[#27AE60] text-sm font-normal cursor-pointer"
+              className="register-btn login w-[355px] h-[50px] rounded-[25px] bg-[#27AE60] text-sm font-normal cursor-pointer lg:block hidden"
               onClick={onSignInClick}
               >Войти через e-mail</button>
 

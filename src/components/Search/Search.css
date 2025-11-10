@@ -53,3 +53,10 @@ label input.km-m-input:checked + span {
   background-color: #219653;
   border: 3px solid #ffffff;
 }
+
+
+@media(max-width: 1024px) {
+  .dropdown-select{
+    flex-direction: column;
+  }
+}
