@@ -1,14 +1,15 @@
 import React from "react";
 import './Result.css'
+import AdSlot from "../Advertising/AdSlot";
 
-function Result({ recomendation, onClick, selectedCard }) {
+function Result({ allProducts, onClick, selectedCard, showAds }) {
   return (
-      <div>
+      <div className="flex flex-col items-end">
         <h2 className="text-[#18A615] text-xl font-medium font-[Roboto]">Результаты поиска</h2>
         <div className="popular-sections w-[521px] max-h-[1385px] overflow-y-auto pr-[10px] mt-[30px]">
           <div className="popular flex flex-col">
             <div className="flex flex-col gap-[18px]">
-              {recomendation.map((item, index) => {
+              {allProducts.map((item, index) => {
                 const isSelected = selectedCard?.id === item.id; 
                 return (
                   <div
@@ -22,18 +23,18 @@ function Result({ recomendation, onClick, selectedCard }) {
                       <div className="flex justify-between w-full h-full py-[15px] pl-[22px] pr-[15px]">
                         <div className="flex gap-[10px] items-center h-full">
                           <img
-                            src={item.image}
-                            alt={item.title}
+                            src={item.images?.[1]}
+                            alt={item.name}
                             className="bitmap w-[70px] h-[70px]"
                           />
                           <div className="bg-[#EDEEF3] h-[100px] w-[1px]" />
                           <div className="flex flex-col justify-center">
                             <div className="flex gap-[5px]">
-                              <h2>{item.title}</h2>
+                              <h2>{item.name}</h2>
                               <p className="text-[10px] text-[#BDBDBD] max-w-[204px]">{item.type}</p>
                             </div>
                             <div className="flex gap-[5px]">
-                              <p className="font-medium font-[Roboto]">{item.price}</p>
+                              <p className="font-medium font-[Roboto]">{item.price} руб.</p>
                               <p className="text-[10px] text-[#BDBDBD] max-w-[204px]">{item.address}</p>
                             </div>
                             <p className="text-[10px] text-[#BDBDBD] max-w-[204px] mt-[7px]">
@@ -53,6 +54,12 @@ function Result({ recomendation, onClick, selectedCard }) {
             </div>
           </div>
         </div>
+        {showAds && (
+        <div className="mt-[41px] flex flex-col gap-[38px] w-[620px]">
+          <AdSlot id={5} />
+          <AdSlot id={6} />
+        </div>
+        )}
       </div>
   );
 }

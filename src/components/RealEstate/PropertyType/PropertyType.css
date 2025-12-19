@@ -1,0 +1,27 @@
+.realEstate {
+    display: none;
+}
+
+.radio-unchecked {
+    width: 18px;
+    height: 18px;
+    background-color: #F2F2F2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.24s;
+}
+
+.radio-checked {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color 0.24s;
+}
+
+.realEstate:checked + label .radio-checked {
+    background-color: #18A615;
+}
+

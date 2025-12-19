@@ -1,22 +1,28 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ref, get } from "firebase/database";
-import { database } from "../../firebase"; 
+import { database } from "../../firebase";
 
-export const fetchRecomendation = createAsyncThunk(
-  "recomendation/fetchRecomendation",
+export const fetchDefaultRecomendation = createAsyncThunk(
+  "recomendation/fetchDefaultRecomendation",
   async () => {
-    const snapshot = await get(ref(database, "recomendation"));
-    return snapshot.val();
+    const snapshot = await get(ref(database, "allProducts"));
+    const allProductsObj = snapshot.val() || {};
+    const allProducts = Object.entries(allProductsObj).map(([id, product]) => ({
+      id,    
+      ...product
+    }));
+
+    return allProducts;
   }
 );
 
 const recomendationSlice = createSlice({
   name: "recomendation",
   initialState: {
-    data: [],         
-    loading: false,   
-    error: null,      
-    selectedCard: null 
+    data: [],            
+    loading: false,
+    error: null,
+    selectedCard: null
   },
   reducers: {
     selectCard: (state, action) => {
@@ -28,15 +34,15 @@ const recomendationSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchRecomendation.pending, (state) => {
+      .addCase(fetchDefaultRecomendation.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchRecomendation.fulfilled, (state, action) => {
+      .addCase(fetchDefaultRecomendation.fulfilled, (state, action) => {
         state.data = action.payload;
         state.loading = false;
       })
-      .addCase(fetchRecomendation.rejected, (state, action) => {
+      .addCase(fetchDefaultRecomendation.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

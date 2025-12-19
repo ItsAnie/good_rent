@@ -1,0 +1,14 @@
+.favorites {
+  mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+}
+
+.favorites::-webkit-scrollbar-thumb {
+  background-color: #219653;
+  border-radius: 5px;     
+  width: 10px;     
+}
+
+.favorites::-webkit-scrollbar {
+  width: 6px;
+}

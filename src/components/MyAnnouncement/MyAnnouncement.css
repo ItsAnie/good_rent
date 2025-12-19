@@ -1,0 +1,14 @@
+.announcement {
+  mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+}
+
+.announcement::-webkit-scrollbar-thumb {
+  background-color: #219653;
+  border-radius: 5px;     
+  width: 10px;     
+}
+
+.announcement::-webkit-scrollbar {
+  width: 6px;
+}

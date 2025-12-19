@@ -1,0 +1,20 @@
+.per-day-input {
+  display: none;
+}
+
+label input.per-day-input + span {
+  display: inline-block;
+  width: 35px !important;
+  height: 35px !important;
+  margin-left: 10px;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 50%;
+  box-sizing: border-box;
+  background-color: #F2F2F2;
+}
+
+label input.per-day-input:checked + span {
+  background-color: #219653;
+  border: 8px solid #F2F2F2;
+}

@@ -9,7 +9,6 @@
     cursor: pointer;
     -moz-border-radius: 50%;
     border-radius: 50%;
-    border: 1px solid #DEE2EC;
 }
 
 .cart-radio:checked + label span {
@@ -23,5 +22,3 @@
     -moz-transition: background-color 0.24s linear;
     transition: background-color 0.24s linear;
 }
-
-

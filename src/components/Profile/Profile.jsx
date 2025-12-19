@@ -1,16 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { ref, get } from "firebase/database";
-import { database } from "../../firebase";
-import './Profile.css'
+import Confirm from "../Confirm/Confirm";
+import Payment from "../Payment/Payment";
 import Review from "../Review/Review";
+import { useNavigate, Outlet, useLocation } from "react-router-dom";
 
-function Profile(){
+
+function Profile({ user }){
+    const navigate = useNavigate();
+    const location = useLocation();
+    const isMessagesPage = location.pathname.includes("/profile/notifications") || location.pathname.includes("/profile/messages/");
+    const {data} = useSelector((state) => state.profile);
+
+    const [showConfirm, setShowConfirm] = useState(false);
+
+    const handleEditClick = () => {
+        navigate("/edit-profile");
+    }
+
     return(
-        <div className="flex profile-full container mx-auto mt-[50px] mb-[50px]">
+        <div className="profile-full flex container mx-auto mt-[50px] mb-[50px]">
             <div className="mr-[19px]">
                 <div className="profile-info flex gap-[29px]">
-                    <img src="/images/profile.png" className="w-[100px] h-[100px] rounded-full" />
+                    <img src={data?.image || "/images/userpic.png"} className="w-[100px] h-[100px] rounded-full object-cover" />
                     <div>
                         <div className="flex flex-col justify-between max-w-[404px]">
                             <div className="flex flex-col gap-[11px]">
@@ -18,8 +30,8 @@ function Profile(){
                                     <img src="/images/star.png" />
                                     4,3
                                 </div>
-                                <div className="flex justify-start items-center">
-                                    <p className="max-w-[195px] text-base text-[#2F3C66] font-[Roboto] font-medium">Константин Константинопольский</p>
+                                <div className="flex justify-start items-center cursor-pointer" onClick={handleEditClick}>
+                                    <p className="max-w-[195px] text-base text-[#2F3C66] font-[Roboto] font-medium">{data.name}</p>
                                     <img src="/images/edit.png" className="w-[20px] h-[20.59px]" />
                                 </div>
                             </div>
@@ -28,18 +40,23 @@ function Profile(){
                                 <div className="flex flex-col gap-[16px] mt-[30px]">
                                     <div className="user-data flex gap-[22px] justify-start items-center">
                                         <img src="/images/envelope.png" className="w-[15px] h-[11px]" />
-                                        <p className="text-sm">example@gmail.com</p>
+                                        <p className="text-sm">{data.email}</p>
                                     </div>
 
                                     <div className="user-data flex gap-[22px] justify-start items-center">
                                         <img src="/images/call-answer.png" className="w-[15px] h-[14px]" />
-                                        <p className="text-sm">+7 909 900 90 90</p> 
-                                        <p className="text-[#18A615] text-xs font-normal">Подтвердить</p>
+                                        <p className="text-sm">{data.phone}</p> 
+                                        <p 
+                                            className="text-[#18A615] text-xs font-normal cursor-pointer"
+                                            onClick={() => setShowConfirm(true)}
+                                        > 
+                                            Подтвердить
+                                        </p>
                                     </div>
 
                                     <div className="user-data flex gap-[22px] justify-start items-center">
                                         <img src="/images/location.png" className="w-[11px] h-[15px]" />
-                                        <p className="text-sm">Краснодар, ул. Тургенева 150</p>
+                                        <p className="text-sm">{data.location}</p>
                                     </div>
 
                                     <div className="user-data flex gap-[22px] justify-start items-center">
@@ -61,55 +78,18 @@ function Profile(){
                 </div>    
             </div>
 
-            <div className="border-solid border-l-1 border-[#D7E3F1] pl-[82px]">
-                <div>
-                    <div className="flex items-center gap-2">
-                        <h2 className="text-[#18A615] text-xl font-medium font-[Roboto]">Способы оплаты</h2>
-                        <img src="/images/arow.png" className="arrow w-[11.69px] h-[5.84px]" />
-                    </div>
-                    <div className="flex flex-col justify-between w-full gap-2.25 mt-[21px]">
-                        <div className="flex justify-between w-[732px] border-1 border-solid border-[#DEE2EC] rounded-lg p-[30px]">
-                            <div className="flex gap-[30px]">
-                                <img src="/images/cart-icon.png" className="w-[59px] h-[36px]" />
-                                <div className="text-sm">
-                                    <p>MasterCard</p>
-                                    <p className="text-[#BDBDBD]">**2341</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-[27px]">
-                                <div>
-                                    <input id="option-one" name="radio" value="one" checked type="radio" className="cart-radio" />
-                                    <label htmlFor="option-one">
-                                        <span className="bg-[#F2F2F2]"></span>
-                                    </label>
-                                </div>
-                                <img src="/images/basket.png" className="w-[20.21px] h-[24.88px]" />
-                            </div>
+            <div className={`border-solid border-l-1 border-[#D7E3F1] ${isMessagesPage ? "pl-[63px]" : "pl-[78px]"}`}>
+                {!isMessagesPage && (
+                    <>
+                        <div className="w-[732px]">
+                            <Payment />
                         </div>
-
-                        <div className="flex justify-between w-[732px] border-1 border-solid border-[#DEE2EC] rounded-lg p-[30px]">
-                            <div className="flex gap-[30px]">
-                                <img src="/images/cart-icon.png" className="w-[59px] h-[36px]" />
-                                <div className="sm">
-                                    <p>MasterCard</p>
-                                    <p className="text-[#BDBDBD]">**2341</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-[27px]">
-                                <div>
-                                    <input id="option-one" name="radio" value="one" type="radio" className="cart-radio" />
-                                    <label htmlFor="option-one">
-                                        <span className="bg-[#F2F2F2]"></span>
-                                    </label>
-                                </div>
-                                <img src="/images/basket.png" className="w-[20.21px] h-[24.88px]" />
-                            </div>
-                        </div>
-                    </div>
-                    <p className="text-[#18A615] text-lg font-normal font-[Roboto] underline decoration-[#C2FFC5]">Добавить способ оплаты</p>
-                </div>
-                <Review />
-            </div>        
+                        <Review isProfile={true} profileUserId={data.uid} />
+                    </>
+                )}
+                <Outlet />
+            </div> 
+            {showConfirm && <Confirm onClose={() => setShowConfirm(false)} />}    
         </div>
     );
 }

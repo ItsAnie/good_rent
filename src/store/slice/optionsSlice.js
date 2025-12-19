@@ -3,27 +3,27 @@ import { ref, get } from "firebase/database";
 import { database } from "../../firebase";
 
 export const fetchOptions = createAsyncThunk("options/fetchOptions", async () => {
-    const dbRef = ref(database, "/");
-    const snapshot = await get(dbRef);
-
-    if (snapshot.exists()){
-        const data = snapshot.val();
+    try {
+        const typeSnap = await get(ref(database, "/type"));
+        const categorySnap = await get(ref(database, "/category"));
+        const serviceSnap = await get(ref(database, "/service"));
 
         return {
-            options: data.options || [],
-            options1: data.options1 || [],
-            service: data.service || [],
+            type: typeSnap.exists() ? typeSnap.val() : [],
+            category: categorySnap.exists() ? categorySnap.val() : [],
+            service: serviceSnap.exists() ? serviceSnap.val() : [],
         };
-    } else{
-        return {options: [], options1: [], service: []};
+    } catch (error) {
+        console.error("Firebase fetch error:", error);
+        throw error;
     }
 });
 
 const optionsSlice = createSlice({
     name: "options",
     initialState: {
-        options: [],
-        options1: [],
+        type: [],
+        category: [],
         service: [],
         loading: false,
         error: null,
@@ -37,8 +37,8 @@ const optionsSlice = createSlice({
             })
             .addCase(fetchOptions.fulfilled, (state, action) => {
                 state.loading = false;
-                state.options = action.payload.options;
-                state.options1 = action.payload.options1;
+                state.type = action.payload.type;
+                state.category = action.payload.category;
                 state.service = action.payload.service;
             })
             .addCase(fetchOptions.rejected, (state, action) => {

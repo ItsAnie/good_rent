@@ -1,26 +1,5 @@
-import { ref, set } from "firebase/database";
+import { ref, set, push } from "firebase/database";
 import { database } from "./firebase";
-
-const recomendation = [
-    // row 1 items
-    [
-      { id: 1, image: "./images/Bitmap.png", title: "Приставка X-BOX 360", price: "10 000 руб./мес", type: "Аренда", category: "Хобби и развлечения", address: "ул. Тургенева 150" },
-      { id: 2, image: "./images/Bitmap.png", title: "Ремонт X-BOX 360", price: "10 000 руб.", type: "Услуга", category: "Хобби и развлечения", address: "ул. Тургенева 150" },
-      { id: 3, image: "./images/Bitmap.png", title: "Приставка X-BOX 360", price: "", type: "Продажа", category: "Хобби и развлечения", address: "ул. Тургенева 150" },
-    ],
-    // row 2 items
-    [
-      { id: 4, image: "./images/Bitmap.png", title: "Приставка X-BOX 360", price: "10 000 руб./мес", type: "Аренда", category: "Хобби и развлечения", address: "ул. Тургенева 150" },
-      { id: 5, image: "./images/Bitmap.png", title: "Приставка X-BOX 360", price: "Приставка PSP/Смартф...", type: "Продажа", category: "Хобби и развлечения", address: "ул. Тургенева 150" },
-      { id: 6, image: "./images/Bitmap.png", title: "Приставка X-BOX 360", price: "2 000 руб./день", type: "Услуга", category: "Хобби и развлечения", address: "Краснодар, ул Красная 121" },
-    ],
-    // row 3 items
-    [
-      { id: 7, image: "./images/Bitmap.png", title: "Приставка X-BOX 360", price: "10 000 руб./мес", type: "Продажа", category: "Хобби и развлечения", address: "ул. Тургенева 150" },
-      { id: 8, image: "./images/Bitmap.png", title: "Приставка X-BOX 360", price: "10 000 руб.", type: "Услуга", category: "Хобби и развлечения", address: "Краснодар, ул Красная 121" },
-      { id: 9, image: "./images/Bitmap.png", title: "Приставка X-BOX 360", price: "10 000 руб.", type: "Аренда", category: "Хобби и развлечения", address: "ул. Тургенева 150" }
-    ],
-  ];
 
 const type = [
   { value: "Аренда", label: "Аренда", icon: "/images/Vector5.png" },
@@ -51,16 +30,25 @@ const service = [
   { value: "Другое", label: "Другое", icon: "/images/other.png" },
 ];
 
+const realEstateFilters = {
+  mainFilters: ["Жилая", "Коммерческая"],
+  residential: ["Квартира", "Дом", "Комната", "Часть дома", "Апартаменты", "Таунхаус"],
+  commercial: ["Офис", "Торговая площадь", "Склад", "Гараж", "Производство", "Помещение свободного назначения"],
+  repair: ["Без ремонта", "Косметический", "Евроремонт", "Дизайнеркий"],
+  bathroom: ["Совмещенный", "Раздельный", "2 и более"],
+  houseType: ["Кирпичный", "Деревянный", "Панельный", "Блочный", "Монолитный", "Кирпично-монолитный"]
+};
+
+const transport = {
+  typeTransport:[ "Автомобиль легковой", "Автомобиль грузовой", "Мотоцикл/мототехника", "Спецтехника", "Воздушный транспорт", "Водный транспорт"],
+  
+}
+
 export function addOptionsToDB() {
-  const recoimendationRef = ref(database, "recomendation");
   const typeRef = ref(database, "type"); 
   const categoryRef = ref(database, "category");
   const serviceRef = ref(database, "service");
-  const locationRef = ref(database, "location")
-
-  set(recoimendationRef, recomendation)
-    .then(() => console.log("Recomendation added successfully!"))
-    .catch((error) => console.error("Error adding recomendation:", error));
+  const realEstateRef = ref(database, "realEstate");
 
   set(typeRef, type)
     .then(() => console.log("Type added successfully!"))
@@ -73,5 +61,8 @@ export function addOptionsToDB() {
   set(serviceRef, service)
     .then(() => console.log("Options added successfully!"))
     .catch((error) => console.error("Error adding options:", error));
-    
+
+    set(realEstateRef, realEstateFilters)
+      .then(() => console.log("Real estate added successfully!"))
+      .catch((error) => console.error("Error adding real estate:", error));  
 }

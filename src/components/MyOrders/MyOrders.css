@@ -1,0 +1,14 @@
+.orders {
+  mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+}
+
+.orders::-webkit-scrollbar-thumb {
+  background-color: #219653;
+  border-radius: 5px;     
+  width: 10px;     
+}
+
+.orders::-webkit-scrollbar {
+  width: 6px;
+}

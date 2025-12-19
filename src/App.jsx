@@ -1,42 +1,95 @@
-import React, { useEffect } from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  useLocation,
-} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Start from "./components/Start/Start";
 import AuthForm from "./components/AuthForm/AuthForm";
 import Search from "./components/Search/Search";
 import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
-import Popular from "./components/Popular/Popular";
 import Footer from "./components/Footer/Footer";
 import { addOptionsToDB } from "./data"; 
 import "./App.css";
+import EditProfile from "./components/EditProfile/EditProfile";
+import { auth } from "./firebase"; 
+import { onAuthStateChanged } from "firebase/auth";
+import MyOrders from "./components/MyOrders/MyOrders";
+import MyAnnouncement from "./components/MyAnnouncement/MyAnnouncement";
+import Messages from "./components/Messages/Messages";
+import Chat from "./components/Chat/Chat";
+import NewAd from "./components/NewAd/NewAd";
+import CardForClient from "./components/Cards/CardForClient";
+import CardForUser from "./components/Cards/CardForUser/CardForUser";
+import Feedbacks from "./components/Feedback/Feedbacks";
+
+import { useDispatch } from "react-redux";
+import { fetchUserProfile } from "./store/slice/profileSlice";
+import AboutUs from "./components/AboutUs";
+import Help from "./components/Help";
+import { AdsProvider } from "./store/AdsContext";
+import Advertising from "./components/Advertising/Advertising";
 
 function App() {
-  const location = useLocation();
-  const hideHeader = location.pathname === "/";
+ const dispatch = useDispatch();
+ const [currentUser, setCurrentUser] = useState(null);
+
+ useEffect(() => {
+  if (currentUser?.uid) {
+    dispatch(fetchUserProfile(currentUser.uid));
+  }
+}, [currentUser, dispatch]);
+
 
   useEffect(() => {
-    addOptionsToDB();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user);
+        console.log("Logged in user:", user);
+      } else {
+        setCurrentUser(null);
+        console.log("No user logged in");
+      }
+    });
+
+    return () => unsubscribe(); 
   }, []);
+
+  const location = useLocation();
+  const hideHeader = location.pathname === "/";
 
   return (
     <>
       {!hideHeader && <Header />}
 
-      <Routes>
-        <Route path="/" element={<Start />} />
-        <Route path="/auth" element={<AuthForm />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/popular/:id" element={<Popular />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <AdsProvider>
+        <Routes>
+          <Route path="/" element={<Start />} />
+          <Route path="/auth" element={<AuthForm />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="/advertising" element={<Advertising />} />
+          <Route path="/profile" element={<Profile user={currentUser} />} >
+            <Route 
+              index
+              element={
+                <>
+                  <MyOrders />
+                  <MyAnnouncement />
+                </>
+              }
+            />
+            <Route path="notifications" element={<Messages />} />
+            <Route path="messages/:id" element={<Chat />} />
+          </Route>
+
+          <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/new-add" element={<NewAd />} />
+          <Route path="/card-for-client" element={<CardForClient />} />
+          <Route path="/card-for-user" element={<CardForUser />} />
+          <Route path="/feedbacks" element={<Feedbacks />} />
+        </Routes>
+      </AdsProvider>
 
       <Footer />
     </>
