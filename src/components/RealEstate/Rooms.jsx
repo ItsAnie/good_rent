@@ -6,7 +6,7 @@ function Rooms({newAd}){
     const [selected, setSelected] = useState(null);
 
     return (
-        <div className="mt-[35px] text-[#333333] text-lg">
+        <div className= "mt-[35px] text-[#333333] text-lg">
             <h2 className={`font-medium ${newAd ? "text-[#BDBDBD] font-normal text-base" : "transparent"}`}>Количество комнат</h2>
             <div className="flex items-center gap-[32px] mt-[15px]"> 
 

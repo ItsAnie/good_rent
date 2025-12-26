@@ -16,6 +16,7 @@ const realEstateSlice = createSlice({
   initialState: {
     mainFilters: [],
     selectedMainFilter: null,
+    selectedPropertyType: "Автомобиль легковой",
     residential: [],
     commercial: [],
     repair: [],
@@ -27,6 +28,9 @@ const realEstateSlice = createSlice({
   reducers: {
     setSelectedMainFilter: (state, action) => {
       state.selectedMainFilter = action.payload;
+    },
+    setSelectedPropertyType: (state, action) => {
+      state.selectedPropertyType = action.payload;
     },
   },
   extraReducers: builder => {
@@ -53,5 +57,5 @@ const realEstateSlice = createSlice({
   },
 });
 
-export const {setSelectedMainFilter} = realEstateSlice.actions;
+export const {setSelectedMainFilter, setSelectedPropertyType} = realEstateSlice.actions;
 export default realEstateSlice.reducer;

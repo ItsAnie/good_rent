@@ -14,20 +14,21 @@ function Footer() {
 
           <div className="icons-list flex flex-wrap justify-between gap-8 xl:gap-12 items-center">
             <div className="footer-icons flex flex-wrap items-center justify-center gap-3 xl:gap-5">
-              <img src="/images/instagram.png" className="w-[24px] h-[24px] xl:w-[28px] xl:h-[28px]" />
-              <img src="/images/fb.png" className="w-[24px] h-[24px] xl:w-[28px] xl:h-[28px]" />
-              <img src="/images/in.png" className="w-[24px] h-[24px] xl:w-[28px] xl:h-[28px]" />
-              <img src="/images/yelp.png" className="w-[24px] h-[24px] xl:w-[28px] xl:h-[28px]" />
-              <img src="/images/youtube.png" className="w-[24px] h-[24px] xl:w-[28px] xl:h-[28px]" />
-              <img src="/images/tg.png" className="w-[24px] h-[24px] xl:w-[28px] xl:h-[28px]" />
-              <img src="/images/whatsapp.png" className="w-[24px] h-[24px] xl:w-[28px] xl:h-[28px]" />
+              <img src="/images/instagram.png" className="w-[28px] h-[28px]" />
+              <img src="/images/fb.png" className="w-[31px] h-[31px]" />
+              <img src="/images/in.png" className="w-[28px] h-[28px]" />
+              <img src="/images/yelp.png" className="w-[21px] h-[28px]" />
+              <img src="/images/youtube.png" className="w-[31px] h-[21px]" />
+              <img src="/images/tg.png" className="w-[31px] h-[26px]" />
+              <img src="/images/whatsapp.png" className="w-[28px] h-[28px]" />
             </div>
 
             <div className="language-list flex flex-col items-center gap-3 justify-between">
-              <p className="text-sm xl:text-base">Язык интерфейса</p>
+              <p className="text-sm xl:text-base text-[#FFF4F4]">Язык интерфейса</p>
               <select
+                id="language"
                 className="language bg-[#FFFFFF] text-[#2C2C2C] rounded-[10px] text-sm xl:text-base 
-                           h-[40px] xl:h-[45px] w-[120px] xl:w-[140px] text-center focus:outline-none"
+                           h-[40px] xl:h-[45px] w-[120px] xl:w-[140px] text-center focus:outline-none cursor-pointer"
               >
                 <option>Русский</option>
                 <option>Английский</option>

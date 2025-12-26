@@ -6,6 +6,7 @@ import { useToggle } from "../../hooks/useToggle";
 
 function MyAnnouncement(){
     const [isOpen, toggle] = useToggle(true);
+    const [products, setProducts] = useState([]);
 
     const dispatch = useDispatch();
     const {data, loading, error} = useSelector((state) => state.allProducts);
@@ -14,14 +15,29 @@ function MyAnnouncement(){
         dispatch(fetchAllProducts());
     }, [dispatch]);
 
+    useEffect(() => {
+        if (data) {
+            const flat = Array.isArray(data) ? data.flat() : Object.values(data).flat();
+            setProducts(flat);
+        }
+    }, [data]);
+    
+    const handleDelete = (id) => {
+        setProducts(prev => prev.filter(product => product.id !== id));
+    };
+
+
     if (loading) return <p>Загрузка...</p>;
     if (error) return <p>Ошибка: {error}</p>;
     if (!data) return <p>Нет данных</p>;
 
     const flatData = Array.isArray(data) ? data.flat() : Object.values(data).flat();
 
-    const active = flatData.slice(0, 2);
-    const archive = flatData.slice(0, 8);
+    const active = products.slice(0, 2);
+    const archive = products.slice(0, 8);
+    
+
+
 
     return (
         <div className="mt-[40px] overflow-hidden max-h-[690px]">
@@ -63,8 +79,8 @@ function MyAnnouncement(){
                         <div className="active mt-[15px]">
                             {active.map((product, index) => {
                                 return (
-                                    <div className="flex mt-[10px] w-[739px] shadow-[0_2px_10px_0_rgba(0,0,0,0.07)] rounded-[8px] py-[15px] gap-[31px]">
-                                        <div key={product.id || index} className="flex"> 
+                                    <div key={product.id || index} className="flex mt-[10px] w-[739px] shadow-[0_2px_10px_0_rgba(0,0,0,0.07)] rounded-[8px] py-[15px] gap-[31px]">
+                                        <div className="flex"> 
                                             <img 
                                                 src={product.images?.[1]} 
                                                 className="w-[70px] h-[70px]"
@@ -93,7 +109,11 @@ function MyAnnouncement(){
                                                 </div>
                                             </div>
                                             <div className="flex justify-end gap-[18px]">
-                                                <img src="/images/delete.png" alt="delete" />
+                                                <img 
+                                                    src="/images/delete.png" 
+                                                    alt="delete" 
+                                                    className="cursor-pointer"
+                                                    onClick={() => handleDelete(product.id)} />
                                                 <img src="/images/edit.png" alt="edit" />
                                             </div>
                                         </div>
@@ -139,7 +159,11 @@ function MyAnnouncement(){
                                             </div>
                                             <div className="flex justify-end gap-[18px]">
                                                 <img src="/images/restore.png" alt="restore" />
-                                                <img src="/images/delete.png" alt="delete" />
+                                                <img 
+                                                    src="/images/delete.png" 
+                                                    alt="delete"
+                                                    className="cursor-pointer"
+                                                    onClick={() => handleDelete(product.id)} />
                                                 <img src="/images/edit.png" alt="edit" />
                                             </div>
                                         </div>

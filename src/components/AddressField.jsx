@@ -1,26 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useToggle } from "../hooks/useToggle";
+import { updateUserProfile } from "../store/slice/profileSlice";
 
-function AddressField({newAd}) {
+function AddressField({newAd, formData, setFormData}) {
     const dispatch = useDispatch();
     const profile = useSelector(state => state.profile.data);
     const [isMapOpen, toggleMap] = useToggle(false);
 
     const handleChange = (e) => {
-        const newLocation = e.target.value;
-        dispatch(updateUserProfile({
-            uid: profile.uid,
-            profileData: {
-                ...profile,
-                location: newLocation
-            }
+        setFormData(prev => ({
+            ...prev,
+            location: e.target.value
         }));
     };
 
     return (
         <div className={`flex flex-col gap-[8px] ${newAd ? "mt-[61px]" : ""}`}>
-            <label htmlFor="address" className="ml-[21px]">Адрес</label>
+            <label htmlFor="address" className="ml-[21px] text-[#BDBDBD]">Адрес</label>
             <div className="flex gap-[17px]">
                 <input
                     id="address"

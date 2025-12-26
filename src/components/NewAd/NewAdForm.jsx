@@ -1,8 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import ImageUploadSlider from "./ImageUploadSlider/ImageUploadSlider";
-import Dropdown from "../Dropdown";
+import Dropdown from "../../Dropdown";
 import Rent from "./Rent/Rent";
-import { useToggle } from "../../hooks/useToggle";
 import RealEstate from "../RealEstate/RealEstate";
 import Square from "../RealEstate/Square";
 import Rooms from "../RealEstate/Rooms";
@@ -10,18 +10,22 @@ import AddressField from "../AddressField";
 import YearConstruction from "../RealEstate/YearConstruction";
 import Floor from "../RealEstate/Floor";
 import PropertyType from "../RealEstate/PropertyType/PropertyType";
+import TransportDropdown from "../Transport/TransportDropdown/TransportDropdown";
+import Transport from "../Transport/Transport";
 
 function NewadForm({formData, setFormData, selectedType, selectedCategory, isEditMode, handleSubmit, handleSaveChanges, handleCancel, isFormValid, imageFiles, setImageFiles}){
+    const { selectedPropertyType } = useSelector(state => state.realEstate);
+    const {selectedMainFilter} = useSelector(state => state.realEstate);
 
     return (
-        <div className="container mx-auto pt-[65px] pb-[206px]">
+        <div className="container mx-auto pt-[65px] pb-[206px] min-h-screen">
             <h2 className="text-2xl text-[#18A615] text-center font-medium font-[Roboto] mb-[36px]">Подать объявление</h2>
                 <ImageUploadSlider onImagesChange={setImageFiles} imageFiles={imageFiles} />
-                <div className="flex flex-col text-[#BDBDBD] font-medium font-[Roboto] pt-[97px]">
+                <div className="flex flex-col font-medium font-[Roboto] pt-[97px]">
                 <div className="flex justify-between">
                     <div className="w-[489px]">                   
                             <div className="flex flex-col gap-2">
-                                <label htmlFor="name" className="ml-[22px]">Название</label>
+                                <label htmlFor="name" className="ml-[22px] text-[#BDBDBD]">Название</label>
                                 <input 
                                     id="name"
                                     type="text"
@@ -34,7 +38,7 @@ function NewadForm({formData, setFormData, selectedType, selectedCategory, isEdi
                             </div>
                         
                             <div className="flex flex-col gap-2">
-                                <label htmlFor="description" className="ml-[22px] mt-[39px]">Описание</label>
+                                <label htmlFor="description" className="ml-[22px] mt-[39px] text-[#BDBDBD]">Описание</label>
                                 <textarea 
                                     id="description"
                                     placeholder="Описание товара" 
@@ -49,7 +53,7 @@ function NewadForm({formData, setFormData, selectedType, selectedCategory, isEdi
                     {/* dropdown */}
                     <div className="relative">
                         <div className="flex flex-col gap-2 text-sm relative z-20">
-                            <p className="pl-[20px] text-base">Тип объявления</p>
+                            <p className="pl-[20px] text-base text-[#BDBDBD]">Тип объявления</p>
                             <div className="relative w-[340px] font-normal text-[#333333] text-sm">
                                 <Dropdown
                                     id="type"
@@ -59,7 +63,7 @@ function NewadForm({formData, setFormData, selectedType, selectedCategory, isEdi
                         </div>
 
                         <div className="flex flex-col gap-2 mt-[39px] text-sm relative z-10">
-                            <p className="pl-[20px] text-base">Категория</p>
+                            <p className="pl-[20px] text-base text-[#BDBDBD]">Категория</p>
                             <div className="relative w-[340px] font-normal text-[#333333] text-sm">
                                 <Dropdown
                                     id="category"
@@ -71,17 +75,16 @@ function NewadForm({formData, setFormData, selectedType, selectedCategory, isEdi
                         {selectedCategory?.value === "Недвижимость" && (
                             <div className="flex justify-between w-full absolute gap-45">
                                 <Square newAd />
-                                <Rooms newAd />
                             </div>
                         )}
                 </div>
-                <div className={`${selectedType?.value || selectedCategory?.value ? "block" : "invisible"} min-w-[478px] max-w-full`}>
+                <div className={`${selectedType?.value || selectedCategory?.value ? "block" : "invisible"} min-w-[478px] max-w-full relative`}>
                     {selectedType?.value === "Аренда" && 
                         <Rent formData={formData} setFormData={setFormData} />
                     }
                     {selectedType?.value === "Продажа" && (
-                    <div className="flex flex-col absolute">
-                        <label htmlFor="price" className="ml-[18px]">Стоимость (руб.)</label>
+                    <div className="flex flex-col absolute z-50">
+                        <label htmlFor="price" className="ml-[18px] text-[#BDBDBD]">Стоимость (руб.)</label>
                         <input 
                             type="text" 
                             id="price" 
@@ -103,7 +106,7 @@ function NewadForm({formData, setFormData, selectedType, selectedCategory, isEdi
 
                     {selectedType?.value === "Обмен" && (
                     <div className="flex flex-col gap-[8px]">
-                        <label htmlFor="exchange" className="ml-[18px]">Цель обмена</label>
+                        <label htmlFor="exchange" className="ml-[18px] text-[#BDBDBD]">Цель обмена</label>
                         <textarea 
                             id="exchange" 
                             value={formData.exchange}
@@ -115,22 +118,49 @@ function NewadForm({formData, setFormData, selectedType, selectedCategory, isEdi
                     </div>
                     )}
 
-                    {selectedCategory?.value === "Недвижимость" && (
-                        <div className="flex items-end justify-between w-full">                        
-                            <RealEstate newAd />
-                            <div className="flex flex-col items-center justify-center ml-[60px]">
-                                <Floor newAd />
-                                <YearConstruction newAd />
+                    {selectedCategory?.value === "Недвижимость" ? (
+                        <div className="flex flex-col absolute">
+                            <div className="flex items-end w-full">   
+                                <div className="mb-[15px]">
+                                    <RealEstate newAd />
+                                </div>                     
+                                <div className="flex flex-col items-center gap-[39px] justify-center ml-[60px]">
+                                    <Floor newAd />
+                                    <YearConstruction newAd selectedCategory={selectedCategory} />
+                                </div>
+                            </div>
+                            <div className="flex flex-col">
+                                    <div className="-ml-[100px]">
+                                        {selectedMainFilter !== "Коммерческая" && <Rooms newAd />}
+                                    </div>
+                                    <div className="mt-[59px]">
+                                        <PropertyType newAd selectedCategory={selectedCategory} selectedValue={selectedPropertyType} />
+                                    </div>
+                            </div>
+                        </div>
+                    ) : (selectedCategory?.value === "Транспорт" && 
+                        <div className="flex flex-col items-end absolute top-0 bottom-0 left-0 right-0">
+                            <YearConstruction newAd selectedCategory={selectedCategory} />
+                            <div className="flex flex-col items-start mt-[43px]">
+                                <PropertyType newAd selectedCategory={selectedCategory} selectedValue={selectedPropertyType} />
+                                {selectedPropertyType === "Автомобиль легковой" && (
+                                    <div>
+                                        <Transport id="transmission" newAd />
+                                        <Transport id="drive" newAd />
+                                        <Transport id="steeringWheel" newAd />
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )}
                 </div>
                 </div>
-                <div className="flex justify-between items-center">
+                <div className={`${selectedCategory?.value === "Недвижимость" ? "flex" : "flex flex-col"} justify-between`}>
                     <AddressField newAd />
-                    {selectedCategory?.value === "Недвижимость" && (
-                        <div className="mt-[59px]">
-                            <PropertyType newAd />
+                     {(selectedCategory?.value === "Транспорт" && selectedPropertyType === "Автомобиль легковой") && (
+                        <div className="flex justify-between w-[780px] items-center">
+                            <TransportDropdown id="brand" newAd />
+                            <TransportDropdown id="color" newAd />
                         </div>
                     )}
                 </div>

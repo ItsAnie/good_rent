@@ -81,10 +81,14 @@ export const profileSlice = createSlice({
                 state.error = null;
             })
             .addCase(updateUserProfile.fulfilled, (state, action) => {
-                state.loading = false;
-                state.data = {
+                 state.loading = false;
+                 state.data = {
                     ...state.data,
-                    ...action.payload
+                    ...action.payload,
+                    socialLinks: {
+                        ...state.data.socialLinks,
+                        ...action.payload.socialLinks
+                    }
                 };
             })
             .addCase(updateUserProfile.rejected, (state, action) => {

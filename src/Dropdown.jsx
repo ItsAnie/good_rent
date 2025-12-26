@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOptions } from "../store/slice/optionsSlice";
-import { setSelectedType, setSelectedCategory, setSelectedSub } from "../store/slice/dropdownSlice";
+import { fetchOptions } from "./store/slice/optionsSlice";
+import { setSelectedType, setSelectedCategory, setSelectedSub } from "./store/slice/dropdownSlice";
 
 function Dropdown({ id, iconKey = "icon", onlyLabels = false }) {
   const dispatch = useDispatch();

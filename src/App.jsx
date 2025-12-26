@@ -7,10 +7,10 @@ import Search from "./components/Search/Search";
 import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
 import Footer from "./components/Footer/Footer";
-import { addOptionsToDB } from "./data"; 
+import { addOptionsToDB } from "./data";
 import "./App.css";
 import EditProfile from "./components/EditProfile/EditProfile";
-import { auth } from "./firebase"; 
+import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import MyOrders from "./components/MyOrders/MyOrders";
 import MyAnnouncement from "./components/MyAnnouncement/MyAnnouncement";
@@ -20,24 +20,27 @@ import NewAd from "./components/NewAd/NewAd";
 import CardForClient from "./components/Cards/CardForClient";
 import CardForUser from "./components/Cards/CardForUser/CardForUser";
 import Feedbacks from "./components/Feedback/Feedbacks";
-
 import { useDispatch } from "react-redux";
 import { fetchUserProfile } from "./store/slice/profileSlice";
 import AboutUs from "./components/AboutUs";
 import Help from "./components/Help";
 import { AdsProvider } from "./store/AdsContext";
 import Advertising from "./components/Advertising/Advertising";
+import { fetchAllUsers } from "./store/slice/usersSlice";
 
 function App() {
- const dispatch = useDispatch();
- const [currentUser, setCurrentUser] = useState(null);
+  const dispatch = useDispatch();
+  const [currentUser, setCurrentUser] = useState(null);
 
- useEffect(() => {
-  if (currentUser?.uid) {
-    dispatch(fetchUserProfile(currentUser.uid));
-  }
-}, [currentUser, dispatch]);
+  useEffect(() => {
+    if (currentUser?.uid) {
+      dispatch(fetchUserProfile(currentUser.uid));
+    }
+  }, [currentUser, dispatch]);
 
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -50,7 +53,7 @@ function App() {
       }
     });
 
-    return () => unsubscribe(); 
+    return () => unsubscribe();
   }, []);
 
   const location = useLocation();
@@ -69,7 +72,7 @@ function App() {
           <Route path="/help" element={<Help />} />
           <Route path="/advertising" element={<Advertising />} />
           <Route path="/profile" element={<Profile user={currentUser} />} >
-            <Route 
+            <Route
               index
               element={
                 <>
@@ -79,7 +82,7 @@ function App() {
               }
             />
             <Route path="notifications" element={<Messages />} />
-            <Route path="messages/:id" element={<Chat />} />
+            <Route path="/profile/messages/:id" element={<Chat />} />
           </Route>
 
           <Route path="/edit-profile" element={<EditProfile />} />
@@ -90,7 +93,6 @@ function App() {
           <Route path="/feedbacks" element={<Feedbacks />} />
         </Routes>
       </AdsProvider>
-
       <Footer />
     </>
   );

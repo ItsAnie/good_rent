@@ -6,13 +6,17 @@ import { database } from "../../firebase";
 import "./Messages.css";
 import BannerSubmissionSuccess from "../BannerSubmissionSuccess";
 import { useAds } from "../../store/AdsContext";
+import { useSelector } from "react-redux";
 
-function Messages({ onOpenChat }) {
+function Messages() {
     const navigate = useNavigate();
     const auth = getAuth();
     const currentUser = auth.currentUser;
     const [chats, setChats] = useState([]);
     const { submittedBanner } = useAds();
+    const users = useSelector(state => state.users.data);
+    console.log("Users", users);
+
 
     useEffect(() => {
         if (!currentUser) return;
@@ -23,31 +27,29 @@ function Messages({ onOpenChat }) {
             const list = [];
 
             Object.entries(data).forEach(([chatId, chat]) => {
-                if (!chat.users?.[currentUser.uid]) return;
+                if (!chat.users?.[currentUser?.uid]) return;
 
-                let opponent = {};
-                if (chat.lastMessage?.senderId === currentUser.uid) {
-                    opponent = chat.opponent || {
-                        id: Object.keys(chat.users).find(uid => uid !== currentUser.uid),
-                        name: chat.opponent?.name,
-                        image: chat.opponent?.image
-                    };
-                } else {
-                    opponent = {
-                        id: chat.lastMessage.senderId,
-                        name: chat.lastMessage.senderName,
-                        image: chat.lastMessage.senderImage
-                    };
-                }
+                const opponentId = Object.keys(chat.users).find(uid => uid !== currentUser?.uid);
+                const opponentFromState = users.find(u => u.uid === opponentId);
+
+                console.log("opponentId", opponentId)
+                console.log("usersMap", users.map(u => u.uid));
+
+                const opponent = {
+                    id: opponentId,
+                    name: opponentFromState?.name,
+                    image: opponentFromState?.photoURL 
+                };
+                console.log("opponent", opponent)
 
                 list.push({
                     id: chatId,
-                    opponentId: opponent.id,
+                    opponentId: opponentId,
                     lastMessage: chat.lastMessage,
                     unread: chat.unread?.[currentUser.uid],
                     receiverId: opponent.id,
-                    receiverName: opponent.name,
-                    receiverImage: opponent.image,
+                    receiverName: opponentFromState?.name,
+                    receiverImage: opponentFromState?.image,
                     bitmap: chat.lastMessage?.bitmap
                 });
             });
@@ -101,6 +103,6 @@ function Messages({ onOpenChat }) {
             </div>
         </div>
     );
-}
+}   
 
 export default Messages;

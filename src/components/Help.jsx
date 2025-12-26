@@ -3,9 +3,9 @@ import { useToggle } from "../hooks/useToggle";
 
 function Help(){
     const [isOpen, toggle] = useToggle();
-    
+
     return(
-        <div className="flex flex-col justify-center items-center font-[Roboto] mt-[53px] mb-[347px]">
+        <div className="flex flex-col items-center font-[Roboto] mt-[53px] mb-[347px]">
             <div className="flex items-center gap-2 cursor-pointer w-[765px]" onClick={toggle}>
                 <h2 className="text-xl font-medium text-[#18A615]">Частые вопросы</h2>
                 <img src={isOpen ? "/images/arow.png" : "/images/arow-down.png"} className="arrow w-[11.69px] h-[5.84px]" />

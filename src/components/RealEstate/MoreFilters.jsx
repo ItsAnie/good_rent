@@ -9,38 +9,31 @@ import YearConstruction from "./YearConstruction";
 import Floor from "./Floor";
 import { useSelector } from "react-redux";
 import Rooms from "./Rooms";
+import Transport from "../Transport/Transport";
+import TransportDropdown from "../Transport/TransportDropdown/TransportDropdown";
 
 function MoreFilters({selectedCategory}){
     const {selectedMainFilter} = useSelector(state => state.realEstate);
-    const containerHeight = selectedMainFilter
-        ? "min-h-[753px]"
-        : "min-h-[1038px]";
-        
-    const containerClass =
-        selectedMainFilter === "Жилая"
-            ? "justify-end pb-[60px]"
-            : "justify-center";
-
-    const mtMap = {
-        "Жилая": "-mt-[230px]",
-        "Коммерческая": "-mt-[210px]"
-    };
-
-    const mtClass = mtMap[selectedMainFilter] || "-mt-[170px]";
+    const { selectedPropertyType } = useSelector(state => state.realEstate);
 
     return(
-        <div className={`flex flex-col items-center w-[1520px] bg-gradient-to-b 
+        <div className="flex flex-col items-center w-[1520px] bg-gradient-to-b 
                         from-[#3CC742] to-[#C2FFC5] mx-auto h-auto rounded-[20px]
-                        absolute left-1/2 -translate-x-1/2 top-full  -mt-[170px] ${containerClass} ${containerHeight} ${mtClass}`}>
-            <div className="max-w-full h-full flex flex-col text-[#333333] text-lg mt-[30px]">
-                <PropertyType />
+                        absolute left-1/2 -translate-x-1/2 top-full -mt-[170px] max-h-[1038px] min-h-[639px] pb-[55px]">
+            <div className="max-w-full h-full flex flex-col text-[#333333] text-lg mt-[190px]">
+                <PropertyType 
+                    selectedCategory={selectedCategory} 
+                    selectedValue={selectedPropertyType}
+                />
 
                 <div className="flex justify-between w-full items-center">
                     <Price />
-                    <Square />
+                    {selectedPropertyType !== "Водный транспорт" 
+                        ? <Square selectedCategory={selectedCategory} /> 
+                        : <YearConstruction selectedCategory={selectedCategory} />}
                 </div>
 
-                {!(selectedMainFilter === "Жилая" || selectedMainFilter === "Коммерческая") && (
+                {!(selectedMainFilter === "Жилая" || selectedMainFilter === "Коммерческая" || selectedCategory?.value === "Транспорт") && (
                     <div>
                         <Repair />
                         <Bathroom />
@@ -49,13 +42,39 @@ function MoreFilters({selectedCategory}){
                 )}
 
                 <div className="flex justify-between w-full items-center">
-                    <YearConstruction />
-                    <Floor />
+                    {selectedPropertyType !== "Водный транспорт" && <YearConstruction selectedCategory={selectedCategory} />}
+                    {(selectedCategory?.value === "Транспорт" && selectedPropertyType === "Автомобиль легковой") && (
+                        <Transport id="transmission" />
+                    )}
+                    {selectedCategory?.value === "Недвижимость" && <Floor />}
                 </div>
 
-                {selectedMainFilter === "Жилая" && (<Rooms />)}
+                {(selectedCategory?.value === "Транспорт" && selectedPropertyType === "Автомобиль легковой") && (
+                    <div>
+                        <div className="flex justify-between w-full items-center">
+                            <Transport id="drive" />
+                            <Transport id="steeringWheel" />
+                        </div> 
+                        <div className="flex justify-between w-[780px] items-center">
+                            <TransportDropdown id="brand" />
+                            <TransportDropdown id="color" />
+                        </div> 
+                    </div>                       
+                )}
 
-                <button className="bg-[#27AE60] w-[228px] h-[50px] rounded-[25px] cursor-pointer text-white text-sm absolute bottom-[49px] right-[63px]">Применить</button>
+                {(selectedPropertyType === "Мотоцикл/мототехника" && selectedPropertyType !== "Водный транспорт") && (
+                    <div className="flex justify-between w-[780px] items-center">
+                        <TransportDropdown id="brand" />
+                        <TransportDropdown id="color" />
+                    </div> 
+                )}
+
+                {selectedMainFilter === "Жилая" && (<Rooms />)}
+            </div>
+             <div className="flex justify-end w-full pr-[63px] mt-[48px]">
+                <button className="bg-[#27AE60] w-[228px] h-[50px] rounded-[25px] cursor-pointer text-white text-sm">
+                    Применить
+                </button>
             </div>
         </div>
     );

@@ -41,7 +41,7 @@ function Feedbacks() {
 
                 {owner && (
                     <div className="flex gap-[11px]">
-                        <p className="text-xs max-w-[140px]">{owner.name}</p>
+                        <p className="text-xs max-w-[140px] text-[#4F4F4F]">{owner.name}</p>
                         <img src={owner.image} alt={owner.name} className="w-[50px] h-[50px] rounded-full" />
                     </div>
                 )}

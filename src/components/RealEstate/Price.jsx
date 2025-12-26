@@ -8,13 +8,15 @@ function Price(){
                 <div className="flex items-center gap-[12px]">
                     <p>От</p>
                     <input 
+                        id="price-from"
                         type="text" 
-                         className="bg-[#F6F6F6] w-[180px] h-[50px] rounded-[19px] shadow-[0_2px_10px_0_rgba(0,0,0,0.07)] focus:outline-none pl-[8px]"
+                        className="bg-[#F6F6F6] w-[180px] h-[50px] rounded-[19px] shadow-[0_2px_10px_0_rgba(0,0,0,0.07)] focus:outline-none pl-[8px]"
                     />
                 </div>
                 <p>До</p>
                 <div className="flex items-center gap-[15px]">
                     <input 
+                        id="price-to"
                         type="text" 
                         className="bg-[#F6F6F6] w-[180px] h-[50px] rounded-[19px] shadow-[0_2px_10px_0_rgba(0,0,0,0.07)] focus:outline-none pl-[8px]"
                     />

@@ -56,7 +56,7 @@ function Chat(){
                 text,
                 senderId: currentUser.uid,
                 senderName: currentUser.displayName,
-                senderImage: currentUser.photoURL || "/images/filled-user.png",
+                senderImage: currentUser.photoURL,
                 bitmap: bitmap,
                 timestamp: Date.now(),
                 read: false
@@ -65,11 +65,6 @@ function Chat(){
                 [receiverId]: true,  
                 [currentUser.uid]: false  
             },
-            opponent: {
-                id: receiverId,
-                name: receiverName,
-                image: receiverImage
-            }
         });
 
         setText("");

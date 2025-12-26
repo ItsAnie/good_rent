@@ -3,7 +3,7 @@ import "./PropertyType/PropertyType.css"
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRealEstate, setSelectedMainFilter } from "../../store/slice/realEstateSlice";
 
-function RealEstate({onMoreFilters, newAd}){
+function RealEstate({onMoreFilters, newAd, selectedCategory}){
     const dispatch = useDispatch();
     const {mainFilters, status} = useSelector(state => state.realEstate);
     const [selected, setSelected] = useState(null);
@@ -21,7 +21,7 @@ function RealEstate({onMoreFilters, newAd}){
     
     return(
         <div className={`flex items-center ${!newAd ? "justify-end" : ""} gap-[30px] text-[#333333] text-lg font-normal`}>
-            {mainFilters.map((filter) => (
+            {selectedCategory?.value !== "Транспорт" && mainFilters.map((filter) => (
                 <div key={filter}>
                     <input 
                         id={`realEstate-${filter}`}

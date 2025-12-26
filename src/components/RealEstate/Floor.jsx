@@ -2,8 +2,8 @@ import React from "react";
 
 function Floor({newAd}){
     return(
-        <div className="mt-[30px]">
-            <h2 className={`font-medium font-[Roboto] mb-[10px] ${newAd ? "ml-[20px] font-normal" : "ml-[25px]"}`}>Этаж</h2>
+        <div className={`${newAd ? "mt-0" : "mt-[30px]"}`}>
+            <h2 className={`font-medium font-[Roboto] mb-[10px] ${newAd ? "ml-[20px] font-normal text-[#BDBDBD]" : "ml-[25px]"}`}>Этаж</h2>
             <div className="flex items-center gap-[15px]">
                 <div className="flex items-center gap-[12px]">
                     {!newAd && <p>От</p>}

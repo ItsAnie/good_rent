@@ -2,18 +2,27 @@ import React, { useEffect, useState } from "react";
 import "./PropertyType.css"
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRealEstate } from "../../../store/slice/realEstateSlice";
+import { fetchTransport } from "../../../store/slice/transportSlice";
+import { setSelectedPropertyType } from "../../../store/slice/realEstateSlice";
 
-function PropertyType({ newAd }) {
+function PropertyType({ newAd, selectedCategory, selectedValue }) {
     const dispatch = useDispatch();
     const { residential, commercial, selectedMainFilter, status } = useSelector(state => state.realEstate);
-    const [selected, setSelected] = useState(null);
+    const {typeTransport} = useSelector(state => state.transport);
 
     const isCommercialGrid = newAd && selectedMainFilter === "Коммерческая";
 
-    const filtersToShow =
-        !selectedMainFilter || selectedMainFilter === "Жилая"
-            ? residential
-            : commercial;
+    let filtersToShow;
+
+    if (selectedCategory?.value === "Транспорт") {
+        filtersToShow = typeTransport;
+    } else if (!selectedMainFilter || selectedMainFilter === "Жилая") {
+        filtersToShow = residential;
+    } else if (selectedMainFilter === "Коммерческая") {
+        filtersToShow = commercial;
+    }
+    
+    console.log("selected category", selectedCategory)
 
     useEffect(() => {
         if (status === "idle") {
@@ -21,21 +30,28 @@ function PropertyType({ newAd }) {
         }
     }, [dispatch, status]);
 
+    useEffect(() => {
+        dispatch(fetchTransport());
+    }, [dispatch]);
+
+
     return (
-        <div className="text-[#333333] max-w-[1085px]">
+        <div className={`text-[#333333] max-w-[1085px]`}>
             <h2
                 className={`font-medium font-[Roboto] mb-[15px] 
-                ${newAd ? "text-[#BDBDBD] font-normal text-base" : ""}`}
+                ${newAd ? "font-normal text-[#BDBDBD]" : ""}`}
             >
-                Тип недвижимости
+                {selectedCategory?.value === "Транспорт" ? "Тип транспорта" : "Тип недвижимости"}
             </h2>
 
             <div
                 className={
-                    isCommercialGrid
+                    `${isCommercialGrid
                         ? "grid grid-cols-3 gap-y-[22px] gap-x-[20px]"
                         : "flex flex-wrap gap-y-[22px]"
-                }
+                    }
+                    ${newAd && selectedCategory?.value === "Транспорт" ? "grid grid-cols-2 gap-x-17" : ""}
+                `}
             >
                 {filtersToShow.map((filter, idx) => {
                     let customGrid = "";
@@ -59,8 +75,8 @@ function PropertyType({ newAd }) {
                                 type="radio"
                                 className="realEstate"
                                 value={filter}
-                                checked={selected === filter}
-                                onChange={() => setSelected(filter)}
+                                checked={selectedValue === filter}
+                                onChange={() => dispatch(setSelectedPropertyType(filter))}
                             />
                             <label
                                 htmlFor={`residential-${filter}`}

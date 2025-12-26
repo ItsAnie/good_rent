@@ -37,7 +37,7 @@ function PrivateData({ formData, setFormData, toggleMap  }) {
                             />
                         </div>
 
-                        <AddressField toggleMap={toggleMap} />
+                        <AddressField toggleMap={toggleMap} setFormData={setFormData} formData={formData} />
                         
                         <p className="max-w-[340px] ml-[20px] font-normal">
                             Личные данные защищены политикой конфиденциальности

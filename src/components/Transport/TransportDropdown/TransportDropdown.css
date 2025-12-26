@@ -1,0 +1,15 @@
+
+.transport-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.transport-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.transport-scroll::-webkit-scrollbar-thumb {
+  background-color: #219653;
+  border-radius: 5px;
+}
+
+

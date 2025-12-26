@@ -6,9 +6,8 @@ import { useLocation } from "react-router-dom";
 function CardForClient(){
     const { state } = useLocation();
     const clickedItem = state?.item;
-    const users = useSelector((state) => state.users.data)
+    const users = useSelector((state) => state.users.data);
     const owner = users.find(user => user.uid === clickedItem.userId);
-
 
     return (
         <div className="flex justify-center mt-[47px] mb-[50px] h-full">
@@ -16,7 +15,7 @@ function CardForClient(){
                 <div className="flex gap-[5px]">
                     <img src={owner.image} className="rounded-full w-[50px] h-[50px]" />
                     <div className="flex flex-col gap-[10px]">
-                        <p className="max-w-[257px]">{owner.name}</p>
+                        <p className="max-w-[257px] font-medium text-[#4F4F4F]">{owner.name}</p>
                         <p className="text-[#BDBDBD] text-xs">3 объявления</p>
                         <p>{owner.phone}</p>
                         <div className="flex gap-[27px]">

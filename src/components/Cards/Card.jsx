@@ -13,11 +13,10 @@ function Card({card, forSearch, forUser, forClient, showAds }){
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const selectedCard = card || useSelector(state => state.allProducts.selectedCard) || {};
-    const {users = [], loading} = useSelector(state => state.users);
+    const users = useSelector((state) => state.users.data);
     const [reviewsCount, setReviewsCount] = useState(0);
     const [isRented, setIsRented] = useState(false);
-    const owner = users.find(user => user.uid === selectedCard?.userId);
-
+    const owner = users.find(user => user.uid == selectedCard?.userId);
 
     const auth = getAuth();
     const currentUser = auth.currentUser;
@@ -37,10 +36,10 @@ function Card({card, forSearch, forUser, forClient, showAds }){
     };
 
     useEffect(() => {
-        if (!loading) {
+        if (users.length === 0) {
             dispatch(fetchAllUsers());
         }
-    }, [loading, dispatch]);
+    }, [ dispatch, users.lenght]);
 
     useEffect(() => {
         if (!selectedCard?.id) return;
@@ -142,7 +141,7 @@ function Card({card, forSearch, forUser, forClient, showAds }){
                         {!forUser ? 
                             <button 
                                 className="text-white bg-[#27AE60] text-sm w-[355px] h-[50px] rounded-[25px] border-none mt-[14px] cursor-pointer"
-                                onClick={() => navigate(`/profile/messages/${owner.uid}`, {
+                                onClick={() => navigate(`/profile/messages/${owner?.uid}`, {
                                     state: {
                                         receiverId: owner?.uid,
                                         receiverName: owner?.name,

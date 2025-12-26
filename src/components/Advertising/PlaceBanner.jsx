@@ -1,7 +1,7 @@
-import { getAuth } from "firebase/auth";
 import React, { useRef, useState } from "react";
 import { database } from "../../firebase";
 import { push, ref, set } from "firebase/database";
+import { getAuth } from "firebase/auth";
 import { useAds } from "../../store/AdsContext";
 
 function PlaceBanner({ onClose, selectedAdSlot }) {

@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import './Header.css'
 import { useDispatch, useSelector } from "react-redux";
 
 function Header({user}) {
   const {data: profile} = useSelector((state) => state.profile);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleProfileClick = () => {
     navigate("/profile");
@@ -13,7 +14,7 @@ function Header({user}) {
 
   return (
     <header className="w-full bg-[#65E36A] rounded-b-[20px] overflow-hidden">
-      <div className="container mx-auto px-4 py-4 text-[#4F4F4F] font-medium font-[Roboto]">
+      <div className="container mx-auto py-[15px] text-[#4F4F4F] font-medium font-[Roboto]">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-0">
 
           {/* Logo */}
@@ -28,12 +29,36 @@ function Header({user}) {
           </div>
 
           {/* Navigation */}
-          <ul className="nav-list hidden lg:flex flex-wrap gap-6 list-none text-2xl">
-            <li className="cursor-pointer" onClick={() => navigate("/search")}>Поиск</li>
-            <li className="cursor-pointer" onClick={() => navigate("/about-us")}>О нас</li>
-            <li className="cursor-pointer" onClick={() => navigate("help")}>Помощь</li>
-            <li className="cursor-pointer" onClick={() => navigate("advertising")}>Реклама</li>
-            <li className="cursor-pointer">Блог</li>
+          <ul className="nav-list hidden lg:flex flex-wrap gap-20 list-none text-2xl">
+            <div className="flex flex-col items-center gap-[51px]">
+              <li className="cursor-pointer" onClick={() => navigate("/search")}>Поиск</li>
+              {location.pathname === "/search" && (
+                <div className="w-[100px] h-[3px] bg-[#4F4F4F]"></div>
+              )}
+            </div>
+
+            <div className="flex flex-col items-center gap-[51px]">
+              <li className="cursor-pointer" onClick={() => navigate("/about-us")}>О нас</li>
+              {location.pathname === "/about-us" && (
+                <div className="w-[100px] h-[3px] bg-[#4F4F4F]"></div>
+              )}
+            </div>
+
+            <div className="flex flex-col items-center gap-[51px]">
+              <li className="cursor-pointer" onClick={() => navigate("/help")}>Помощь</li>
+              {location.pathname === "/help" && (
+                <div className="w-[100px] h-[3px] bg-[#4F4F4F]"></div>
+              )}
+            </div>
+
+            <div className="flex flex-col items-center gap-[51px]">
+              <li className="cursor-pointer" onClick={() => navigate("/advertising")}>Реклама</li>
+              {location.pathname === "/advertising" && (
+                <div className="w-[100px] h-[3px] bg-[#4F4F4F]"></div>
+              )}
+            </div>
+
+            <li className="cursor-pointer">Блог</li> 
           </ul>
 
           {/* Profile */}
@@ -41,14 +66,17 @@ function Header({user}) {
               className="profile flex items-center max-w-[337px] gap-[37px] cursor-pointer"
               onClick={handleProfileClick} 
             >
-              <img 
-                src="/images/notifications.png" 
-                className="w-[37px] h-[38px]" 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate("/profile/notifications");
-                }}
-              />
+              <div className="relative">
+                <div className="bg-[#F2C94C] w-[20px] h-[20px] rounded-full absolute left-[17px] top-[-5px] text-center text-sm text-[#4F4F4F] font-normal font-[Roboto]">2</div>
+                <img 
+                  src="/images/notifications.png" 
+                  className="w-[37px] h-[38px]" 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate("/profile/notifications");
+                  }}
+                />
+              </div>
               <div className="flex flex-col gap-2.5">
                 <div className="flex items-start gap-2.5 about-profile">
                   <img
@@ -56,7 +84,7 @@ function Header({user}) {
                     className="profile-img rounded-full w-[40px] h-[40px] object-cover"
                   />
                   <p className="name max-w-[212px] text-base">
-                    {profile.name}
+                    {profile?.name || "Анонимный пользователь"}
                   </p>
                   <img src="/images/exit.png" className="exit w-[20px] h-[20px]" />
                 </div>

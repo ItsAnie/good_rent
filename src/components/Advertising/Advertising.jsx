@@ -23,7 +23,7 @@ function Advertising() {
 
 
   return (
-    <div className="flex flex-col gap-[60px] mx-auto max-w-[1520px] mt-[91px]">
+    <div className="flex flex-col gap-[60px] mx-auto max-w-[1520px] min-h-screen mt-[91px]">
       <div className="text-xs leading-[24px]">
         <h2 className="text-[#18A615] text-xl font-medium font-[Roboto] mb-[10px]">
           Рекламный баннер на главной

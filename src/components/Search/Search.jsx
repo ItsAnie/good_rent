@@ -3,7 +3,7 @@ import Recomendation from "../Recomendation/Recomendation";
 import './Search.css';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts, setSelectedCard } from "../../store/slice/allProductsSlice";
-import Dropdown from "../Dropdown";
+import Dropdown from "../../Dropdown";
 import { setSelectedCategory, setSelectedType } from "../../store/slice/dropdownSlice";
 import SearchResults from "./SearchResults";
 import RealEstate from "../RealEstate/RealEstate";
@@ -111,6 +111,7 @@ function Search() {
             <div className="search-box relative flex items-center">
               <img src="/images/Shape.png" className="absolute left-[20px] text-[#BDBDBD]" />
               <input 
+                id="search"
                 type="text" 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -153,7 +154,9 @@ function Search() {
               <div className="radius flex flex-col text-sm font-medium pt-[9px] gap-[5px] ml-[46px]">
                 <p className="text-xs leading-[20px] font-[Roboto] font-medium">Радиус поиска</p>
                 <div className="radius-box flex gap-[14px] text-black">
-                  <input type="text" 
+                  <input 
+                        id="radius"
+                        type="text" 
                         defaultValue={1} 
                         className="bg-[#F6F6F6] text-[#000000] w-[94px] h-[50px]
                                   font-medium font-[Montserrat] rounded-[19px] pl-[27px]
@@ -205,10 +208,12 @@ function Search() {
             </button>
           </div>
 
-          {selectedCategory?.value === "Недвижимость" && <RealEstate onMoreFilters={handleMoreFilters} />}
+          {(selectedCategory?.value === "Недвижимость" || selectedCategory?.value === "Транспорт") &&
+           <RealEstate onMoreFilters={handleMoreFilters} selectedCategory={selectedCategory} />
+          }
         </div>
       </div>
-      {(showMoreFilters && selectedCategory?.value === "Недвижимость") &&(
+      {showMoreFilters &&(
         <div className="absolute w-full z-[50]">
           <MoreFilters selectedCategory={selectedCategory} />
         </div>

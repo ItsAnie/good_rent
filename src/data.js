@@ -1,4 +1,4 @@
-import { ref, set, push } from "firebase/database";
+import { ref, set } from "firebase/database";
 import { database } from "./firebase";
 
 const type = [
@@ -41,7 +41,11 @@ const realEstateFilters = {
 
 const transport = {
   typeTransport:[ "Автомобиль легковой", "Автомобиль грузовой", "Мотоцикл/мототехника", "Спецтехника", "Воздушный транспорт", "Водный транспорт"],
-  
+  transmission: ["Механическая", "Автомат", "Вариатор"],
+  drive: ["Передний", "Задний", "Полный"],
+  steeringWheel: ["Левый", "Правый"],
+  brand: ["Bentley", "BMW", "Chrysler", "Chevrolet", "Dodge", "Ford", "Geely"],
+  color: ["Черный", "Белый", "Синий", "Красный", "Желтый", "Зеленый", "Серый"]
 }
 
 export function addOptionsToDB() {
@@ -49,6 +53,7 @@ export function addOptionsToDB() {
   const categoryRef = ref(database, "category");
   const serviceRef = ref(database, "service");
   const realEstateRef = ref(database, "realEstate");
+  const transportRef = ref(database, "transport");
 
   set(typeRef, type)
     .then(() => console.log("Type added successfully!"))
@@ -62,7 +67,11 @@ export function addOptionsToDB() {
     .then(() => console.log("Options added successfully!"))
     .catch((error) => console.error("Error adding options:", error));
 
-    set(realEstateRef, realEstateFilters)
-      .then(() => console.log("Real estate added successfully!"))
-      .catch((error) => console.error("Error adding real estate:", error));  
+  set(realEstateRef, realEstateFilters)
+    .then(() => console.log("Real estate added successfully!"))
+    .catch((error) => console.error("Error adding real estate:", error));  
+
+  set(transportRef, transport)
+    .then(() => console.log("Transport added successfully!"))
+    .catch((error) => console.error("Error adding transport:", error));
 }

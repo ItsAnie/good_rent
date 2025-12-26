@@ -8,6 +8,7 @@ import dropdownReducer from "./slice/dropdownSlice";
 import usersReducer from "./slice/usersSlice";
 import reviewReducer from "./slice/reviewSlice";
 import realEstateReducer from "./slice/realEstateSlice";
+import transportReducer from "./slice/transportSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     users: usersReducer,
     review: reviewReducer,
     realEstate: realEstateReducer,
+    transport: transportReducer,
   },
 });
 
