@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllUsers } from "../../store/slice/usersSlice";
 import { database } from "../../firebase";
 import { ref, onValue } from "firebase/database";
 import { useToggle } from "../../hooks/useToggle";
 import "./Review.css";
+import { useScrollGradient } from "../../hooks/useScrollGradient";
 
 function Review({ productId, isFeedback = false, isProfile = false, profileUserId }) {
   const dispatch = useDispatch();
   const [isOpen, toggle] = useToggle(true);
   const [reviews, setReviews] = useState([]);
   const users = useSelector(state => state.users.data);
-  const products = useSelector(state => state.allProducts.data)
+  const products = useSelector(state => state.allProducts.data);
+  const scrollRef = useScrollGradient([reviews.length]);
 
   useEffect(() => {
     if (!users.length) {
@@ -58,7 +60,10 @@ function Review({ productId, isFeedback = false, isProfile = false, profileUserI
       )}
 
       {isOpen && reviews.length > 0 && (
-        <div className="flex flex-col gap-[23px] review-scroll max-h-[759px] w-[765px] overflow-y-auto pr-[17px] scroll-smooth mt-[18px]">
+        <div 
+          ref={scrollRef}
+          className="flex flex-col gap-[10px] review-scroll max-h-[759px] w-[765px] overflow-y-auto pr-[17px] pb-[23px] scroll-smooth mt-[18px]"
+        >
           {reviews.map((item, index) => {
             const reviewUser = users.find(u => u.uid === item.userId);
             return (

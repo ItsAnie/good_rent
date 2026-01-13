@@ -1,12 +1,17 @@
 import React from "react";
 import './Result.css'
 import AdSlot from "../Advertising/AdSlot";
+import { useScrollGradient } from "../../hooks/useScrollGradient";
 
 function Result({ allProducts, onClick, selectedCard, showAds }) {
+  const scrollRef = useScrollGradient([allProducts.length]);
+  
   return (
       <div className="flex flex-col items-end">
         <h2 className="text-[#18A615] text-xl font-medium font-[Roboto]">Результаты поиска</h2>
-        <div className="popular-sections w-[521px] max-h-[1385px] overflow-y-auto pr-[10px] mt-[30px]">
+        <div 
+          ref={scrollRef}
+          className="popular-sections w-[521px] max-h-[1398 px] overflow-y-auto pr-[10px] pb-[18px] mt-[30px]">
           <div className="popular flex flex-col">
             <div className="flex flex-col gap-[18px]">
               {allProducts.map((item, index) => {

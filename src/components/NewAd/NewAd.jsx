@@ -48,8 +48,6 @@ function NewAd(){
 
     const isFormValid = checkFormValid();
 
-
-
     useEffect(() => {
           dispatch(setSelectedType(null));
           dispatch(setSelectedCategory(null));
@@ -60,7 +58,6 @@ function NewAd(){
             setFormData(prev => ({ ...prev, address: profile.location }));
         }
     }, [profile]);
-
 
     const uploadImageToCloudinary = async (file) => {
         const formDataCloud = new FormData();
@@ -75,47 +72,46 @@ function NewAd(){
     };
 
     const handleSubmit = async () => {
-    try {
-        if (!profile?.uid) {
-            alert("Профиль пользователя ещё не загружен.");
-            return;
+        try {
+            if (!profile?.uid) {
+                alert("Профиль пользователя ещё не загружен.");
+                return;
+            }
+
+            const uploadedUrls = [];
+            for (const file of imageFiles) {
+                const url = await uploadImageToCloudinary(file);
+                uploadedUrls.push(url);
+            }
+
+            const newProduct = {
+                name: formData.name,
+                description: formData.description,
+                price: formData.price,
+                category: selectedCategory?.label || "",
+                type: selectedType?.value || "",
+                images: uploadedUrls,
+                address: formData.address,
+                rentMin: formData.rentMin,
+                rentMax: formData.rentMax,
+                rentDay: formData.rentDay,
+                deposit: formData.deposit,
+                exchange: formData.exchange,
+                userId: profile.uid, 
+                createdAt: Date.now()
+            };
+
+            const newRef = await push(ref(database, "allProducts"), newProduct);
+
+            setProductId(newRef.key);           
+            setOriginalData(newProduct);        
+            setIsEditMode(true);                
+
+        } catch (error) {
+            console.error(error); 
+            alert("Произошла ошибка при отправке объявления!");
         }
-
-        const uploadedUrls = [];
-        for (const file of imageFiles) {
-            const url = await uploadImageToCloudinary(file);
-            uploadedUrls.push(url);
-        }
-
-        const newProduct = {
-            name: formData.name,
-            description: formData.description,
-            price: formData.price,
-            category: selectedCategory?.label || "",
-            type: selectedType?.value || "",
-            images: uploadedUrls,
-            address: formData.address,
-            rentMin: formData.rentMin,
-            rentMax: formData.rentMax,
-            rentDay: formData.rentDay,
-            deposit: formData.deposit,
-            exchange: formData.exchange,
-            userId: profile.uid, 
-            createdAt: Date.now()
-        };
-
-        const newRef = await push(ref(database, "allProducts"), newProduct);
-
-        setProductId(newRef.key);           
-        setOriginalData(newProduct);        
-        setIsEditMode(true);                
-
-    } catch (error) {
-        console.error(error); 
-        alert("Произошла ошибка при отправке объявления!");
-    }
-};
-
+    };
 
     const handleSaveChanges = async () => {
         try {

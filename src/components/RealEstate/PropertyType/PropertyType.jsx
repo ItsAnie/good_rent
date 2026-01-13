@@ -21,9 +21,7 @@ function PropertyType({ newAd, selectedCategory, selectedValue }) {
     } else if (selectedMainFilter === "Коммерческая") {
         filtersToShow = commercial;
     }
-    
-    console.log("selected category", selectedCategory)
-
+ 
     useEffect(() => {
         if (status === "idle") {
             dispatch(fetchRealEstate());

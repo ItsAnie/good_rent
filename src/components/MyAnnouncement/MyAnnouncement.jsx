@@ -3,6 +3,7 @@ import { fetchAllProducts } from "../../store/slice/allProductsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import './MyAnnouncement.css'
 import { useToggle } from "../../hooks/useToggle";
+import { useScrollGradient } from "../../hooks/useScrollGradient";
 
 function MyAnnouncement(){
     const [isOpen, toggle] = useToggle(true);
@@ -10,6 +11,7 @@ function MyAnnouncement(){
 
     const dispatch = useDispatch();
     const {data, loading, error} = useSelector((state) => state.allProducts);
+    const scrollRef = useScrollGradient([data?.length]);
 
     useEffect(() => {
         dispatch(fetchAllProducts());
@@ -26,27 +28,19 @@ function MyAnnouncement(){
         setProducts(prev => prev.filter(product => product.id !== id));
     };
 
-
-    if (loading) return <p>Загрузка...</p>;
-    if (error) return <p>Ошибка: {error}</p>;
-    if (!data) return <p>Нет данных</p>;
-
-    const flatData = Array.isArray(data) ? data.flat() : Object.values(data).flat();
-
     const active = products.slice(0, 2);
     const archive = products.slice(0, 8);
     
-
-
-
     return (
-        <div className="mt-[40px] overflow-hidden max-h-[690px]">
+        <div className="mt-[40px] overflow-hidden">
             <div className="flex items-center gap-2 cursor-pointer" onClick={toggle}>
                 <h2 className="text-xl font-medium text-[#18A615] font-[Roboto]">Мои объявления</h2>
                 <img src={isOpen ? "/images/arow.png" : "/images/arow-down.png"} className="arrow w-[11.69px] h-[5.84px]" />
             </div>
             {isOpen && (
-                <div className="announcement h-[600px] overflow-y-auto">
+                <div 
+                    ref={scrollRef}
+                    className="announcement h-[690px] overflow-y-auto pb-[10px]">
                     <div>
                         <h3 className="mt-[18px]">Активные (2)</h3>
                         <div className="flex justify-center gap-[10px]">

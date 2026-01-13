@@ -38,3 +38,8 @@
 .review-scroll::-webkit-scrollbar {
   width: 6px;
 }
+
+.no-gradient {
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+} 

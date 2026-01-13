@@ -1,6 +1,6 @@
 .orders {
-  mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 }
 
 .orders::-webkit-scrollbar-thumb {
@@ -12,3 +12,8 @@
 .orders::-webkit-scrollbar {
   width: 6px;
 }
+
+.no-gradient {
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+} 

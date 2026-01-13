@@ -9,9 +9,6 @@ function LeaveFeedback({onClose, productId}){
 
     const currentUser = useSelector(state => state.auth.user);
 
-    console.log("currentUser", currentUser);
-
-
     const handleSubmit = async () => {
     if (!reviewText) return;
     if (!currentUser?.uid) {
@@ -32,7 +29,6 @@ function LeaveFeedback({onClose, productId}){
     setReviewText("");
     onClose();
 };
-
 
     return(
         <div>

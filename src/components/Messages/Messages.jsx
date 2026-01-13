@@ -15,7 +15,6 @@ function Messages() {
     const [chats, setChats] = useState([]);
     const { submittedBanner } = useAds();
     const users = useSelector(state => state.users.data);
-    console.log("Users", users);
 
 
     useEffect(() => {
@@ -32,15 +31,11 @@ function Messages() {
                 const opponentId = Object.keys(chat.users).find(uid => uid !== currentUser?.uid);
                 const opponentFromState = users.find(u => u.uid === opponentId);
 
-                console.log("opponentId", opponentId)
-                console.log("usersMap", users.map(u => u.uid));
-
                 const opponent = {
                     id: opponentId,
                     name: opponentFromState?.name,
                     image: opponentFromState?.photoURL 
                 };
-                console.log("opponent", opponent)
 
                 list.push({
                     id: chatId,

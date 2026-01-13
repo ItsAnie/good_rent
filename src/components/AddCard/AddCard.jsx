@@ -8,7 +8,6 @@ function AddCard({onClose}){
     const uid = user.uid;
 
     const [cardNumber, setCardNumber] = useState("");
-    const [expiry, setExpiry] = useState("");
     const [cvv, setCvv] = useState("");
     const [cardType, setCardType] = useState("");
     const [expMonth, setExpMonth] = useState("");

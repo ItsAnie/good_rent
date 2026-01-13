@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import './Header.css'
 import { useDispatch, useSelector } from "react-redux";
 
-function Header({user}) {
+function Header() {
   const {data: profile} = useSelector((state) => state.profile);
   const navigate = useNavigate();
   const location = useLocation();
