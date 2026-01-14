@@ -27,8 +27,10 @@ import Help from "./components/Help";
 import { AdsProvider } from "./store/AdsContext";
 import Advertising from "./components/Advertising/Advertising";
 import { fetchAllUsers } from "./store/slice/usersSlice";
+import { useAuthListener } from "./hooks/useAuthListener";
 
 function App() {
+  useAuthListener();
   const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -88,8 +90,8 @@ function App() {
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/new-add" element={<NewAd />} />
-          <Route path="/card-for-client" element={<CardForClient />} />
-          <Route path="/card-for-user" element={<CardForUser />} />
+          <Route path="/card-for-client/:id" element={<CardForClient />} />
+          <Route path="/card-for-user/:id" element={<CardForUser />} />
           <Route path="/feedbacks" element={<Feedbacks />} />
         </Routes>
       </AdsProvider>

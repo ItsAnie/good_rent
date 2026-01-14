@@ -58,7 +58,9 @@ function InterestedUsers({ productId, onClose }) {
                                 </div>
                             ))}
                         </div>
-                        <button className="w-[355px] h-[50px] bg-[#27AE60] text-white text-sm font-normal rounded-[25px] cursor-pointer mt-[33px]">
+                        <button 
+                            onClick={onClose}
+                            className="w-[355px] h-[50px] bg-[#27AE60] text-white text-sm font-normal rounded-[25px] cursor-pointer mt-[33px]">
                             Подтвердить
                         </button>
                     </div>

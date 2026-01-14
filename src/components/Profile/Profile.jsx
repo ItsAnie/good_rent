@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Confirm from "../Confirm/Confirm";
 import Payment from "../Payment/Payment";
 import Review from "../Review/Review";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
-
+import Logout from "../Logout";
 
 function Profile({ user }){
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
     const isMessagesPage = location.pathname.includes("/profile/notifications") || location.pathname.includes("/profile/messages/");
     const {data} = useSelector((state) => state.profile);
 
     const [showConfirm, setShowConfirm] = useState(false);
+    const [logout, setLogout] = useState(false);
 
     const handleEditClick = () => {
         navigate("/edit-profile");
@@ -70,7 +72,12 @@ function Profile({ user }){
                                     <img src="/images/telegram.png" />
                                     <img src="/images/whatsapp-icon.png" />
                                 </div>   
-                                <p className="text-xl text-[#F34040] font-normal mt-[26px]">Выйти</p>    
+                                <p 
+                                    className="text-xl text-[#F34040] font-normal mt-[26px] cursor-pointer"
+                                    onClick={() => setLogout(true)}
+                                >
+                                    Выйти
+                                </p>    
                             </div>
                         </div>
                         <p className="text-[#18A615] text-xl font-normal max-w-[250px] mt-[18px]">Разместить рекламный баннер</p>
@@ -89,7 +96,8 @@ function Profile({ user }){
                 )}
                 <Outlet />
             </div> 
-            {showConfirm && <Confirm onClose={() => setShowConfirm(false)} />}    
+            {showConfirm && <Confirm onClose={() => setShowConfirm(false)} />}   
+            {logout && <Logout onClose={() => setLogout(false)} />} 
         </div>
     );
 }

@@ -46,7 +46,7 @@ function CardForUser() {
                     Товар ожидают:
                 </h2>
 
-                <div className="review-scroll flex flex-col gap-[10px] max-h-[658px] w-full overflow-y-auto pt-[18px] pb-[10px] px-[10px]">
+                <div className="review-scroll flex flex-col gap-[10px] max-h-[658px] w-full overflow-y-auto p-[11px]">
                     {interestedUsers.map((user) => (
                         <div
                             key={user.id}
@@ -70,7 +70,7 @@ function CardForUser() {
                     ))}
                 </div>
 
-                <button className="w-[355px] h-[50px] bg-[#27AE60] text-white text-sm rounded-[25px] mt-[30px] cursor-pointer">
+                <button className="w-[355px] h-[50px] bg-[#27AE60] text-white text-sm rounded-[25px] cursor-pointer">
                     Сообщить всем
                 </button>
             </div>

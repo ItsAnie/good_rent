@@ -12,7 +12,7 @@ import Rooms from "./Rooms";
 import Transport from "../Transport/Transport";
 import TransportDropdown from "../Transport/TransportDropdown/TransportDropdown";
 
-function MoreFilters({selectedCategory}){
+function MoreFilters({selectedCategory, onClose}){
     const {selectedMainFilter} = useSelector(state => state.realEstate);
     const { selectedPropertyType } = useSelector(state => state.realEstate);
 
@@ -72,7 +72,10 @@ function MoreFilters({selectedCategory}){
                 {selectedMainFilter === "Жилая" && (<Rooms />)}
             </div>
              <div className="flex justify-end w-full pr-[63px] mt-[48px]">
-                <button className="bg-[#27AE60] w-[228px] h-[50px] rounded-[25px] cursor-pointer text-white text-sm">
+                <button 
+                    onClick={onClose}
+                    className="bg-[#27AE60] w-[228px] h-[50px] rounded-[25px] cursor-pointer text-white text-sm"
+                >
                     Применить
                 </button>
             </div>

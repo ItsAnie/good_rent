@@ -17,7 +17,7 @@ function Header() {
       <div className="container mx-auto py-[15px] text-[#4F4F4F] font-medium font-[Roboto]">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-0">
 
-          {/* Logo */}
+          {/* Logo  */}
           <div className="flex items-center cursor-pointer" onClick={() => navigate("/")}>
             <img src="/images/logo.png" className="w-[101px] h-[120px] flex-shrink-0" />
             <div className="ml-3 flex flex-col">
@@ -66,17 +66,14 @@ function Header() {
               className="profile flex items-center max-w-[337px] gap-[37px] cursor-pointer"
               onClick={handleProfileClick} 
             >
-              <div className="relative">
-                <div className="bg-[#F2C94C] w-[20px] h-[20px] rounded-full absolute left-[17px] top-[-5px] text-center text-sm text-[#4F4F4F] font-normal font-[Roboto]">2</div>
-                <img 
-                  src="/images/notifications.png" 
-                  className="w-[37px] h-[38px]" 
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    navigate("/profile/notifications");
-                  }}
-                />
-              </div>
+              <img 
+                src="/images/notifications.png" 
+                className="w-[37px]" 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate("/profile/notifications");
+                }}
+               />
               <div className="flex flex-col gap-2.5">
                 <div className="flex items-start gap-2.5 about-profile">
                   <img

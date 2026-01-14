@@ -4,18 +4,26 @@ import { database } from "../../firebase";
 import { ref, get, update, onValue } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { fetchAllUsers } from "../../store/slice/usersSlice";
-import { useNavigate } from "react-router-dom";
+import { fetchAllProducts, setSelectedCard } from "../../store/slice/allProductsSlice";
+import { useNavigate, useParams } from "react-router-dom";
 import ImageCarousel from "./ImageCarousel";
 import InterestedUsers from "../InerestedUsers/InterestedUsers";
 import AdSlot from "../Advertising/AdSlot";
 
-function Card({card, forSearch, forUser, forClient, showAds }){
+function Card({ card, forSearch, forUser, forClient, showAds }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const selectedCard = card || useSelector(state => state.allProducts.selectedCard) || {};
-    const users = useSelector((state) => state.users.data);
+    const { id } = useParams(); 
+
+    const selectedCardFromStore = useSelector(state => state.allProducts.selectedCard);
+    const allProducts = useSelector(state => state.allProducts.data);
+    const users = useSelector(state => state.users.data);
+
+    const selectedCard = card || selectedCardFromStore;
     const [reviewsCount, setReviewsCount] = useState(0);
     const [isRented, setIsRented] = useState(false);
+    const [loading, setLoading] = useState(!selectedCard); 
+
     const owner = users.find(user => user.uid == selectedCard?.userId);
 
     const auth = getAuth();
@@ -27,8 +35,8 @@ function Card({card, forSearch, forUser, forClient, showAds }){
 
         update(interestedRef, {
             [currentUser.uid]: {
-                id: currentUser.uid, 
-                name: currentUser.displayName, 
+                id: currentUser.uid,
+                name: currentUser.displayName,
                 image: currentUser.photoURL,
                 timestamp: Date.now()
             }
@@ -39,7 +47,36 @@ function Card({card, forSearch, forUser, forClient, showAds }){
         if (users.length === 0) {
             dispatch(fetchAllUsers());
         }
-    }, [ dispatch, users.lenght]);
+    }, [dispatch, users.length]);
+
+    useEffect(() => {
+        if (!selectedCard) {
+            if (allProducts.length > 0) {
+                if (id) {
+                    const cardFromStore = allProducts.find(p => p.id === id);
+                    if (cardFromStore) {
+                        dispatch(setSelectedCard(cardFromStore));
+                        setLoading(false);
+                    } else {
+                        const cardRef = ref(database, `products/${id}`);
+                        get(cardRef).then(snapshot => {
+                            const data = snapshot.val();
+                            if (data) {
+                                dispatch(setSelectedCard({ id, ...data }));
+                            }
+                        }).finally(() => setLoading(false));
+                    }
+                } else {
+                    dispatch(setSelectedCard(allProducts[0]));
+                    setLoading(false);
+                }
+            } else {
+                dispatch(fetchAllProducts()).finally(() => setLoading(false));
+            }
+        } else {
+            setLoading(false);
+        }
+    }, [selectedCard, allProducts, id, dispatch]);
 
     useEffect(() => {
         if (!selectedCard?.id) return;
@@ -49,18 +86,22 @@ function Card({card, forSearch, forUser, forClient, showAds }){
             setReviewsCount(data ? Object.values(data).length : 0);
         });
         return () => unsubscribe();
-    }, [selectedCard?.id]);  
+    }, [selectedCard?.id]);
 
-    if (!selectedCard) {
-        return <p className="text-center text-[#BDBDBD]">Выберите карточку</p>;
+    if (loading) {
+        return <p className="text-center text-[#BDBDBD]">Загрузка карточки...</p>;
     }
 
-    return(
+    if (!selectedCard) {
+        return <p className="text-center text-[#BDBDBD]">Карточка не найдена</p>;
+    }
+
+    return (
         <div>
             {!forUser && !forClient && showAds &&
-            <div className="mb-[84px]">
-                <AdSlot id={3} />
-            </div>
+                <div className="mb-[84px]">
+                    <AdSlot id={3} />
+                </div>
             }
             <div className="card flex flex-col gap-[56px]">
                 <div className={`card-group flex flex-col rounded-[20px]
@@ -77,14 +118,12 @@ function Card({card, forSearch, forUser, forClient, showAds }){
                                 №174379387590357</p>
                         </div>
 
-                    
                         <div className="w-full mx-auto overflow-hidden">
                             <div className="flex space-x-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
                                 <ImageCarousel images={selectedCard.images} />
                             </div>
                         </div>
 
-                    
                         <h3 className="font-normal text-2xl">{selectedCard.description}</h3>
                         <div className={`flex ${forSearch ? "justify-between" : "justify-center"}`}>
                             {forSearch && owner && (
@@ -114,13 +153,13 @@ function Card({card, forSearch, forUser, forClient, showAds }){
                     </div>
 
                     <div className={`remember flex flex-col justify-center mx-auto text-xs font-normal text-[#BDBDBD] leading-[16px] items-center ${
-                                        forUser ? "mt-[33px]" : "mt-[54px]"
-                                    }`}>
+                        forUser ? "mt-[33px]" : "mt-[54px]"
+                    }`}>
                         {forUser ? 
                             <button 
                                 className="text-white bg-[#27AE60] text-sm w-[355px] h-[50px] rounded-[25px] border-none cursor-pointer"
                                 onClick={() => setIsRented(true)}
-                                >
+                            >
                                 {selectedCard.type === "Аренда" ? "Товар сдан в аренду" : selectedCard.type === "Продажа" ? "Товар продан" : ""}
                             </button> : 
                             <h3 
@@ -135,7 +174,7 @@ function Card({card, forSearch, forUser, forClient, showAds }){
                                 onClick={() => navigate("/feedbacks", { state: { item: selectedCard } })}
                             >
                                 Отзывы ({reviewsCount})
-                        </p>
+                            </p>
                         )}
                         <p className="max-w-[220px] text-left mt-[28px]">Минимальный срок аренды {selectedCard.rentMin} Максимальный — {selectedCard.rentMax}</p>
                         {!forUser ? 
@@ -147,7 +186,6 @@ function Card({card, forSearch, forUser, forClient, showAds }){
                                         receiverName: owner?.name,
                                         receiverImage: owner?.image,
                                         bitmap: selectedCard.images?.[1]
-                                        
                                     }
                                 })}
                             >
@@ -155,14 +193,14 @@ function Card({card, forSearch, forUser, forClient, showAds }){
                             </button> :
                             <div className="mt-[44px]">
                                 {selectedCard.type !== "Продажа" && (
-                                <div className="flex justify-between w-[355px]">
-                                    <p className="text-black text-sm">Недоступен для аренды</p>
-                                    <label htmlFor="toggle" className="flex items-center cursor-pointer">
-                                        <input type="checkbox" id="toggle" className="sr-only peer" defaultChecked  />
-                                        <div className="w-[38px] h-[21px] bg-[#EDEEF3] rounded-full transition-colors duration-300"></div>
-                                        <div className="absolute w-[21px] h-[21px] bg-[#219653] rounded-full shadow-md transform peer-checked:translate-x-[18px] transition-transform duration-300"></div>
-                                    </label>
-                                </div>
+                                    <div className="flex justify-between w-[355px]">
+                                        <p className="text-black text-sm">Недоступен для аренды</p>
+                                        <label htmlFor="toggle" className="flex items-center cursor-pointer">
+                                            <input type="checkbox" id="toggle" className="sr-only peer" defaultChecked  />
+                                            <div className="w-[38px] h-[21px] bg-[#EDEEF3] rounded-full transition-colors duration-300"></div>
+                                            <div className="absolute w-[21px] h-[21px] bg-[#219653] rounded-full shadow-md transform peer-checked:translate-x-[18px] transition-transform duration-300"></div>
+                                        </label>
+                                    </div>
                                 )}
                                 <p className="text-[#F34040] text-center mt-[36px] text-sm cursor-pointer">Снять с публикации</p>
                             </div>

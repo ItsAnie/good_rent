@@ -215,7 +215,7 @@ function Search() {
       </div>
       {showMoreFilters &&(
         <div className="absolute w-full z-[50]">
-          <MoreFilters selectedCategory={selectedCategory} />
+          <MoreFilters selectedCategory={selectedCategory} onClose={() => setShowMoreFilters(false)} />
         </div>
       )}
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { registerUser, loginUser, sendPasswordReset } from "../../store/slice/authSlice";
@@ -8,10 +8,17 @@ function AuthForm({ isSignUp }) {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [forget, setForget] = useState(false);
+  const {user} = useSelector((state) => state.auth)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/search");
+    }
+  },[user, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

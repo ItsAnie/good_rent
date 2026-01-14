@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDefaultRecomendation } from "../../store/slice/recomendationSlice";
@@ -15,6 +15,14 @@ function Recomendation({ searchResults, showAds, style={ }, onSelectedAdSlot, sh
   const user = useSelector(state => state.profile.data);
   const { paidBanners, submittedBanner } = useAds();
   const adSlots = [1, 2] 
+  const [favorite, setFavorite] = useState({});
+
+  const toggleFavorite = (itemId) => {
+    setFavorite(prev => ({
+      ...prev,
+      [itemId]: !prev[itemId]
+    }));
+  };
 
   const handleSelectCard = (item) => {
     if (!user) return;
@@ -22,9 +30,9 @@ function Recomendation({ searchResults, showAds, style={ }, onSelectedAdSlot, sh
     
     const isOwner = item.userId === user.uid;
     if (isOwner) {
-      navigate("/card-for-user", { state: { item, forUser: true } });
+      navigate(`/card-for-user/${item.id}`, { state: { item, forUser: true } });
       } else {
-        navigate("/card-for-client", { state: { item, forClient: true } });
+        navigate(`/card-for-client/${item.id}`, { state: { item, forClient: true } });
       }
     };
 
@@ -54,18 +62,27 @@ function Recomendation({ searchResults, showAds, style={ }, onSelectedAdSlot, sh
                 <div className="grid-box grid grid-cols-3 gap-[20px]">
                   {finalRows[rowIndex].map((item, index) => (
                     <div
-                      key={index}
+                      key={item.id}
                       className="item rounded-[8px] h-[163px] shadow-[0_2px_10px_rgba(0,0,0,0.07)] cursor-pointer bg-[#FFFFFF]"
-                      onClick={() => handleSelectCard(item)}
                     >
                       <div className="flex justify-center border-b border-[#EDEEF3] pt-[9px] pb-[8px]">
                         <div className="text-center text-xs w-[44px] h-[18.8px] bg-[#FFFFFF] rounded-[19px] shadow-[0_2px_10px_rgba(0,0,0,0.07)]">
                           1 км
                         </div>
-                        <img src={item.images?.[1]} alt={item.name} className="w-[84px] h-[84px]" />
-                        <img src="/images/star.png" className="w-[20px] h-[19px]" />
+                        <img 
+                          src={item.images?.[1]} 
+                          alt={item.name} 
+                          className="w-[84px] h-[84px]"
+                          onClick={() => handleSelectCard(item)}
+                        />
+                        <img 
+                          src={favorite[item.id] ? "/images/star.png" : "/images/star_empty.png"}
+                          onClick={() => toggleFavorite(item.id)}
+                          className="w-[20px] h-[19px]" />
                       </div>
-                      <div className="pt-[9px] pl-[13px] text-xs">
+                      <div 
+                        onClick={() => handleSelectCard(item)}
+                        className="pt-[9px] pl-[13px] text-xs">
                         <h3 className="font-normal text-[#000000]">{item.name}</h3>
                         <p className="font-medium font-[Roboto]">
                           {item.price && `${item.price} руб.`}
