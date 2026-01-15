@@ -14,7 +14,7 @@ function Conditions({ onClose }){
                     <div className="w-full h-full flex flex-col items-center justify-between pt-[30px] pb-[61px]">
                         <h2 className="text-[#18A615] text-xl font-medium font-[Roboto] ">Условия использования</h2>
                         <div className="conditions-scroll overflow-y-auto max-h-[401px] mt-[24px]">
-                            <p className="w-[704px] text-left">
+                            <p className="w-[704px] text-left text-[#333333] text-xl">
                                 Et proin cras nisl, quis habitant ultrices nibh amet. Id eget proin vestibulum etiam. Senectus ullamcorper augue vulputate elit tellus, amet. 
                                 Purus et ultrices aliquam mi nunc, ipsum vehicula massa egestas. Tellus tellus, eleifend vulputate tristique nam. 
                                 Nisl leo, orci enim ultrices imperdiet sed eu. Sed arcu odio vitae dictum morbi. Ipsum dolor augue sit non integer vitae id. 

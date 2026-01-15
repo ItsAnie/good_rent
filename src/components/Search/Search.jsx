@@ -8,6 +8,7 @@ import { setSelectedCategory, setSelectedType } from "../../store/slice/dropdown
 import SearchResults from "./SearchResults";
 import RealEstate from "../RealEstate/RealEstate";
 import MoreFilters from "../RealEstate/MoreFilters";
+import SerachDropdowns from "../SearchDropdowns";
 
 function Search() {
   const dispatch = useDispatch();
@@ -99,31 +100,37 @@ function Search() {
 
 
   return (
-    <div className="min-h-screen">
-      <div className="search-container flex justify-between bg-gradient-to-b 
-                      from-[#3CC742] to-[#C2FFC5] rounded-b-[20px] mx-auto 
-                      max-w-[1520px] pt-[31px] pb-[21px] px-[50px] items-start relative z-[60]">
+    <div className="min-h-screen w-full bg-[#F6F6FA] lg:bg-white">
+      <div className="search-container flex lg:justify-between justify-center lg:bg-gradient-to-b 
+                      from-[#3CC742] to-[#C2FFC5] rounded-b-[20px] bg-[#FFFFFF] mx-auto 
+                      max-w-[1520px] w-full pt-[31px] pb-[21px] px-[50px] items-start relative z-[60]">
         <div>
-          <h2 className="text-center font-medium font-[Roboto] text-2xl text-[#4F4F4F]">Что вы ищете?</h2>
+          <h2 className="lg:block hidden text-center font-medium font-[Roboto] text-2xl text-[#4F4F4F]">Что вы ищете?</h2>
 
-          <div className="pt-[23px]">
+          <div className="lg:pt-[23px] ">
             {/* SEARCH BOX */}
-            <div className="search-box relative flex items-center">
-              <img src="/images/Shape.png" className="absolute left-[20px] text-[#BDBDBD]" />
-              <input 
-                id="search"
-                type="text" 
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Поиск"
-                className="focus:outline-none w-full rounded-[19px] border-none bg-[#F6F6F6] w-[531px] 
-                           h-[50px] text-sm pt-[8px] pr-[8px] pb-[8px] pl-[35px] placeholder-[#BDBDBD]
-                           shadow-[0_2px_10px_0_rgba(0,0,0,0.07)]" 
-              />
+            <div className="flex flex-col">
+              <div className="search-box relative flex items-center">
+                <img src="/images/Shape.png" className="absolute left-[20px] text-[#BDBDBD]" />
+                <input 
+                  id="search"
+                  type="text" 
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Поиск"
+                  className="focus:outline-none w-full rounded-[19px] border-none bg-[#F6F6F6] w-[531px] 
+                            h-[50px] text-sm pt-[8px] pr-[8px] pb-[8px] pl-[35px] placeholder-[#BDBDBD]
+                            shadow-[0_2px_10px_0_rgba(0,0,0,0.07)]" 
+                />
+              </div>
+              <div className="lg:hidden">
+                <SerachDropdowns selectedType={selectedType}/>
+              </div>
             </div>
 
+
             <div className="flex items-start justify-between text-[#333333]">
-              <div className="location-container flex flex-col mt-[10px]">
+              <div className="location-container flex flex-col mt-[10px] gap-[8px]">
                 {location.map((loc) => (
                 <div className="radio-option flex items-center" key={loc.id}>
                   <input
@@ -136,14 +143,14 @@ function Search() {
                     className="search-radio"
                     disabled={loc.id === 1 && !profile?.location} 
                   />
-                  <label htmlFor={loc.id} className="flex gap-[11px]">
-                    <div className="location-name flex">
-                      <span></span>
-                      <p className="max-w-[65px]">{loc.name}</p>
-                    </div>
-                    <div className="placeholder-img flex gap-[5.7px] text-sm">
-                      <img src="/images/placeholder.png" alt="" className="w-[16.3px] h-[20px]" />
-                      <p>{loc.address}</p>
+                  <label htmlFor={loc.id} className="flex items-center gap-[6px]">
+                    <span></span>
+                    <div className="flex flex-col lg:flex-row lg:gap-[11px]">
+                      <p className="lg:max-w-[59px] text-[#BDBDBD] lg:text-[#333333]">{loc.name}</p>
+                      <div className="placeholder-img flex gap-[5.7px] text-xs lg:text-sm">
+                        <img src="/images/placeholder.png" alt="" className="w-[16.3px] h-[20px]" />
+                        <p>{loc.address}</p>
+                      </div>
                     </div>
                   </label>
                 </div>
@@ -153,7 +160,7 @@ function Search() {
               {/* RADIUS */}
               <div className="radius flex flex-col text-sm font-medium pt-[9px] gap-[5px] ml-[46px]">
                 <p className="text-xs leading-[20px] font-[Roboto] font-medium">Радиус поиска</p>
-                <div className="radius-box flex gap-[14px] text-black">
+                <div className="radius-box flex flex-col lg:flex-row gap-[14px] text-black">
                   <input 
                         id="radius"
                         type="text" 
@@ -162,7 +169,7 @@ function Search() {
                                   font-medium font-[Montserrat] rounded-[19px] pl-[27px]
                                   shadow-[0_2px_10px_0_rgba(0,0,0,0.07)] focus:outline-none" 
                   />
-                  <div className="flex flex-col gap-[9px]">
+                  <div className="flex lg:flex-col gap-[9px]">
                     <label htmlFor="km" className="flex justify-between cursor-pointer">
                       Км
                       <input type="radio" name="km-m" id="km" className="km-m-input hidden" defaultChecked />
@@ -182,7 +189,7 @@ function Search() {
 
         {/* Dropdowns */}
         <div className="flex flex-col gap-[27px]">
-          <div className="dropdown-select flex gap-[30px] pt-[23px] items-center">
+          <div className="hidden lg:block dropdown-select lg:flex gap-[30px] pt-[23px] items-center">
             <div className="gap-1.75 flex flex-col">
               <p className="pl-[14px] text-xs font-medium font-[Roboto]">Тип объявления</p>
               <div className="relative w-[222px] font-[Roboto] font-medium text-xs">
@@ -201,7 +208,7 @@ function Search() {
             </div>
 
             <button 
-              className="shadow-[0_2px_10px_0_rgba(0,0,0,0.07)] text-white font-normal bg-[#27AE60] rounded-[25px] 
+              className="lg:block hidden shadow-[0_2px_10px_0_rgba(0,0,0,0.07)] text-white font-normal bg-[#27AE60] rounded-[25px] 
                         w-[228px] h-[50px] text-sm cursor-pointer mt-[23px]"
               onClick={() => handleApplyFilter(true)}>
                 Искать
@@ -235,7 +242,7 @@ function Search() {
           onSelectCard={(item) => dispatch(setSelectedCard(item))}
         />
       )}
-      <h2 className="mt-[40px] mb-[72px] text-center text-xl font-medium text-[#18A615]">
+      <h2 className="lg:block hidden mt-[40px] mb-[72px] text-center text-xl font-medium text-[#18A615]">
         Хотите быстрее найти клиентов? Разместите <b>рекламный баннер</b>!
       </h2>
         
