@@ -102,14 +102,20 @@ function Search() {
   return (
     <div className="min-h-screen w-full bg-[#F6F6FA] lg:bg-white">
       <div className="search-container flex lg:justify-between justify-center lg:bg-gradient-to-b 
-                      from-[#3CC742] to-[#C2FFC5] rounded-b-[20px] bg-[#FFFFFF] mx-auto 
+                      from-[#3CC742] to-[#C2FFC5] rounded-b-[30px] lg:rounded-b-[20px] bg-[#FFFFFF] mx-auto 
                       max-w-[1520px] w-full pt-[31px] pb-[21px] px-[50px] items-start relative z-[60]">
         <div>
           <h2 className="lg:block hidden text-center font-medium font-[Roboto] text-2xl text-[#4F4F4F]">Что вы ищете?</h2>
 
           <div className="lg:pt-[23px] ">
             {/* SEARCH BOX */}
-            <div className="flex flex-col">
+            <form 
+              className="flex flex-col"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleApplyFilter();
+              }}
+            >
               <div className="search-box relative flex items-center">
                 <img src="/images/Shape.png" className="absolute left-[20px] text-[#BDBDBD]" />
                 <input 
@@ -126,10 +132,10 @@ function Search() {
               <div className="lg:hidden">
                 <SerachDropdowns selectedType={selectedType}/>
               </div>
-            </div>
+            </form>
 
 
-            <div className="flex items-start justify-between text-[#333333]">
+            <div className="loc-rad flex items-start justify-between text-[#333333]">
               <div className="location-container flex flex-col mt-[10px] gap-[8px]">
                 {location.map((loc) => (
                 <div className="radio-option flex items-center" key={loc.id}>
@@ -146,7 +152,7 @@ function Search() {
                   <label htmlFor={loc.id} className="flex items-center gap-[6px]">
                     <span></span>
                     <div className="flex flex-col lg:flex-row lg:gap-[11px]">
-                      <p className="lg:max-w-[59px] text-[#BDBDBD] lg:text-[#333333]">{loc.name}</p>
+                      <p className="lg:max-w-[59px] text-[#BDBDBD] lg:text-[#333333] pl-[20px] lg:pl-0">{loc.name}</p>
                       <div className="placeholder-img flex gap-[5.7px] text-xs lg:text-sm">
                         <img src="/images/placeholder.png" alt="" className="w-[16.3px] h-[20px]" />
                         <p>{loc.address}</p>
@@ -169,7 +175,7 @@ function Search() {
                                   font-medium font-[Montserrat] rounded-[19px] pl-[27px]
                                   shadow-[0_2px_10px_0_rgba(0,0,0,0.07)] focus:outline-none" 
                   />
-                  <div className="flex lg:flex-col gap-[9px]">
+                  <div className="km-m flex lg:flex-col gap-[9px]">
                     <label htmlFor="km" className="flex justify-between cursor-pointer">
                       Км
                       <input type="radio" name="km-m" id="km" className="km-m-input hidden" defaultChecked />
@@ -188,8 +194,8 @@ function Search() {
         </div>
 
         {/* Dropdowns */}
-        <div className="flex flex-col gap-[27px]">
-          <div className="hidden lg:block dropdown-select lg:flex gap-[30px] pt-[23px] items-center">
+        <div className="hidden lg:block flex flex-col gap-[27px]">
+          <div className="dropdown-select lg:flex gap-[30px] pt-[23px] items-center">
             <div className="gap-1.75 flex flex-col">
               <p className="pl-[14px] text-xs font-medium font-[Roboto]">Тип объявления</p>
               <div className="relative w-[222px] font-[Roboto] font-medium text-xs">
@@ -229,14 +235,12 @@ function Search() {
       {/* Results */}
       {filteredResult.length === 0 &&  
         <Recomendation 
-          style={{marginTop: "73px"}} 
           showAds={true} 
           showOnlyFilledAds={true}  
         /> 
       }
       {filteredResult.length > 0 && (
         <SearchResults
-          style={{marginTop: "73px"}} 
           filteredResult={filteredResult}
           selectedCard={selectedCard}
           onSelectCard={(item) => dispatch(setSelectedCard(item))}
@@ -245,9 +249,8 @@ function Search() {
       <h2 className="lg:block hidden mt-[40px] mb-[72px] text-center text-xl font-medium text-[#18A615]">
         Хотите быстрее найти клиентов? Разместите <b>рекламный баннер</b>!
       </h2>
-        
     </div>
   );  
 }
 
-export default Search;
+export default Search; 

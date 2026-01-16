@@ -59,3 +59,18 @@ label input.km-m-input:checked + span {
     flex-direction: column;
   }
 }
+
+@media(max-width: 375px){
+  .loc-rad{
+    flex-direction: column;
+  }
+  .radius-box{
+    flex-direction: row;
+  }
+  .km-m{
+    flex-direction: column;
+  }
+  .radius{
+    margin-left: 0;
+  }
+}

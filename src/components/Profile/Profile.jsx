@@ -7,7 +7,6 @@ import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import Logout from "../Logout";
 
 function Profile({ user }){
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
     const isMessagesPage = location.pathname.includes("/profile/notifications") || location.pathname.includes("/profile/messages/");

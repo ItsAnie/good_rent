@@ -15,8 +15,8 @@ function SearchResults({
 
   return (
     <>
-      <div className="flex justify-between container mx-auto" style={style}>
-        <div className="w-[825px] h-full">
+      <div className="flex justify-center lg:justify-between container mx-auto lg:mt-[73px]">
+        <div className="w-[825px] h-full hidden lg:block">
           <Card
             selectedCard={selectedCard}
             forSearch

@@ -7,11 +7,11 @@ function Result({ allProducts, onClick, selectedCard, showAds }) {
   const scrollRef = useScrollGradient([allProducts.length]);
   
   return (
-      <div className="flex flex-col items-end">
-        <h2 className="text-[#18A615] text-xl font-medium font-[Roboto]">Результаты поиска</h2>
+      <div className="flex flex-col items-end w-[521px]">
+        <h2 className="hidden lg:block text-[#18A615] text-xl font-medium font-[Roboto]">Результаты поиска</h2>
         <div 
           ref={scrollRef}
-          className="popular-sections w-[521px] max-h-[1398 px] overflow-y-auto pr-[10px] pb-[18px] mt-[30px]">
+          className="popular-sections w-full max-h-[1398 px] overflow-y-auto lg:pr-[10px] pb-[18px] mt-[30px] px-[21px] lg:px-none">
           <div className="popular flex flex-col">
             <div className="flex flex-col gap-[18px]">
               {allProducts.map((item, index) => {
@@ -19,7 +19,7 @@ function Result({ allProducts, onClick, selectedCard, showAds }) {
                 return (
                   <div
                     className={`search-scroll flex flex-col cursor-pointer ${
-                      isSelected ? "border border-[#18A615] rounded-[8px]" : ""
+                      isSelected ? "lg:border border-[#18A615] rounded-[8px]" : ""
                     }`}
                     key={index}
                     onClick={() => onClick(item)}

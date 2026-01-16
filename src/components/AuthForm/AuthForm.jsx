@@ -57,7 +57,7 @@ function AuthForm({ isSignUp }) {
         </div>
 
         {!forget ? (
-          <form className="box-border mt-[94px] lg:mt-0" onSubmit={handleSubmit}>
+          <form className="box-border mt-[94px] lg:mt-0 p-[0_36px]" onSubmit={handleSubmit}>
             <div className="txt_field relative border-b-2 border-b-solid border-b-[#EDEEF3] lg:text-[#F2F2F2]">
               <label className="block text-xs font-normal mb-[5px] text-[#BDBDBD] lg:text-[#F2F2F2]">
                 Email
@@ -108,7 +108,7 @@ function AuthForm({ isSignUp }) {
             {error && <p className="text-red-500 mt-2">{error}</p>}
           </form>
         ) : (
-          <form className="forgot-form mt-[19px] box-border" onSubmit={handleSubmit}>
+          <form className="forgot-form mt-[19px] box-border p-[0_36px]" onSubmit={handleSubmit}>
             <div className="txt_field relative border-b-2 border-b-solid border-b-[#f2f2f2]">
               <label className="block text-xs font-normal text-[#f2f2f2] mb-[5px]">Email</label>
               <input

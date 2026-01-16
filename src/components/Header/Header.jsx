@@ -13,12 +13,12 @@ function Header() {
   };
 
   return (
-    <header className="w-full bg-[#65E36A] rounded-b-[20px] overflow-hidden">
+    <header className="w-full bg-white lg:bg-[#65E36A] rounded-b-[20px] shadow-[0_2px_4px_0_rgba(0,0,0,0.07)] fixed bottom-0 left-0 lg:static">
       <div className="container mx-auto py-[15px] text-[#4F4F4F] font-medium font-[Roboto]">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-0">
 
           {/* Logo  */}
-          <div className="flex items-center cursor-pointer" onClick={() => navigate("/")}>
+          <div className="hidden lg:flex items-center cursor-pointer" onClick={() => navigate("/")}>
             <img src="/images/logo.png" className="w-[101px] h-[120px] flex-shrink-0" />
             <div className="ml-3 flex flex-col">
               <h2 className="title text-5xl">GoodRent.</h2>
@@ -26,44 +26,57 @@ function Header() {
                 Сервис поиска услуг и товаров для аренды рядом с Вами!
               </p>
             </div>
-          </div>
+          </div> 
 
           {/* Navigation */}
-          <ul className="nav-list hidden lg:flex flex-wrap gap-20 list-none text-2xl">
-            <div className="flex flex-col items-center gap-[51px]">
-              <li className="cursor-pointer" onClick={() => navigate("/search")}>Поиск</li>
+          <div className="nav-list flex items-center lg:items-start text-2xl justify-between w-full sm:w-[531px] px-[38px] sm:px-0 md:px-0">
+            <div className="flex flex-col items-center gap-[51px]" onClick={() => navigate("/search")}>
+              <p className="cursor-pointer hidden lg:block">Поиск</p>
+              <img src={`${location.pathname === "/search" ? "/images/search_active.png" : "/images/search_mobile.png"}`} className="lg:hidden w-[27px]" />
               {location.pathname === "/search" && (
-                <div className="w-[100px] h-[3px] bg-[#4F4F4F]"></div>
+                <div className="hidden lg:block w-[100px] h-[3px] bg-[#4F4F4F]"></div>
               )}
             </div>
 
             <div className="flex flex-col items-center gap-[51px]">
-              <li className="cursor-pointer" onClick={() => navigate("/about-us")}>О нас</li>
+              <p onClick={() => navigate("/about-us")} className="hidden lg:block cursor-pointer">О нас</p>
+              <img src="/images/maps-and-flags.png" className="lg:hidden w-[20px]" />           
               {location.pathname === "/about-us" && (
                 <div className="w-[100px] h-[3px] bg-[#4F4F4F]"></div>
               )}
             </div>
 
             <div className="flex flex-col items-center gap-[51px]">
-              <li className="cursor-pointer" onClick={() => navigate("/help")}>Помощь</li>
+              <p onClick={() => navigate("/help")} className="hidden lg:block cursor-pointer">Помощь</p>
+              <img src="/images/plus.png" className="lg:hidden w-[48px]" />
               {location.pathname === "/help" && (
                 <div className="w-[100px] h-[3px] bg-[#4F4F4F]"></div>
               )}
             </div>
 
             <div className="flex flex-col items-center gap-[51px]">
-              <li className="cursor-pointer" onClick={() => navigate("/advertising")}>Реклама</li>
+              <p onClick={() => navigate("/advertising")} className="hidden lg:block cursor-pointer">Реклама</p>
+              <img 
+                src={`${location.pathname === "/profile/notifications" ? " /images/Path_active.png" : " /images/Path.png"}`} 
+                className="lg:hidden w-[28px]" 
+                onClick={() => navigate("/profile/notifications")} />
               {location.pathname === "/advertising" && (
                 <div className="w-[100px] h-[3px] bg-[#4F4F4F]"></div>
               )}
             </div>
 
-            <li className="cursor-pointer">Блог</li> 
-          </ul>
+            <div className="cursor-pointer">
+              <p className="hidden lg:block">Блог</p>
+              <img 
+                src={`${location.pathname === "/profile" ? "/images/human-active.png" : "/images/human.png" }`}
+                className="block lg:hidden w-[21px]" 
+                onClick={handleProfileClick} />
+            </div> 
+          </div>
 
           {/* Profile */}
           <div
-              className="profile flex items-center max-w-[337px] gap-[37px] cursor-pointer"
+              className="hidden lg:flex profile items-center max-w-[337px] gap-[37px] cursor-pointer"
               onClick={handleProfileClick} 
             >
               <img 
