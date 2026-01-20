@@ -10,13 +10,10 @@ function Dropdown({ id, iconKey = "icon", onlyLabels = false }) {
   const { selectedType, selectedCategory, selectedSub } = useSelector(state => state.dropdown);
   const [open, setOpen] = useState(false);
 
-  // Fetch options once
   useEffect(() => {
     if (!loading) dispatch(fetchOptions());
   }, [loading, dispatch]);
 
-
-  // Dropdown mapping
   const map = {
     type: {
       selected: selectedType,

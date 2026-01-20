@@ -100,10 +100,10 @@ function Search() {
 
 
   return (
-    <div className="min-h-screen w-full bg-[#F6F6FA] lg:bg-white">
+    <div className="w-full bg-[#F6F6FA] lg:bg-white">
       <div className="search-container flex lg:justify-between justify-center lg:bg-gradient-to-b 
                       from-[#3CC742] to-[#C2FFC5] rounded-b-[30px] lg:rounded-b-[20px] bg-[#FFFFFF] mx-auto 
-                      max-w-[1520px] w-full pt-[31px] pb-[21px] px-[50px] items-start relative z-[60]">
+                      max-w-[1520px] w-full pt-[31px] pb-[21px] lg:px-[50px] items-start relative z-[60]">
         <div>
           <h2 className="lg:block hidden text-center font-medium font-[Roboto] text-2xl text-[#4F4F4F]">Что вы ищете?</h2>
 
@@ -155,7 +155,7 @@ function Search() {
                       <p className="lg:max-w-[59px] text-[#BDBDBD] lg:text-[#333333] pl-[20px] lg:pl-0">{loc.name}</p>
                       <div className="placeholder-img flex gap-[5.7px] text-xs lg:text-sm">
                         <img src="/images/placeholder.png" alt="" className="w-[16.3px] h-[20px]" />
-                        <p>{loc.address}</p>
+                        <p className="street">{loc.address}</p>
                       </div>
                     </div>
                   </label>
@@ -225,6 +225,7 @@ function Search() {
            <RealEstate onMoreFilters={handleMoreFilters} selectedCategory={selectedCategory} />
           }
         </div>
+        <div className="bg-[#BDBDBD] w-[42px] h-[2px] rounded-[1.5px] absolute bottom-[10px] lg:hidden"></div>
       </div>
       {showMoreFilters &&(
         <div className="absolute w-full z-[50]">

@@ -40,7 +40,7 @@ function Header() {
 
             <div className="flex flex-col items-center gap-[51px]">
               <p onClick={() => navigate("/about-us")} className="hidden lg:block cursor-pointer">О нас</p>
-              <img src="/images/maps-and-flags.png" className="lg:hidden w-[20px]" />           
+              <img src={`${location.pathname === "/map" ? "/images/maps-and-flags-active.png" : "/images/maps-and-flags.png"}`} className="lg:hidden w-[20px]" onClick={() => navigate("/map")} />           
               {location.pathname === "/about-us" && (
                 <div className="w-[100px] h-[3px] bg-[#4F4F4F]"></div>
               )}

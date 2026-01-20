@@ -57,11 +57,11 @@ function Messages() {
     }, [currentUser]);
 
     return (
-        <div>
+        <div className="w-full">
             {submittedBanner && <BannerSubmissionSuccess /> }
             <div className="overflow-hidden">
-                <h2 className="font-[Roboto] font-medium text-xl text-[#18A615] ml-[15px]">Мои сообщения</h2>
-                <div className="messages flex flex-col gap-[10px] w-[560px] h-[650px] overflow-y-auto pr-[15px] mt-[18px]">
+                <h2 className="font-[Roboto] font-medium text-xl text-[#18A615] ml-[15px] hidden lg:block">Мои сообщения</h2>
+                <div className="messages flex flex-col gap-[10px] w-full lg:w-[560px] h-[650px] overflow-y-auto lg:pr-[15px] lg:mt-[18px] px-[20px] lg:px-0">
                     {chats.map((chat) => (
                         <div 
                             key={chat.id}
@@ -90,7 +90,6 @@ function Messages() {
                                     </p>
                                 </div>
                             </div>
-                            <div className="bg-[#EDEEF3] h-full w-[1px] absolute top-0 right-[16px]"></div>
                             <img src={chat.bitmap} alt="bitmap" className="h-[70px] w-[70px]" />
                         </div>
                     ))}

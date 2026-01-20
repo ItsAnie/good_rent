@@ -60,17 +60,8 @@ label input.km-m-input:checked + span {
   }
 }
 
-@media(max-width: 375px){
-  .loc-rad{
-    flex-direction: column;
-  }
-  .radius-box{
-    flex-direction: row;
-  }
-  .km-m{
-    flex-direction: column;
-  }
-  .radius{
-    margin-left: 0;
+@media(max-width: 320px){
+  .street{
+    width: 100px;
   }
 }

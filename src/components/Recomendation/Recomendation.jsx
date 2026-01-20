@@ -50,9 +50,9 @@ function Recomendation({ searchResults, showAds, style={ }, onSelectedAdSlot, sh
   if (loading) return <p className="text-center">Loading...</p>;
 
   return (
-    <div className="recomendation-container bg-[#F6F6FA] lg:bg-white lg:mt-[73px] mt-[25px]">
+    <div className="recomendation-container lg:mt-[73px] mt-[25px]">
       <div className="recomendation container mx-auto">
-        <div className="grid-container flex items-center lg:justify-between justify-center max-w-[1520px] w-full">
+        <div className="grid-container flex items-center lg:justify-between justify-center w-full">
           <div className="grid-scroll flex flex-col gap-[30px]">
             {rowTitles.map((title, rowIndex) => (
               <div key={rowIndex} className="flex flex-col">

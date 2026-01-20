@@ -20,8 +20,8 @@ function Profile({ user }){
     }
 
     return(
-        <div className="profile-full flex container mx-auto mt-[50px] mb-[50px] min-h-screen">
-            <div className="mr-[19px]">
+        <div className={`profile-full flex container mx-auto lg:mt-[50px] ${location.pathname === "/profile/notifications" ? "pt-[30px]" : ""} lg:pt-0 mb-[50px] min-h-screen`}>
+            <div className="mr-[19px] hidden lg:block">
                 <div className="profile-info flex gap-[29px]">
                     <img src={data?.image || "/images/userpic.png"} className="w-[100px] h-[100px] rounded-full object-cover" />
                     <div>
@@ -57,7 +57,7 @@ function Profile({ user }){
 
                                     <div className="user-data flex gap-[22px] justify-start items-center">
                                         <img src="/images/location.png" className="w-[11px] h-[15px]" />
-                                        <p className="text-sm">{data.location}</p>
+                                        <p className="text-sm w-[238px]">{data.location}</p>
                                     </div>
 
                                     <div className="user-data flex gap-[22px] justify-start items-center">
@@ -84,7 +84,7 @@ function Profile({ user }){
                 </div>    
             </div>
 
-            <div className={`border-solid border-l-1 border-[#D7E3F1] ${isMessagesPage ? "pl-[63px]" : "pl-[78px]"}`}>
+            <div className={`border-none lg:border-solid lg:border-l-1 lg:border-[#D7E3F1] w-full lg:w-auto ${isMessagesPage ? "lg:pl-[63px]" : "pl-[78px]"}`}>
                 {!isMessagesPage && (
                     <>
                         <div className="w-[732px]">

@@ -1,7 +1,10 @@
 import React from "react";
 import './Register.css'
+import { useNavigate } from "react-router-dom";
 
 function Register({ onSignUpClick, onSignInClick }) {
+  const navigate = useNavigate();
+
   return (
     <div className="register flex absolute top-[45px] justify-center items-center text-[#FFFFFF] h-screen lg:h-[874px]">
       <div className="logo-register flex flex-col lg:justify-between w-full h-full md:justify-start">
@@ -37,7 +40,12 @@ function Register({ onSignUpClick, onSignInClick }) {
               onClick={onSignInClick}
               >Войти через e-mail</button>
 
-            <button className="register-btn register-btn w-[355px] h-[50px] rounded-[25px] bg-[#27AE60] text-sm font-normal cursor-pointer">Продолжить без регистрации</button>
+            <button 
+              className="register-btn register-btn w-[355px] h-[50px] rounded-[25px] bg-[#27AE60] text-sm font-normal cursor-pointer"
+              onClick={() => navigate("/search")}
+            >
+              Продолжить без регистрации
+            </button>
           </div>
       </div>  
     </div>

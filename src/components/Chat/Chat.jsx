@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { ref, push, update, onValue } from "firebase/database";
 import { database } from "../../firebase";
@@ -7,6 +7,7 @@ import "./Chat.css";
 import { useSelector } from "react-redux";
 
 function Chat(){
+    const navigate = useNavigate();
     const [messages, setMessages] = useState([]);
     const [text, setText] = useState("");
     const location = useLocation();
@@ -83,26 +84,47 @@ function Chat(){
     if (!currentUser) return;
 
     return (
-        <div>
-            <div className="w-[655px]">
-                <div className="flex justify-between items-center w-full h-[70px] rounded-[8px] relative
+        <div className="w-full">
+            <div className="lg:w-[655px] w-full">
+                <div className="flex lg:flex-row flex-col justify-between items-center w-full lg:h-[70px] rounded-[8px] 
                                 shadow-[0_2px_10px_0_rgba(0,0,0,0.1)] bg-white relative 
                                 mb-[-40px] pl-[20px] pt-[14px] pb-[16px] pr-[29px]"
                 >
-                    <div className="flex items-center gap-[10px]">
-                        <img src={receiverImage} alt="user" className="rounded-full w-[40px] h-[40px] object-cover" />
-                        <div className="text-[10px] text-[#BDBDBD]">
-                            <p className="text-xs text-[#000000] font-medium font-[Roboto]">{receiverName}</p>
-                            <p>Online</p>
-                            <p>24.04.2019 в 17:53</p>
+                    <div className="flex justify-between w-full items-center">
+                        <div className="flex items-center justify-start gap-[6px] lg:hidden">
+                            <img src="/images/arrow-point-to-right.png" />
+                            <p 
+                                className="text-[#18A615] text-sm"
+                                onClick={() => navigate("/profile/notifications")}
+                            >
+                                Назад
+                            </p>
+                        </div>
+                        <div className="flex items-center gap-[10px]">
+                            <img src={receiverImage} alt="user" className="rounded-full w-[40px] h-[40px] object-cover hidden lg:block" />
+                            <div className="text-[10px] text-[#BDBDBD]">
+                                <p className="text-xs text-[#000000] font-medium font-[Roboto]">{receiverName}</p>
+                                <p className="hidden lg:block">Online</p>
+                                <p className="text-center lg:text-start">24.04.2019 в 17:53</p>
+                            </div>
+                        </div>
+                        <img src={receiverImage} alt="user" className="rounded-full w-[40px] h-[40px] object-cover lg:hidden" />
+                    </div>
+                    <div className="lg:w-[1px] lg:h-[70px] w-full h-[1px] bg-[#EDEEF3] absolute top-[70px] lg:right-[99.5px] lg:top-0"></div>
+                    <div className="flex justify-start lg:justify-end w-full items-center text-xs mt-[21px] lg:mt-0 gap-[10px]">
+                        <img src={bitmap} alt="bitmap" className="w-[43px] h-[43px] rounded-full lg:rounded-none" />
+                        <div className="lg:hidden flex flex-col">
+                            <h3>Приставка X-BOX 360</h3>
+                            <p className="text-[#2F3C66] font-medium">10 000 руб.</p>
                         </div>
                     </div>
-                    <div className="w-[1px] h-[70px] bg-[#EDEEF3] absolute right-[99.5px]"></div>
-                    <img src={bitmap} alt="bitmap" className="w-[43px] h-[43px]" />
                 </div>
                
-                <div className="bg-[#F2F2F2] border border-[#E0E0E0] w-full h-[659px] rounded-[15px] text-xs flex flex-col justify-between pb-[35px] pl-[37px] pr-[10px]">
-                    <div className="chat mt-[41px] overflow-y-scroll pr-[20px]">
+                <div 
+                    className="bg-none lg:bg-[#F2F2F2] border-none lg:border lg:border-[#E0E0E0]
+                            w-full h-[659px] rounded-[15px] text-xs flex flex-col justify-between lg:pb-[35px] lg:pl-[37px] lg:pr-[10px]"
+                >
+                    <div className="chat mt-[41px] overflow-y-scroll pl-[20px] pr-[23px] lg:pr-[20px] lg:pl-[39px]">
                         {messages.map(msg => (
                             <div
                                 key={msg.id}
@@ -129,15 +151,15 @@ function Chat(){
                             </div>
                         ))}
                     </div>
-                    <div className="flex gap-[9px]">
+                    <div className="flex gap-[9px] justify-center bg-white lg:bg-transparent w-full py-[10px] pr-[10px] pl-[21px] fixed bottom-0 lg:static">
                         <input 
                             type="text" 
                             value={text}
                             onChange={e => setText(e.target.value)}
-                            className="w-[494px] h-[87px] bg-white border border-[#E0E0E0] rounded-[10.5px] focus:outline-none pl-[8px]"
+                            className="w-[494px] h-[30px] md:h-[87px] bg-[#F6F6FA] lg:bg-white border-none lg:border lg:border-[#E0E0E0] rounded-[10.5px] focus:outline-none pl-[8px]"
                         />
                         <div className="flex flex-col justify-between">
-                            <div className="flex flex-col gap-[6px]">
+                            <div className="md:flex flex-col gap-[6px] hidden">
                                 <img src="/images/add_photo.png" className="w-[25px] cursor-pointer" />
                                 <img src="/images/attach.png" className="w-[22.24px] cursor-pointer" />
                             </div>

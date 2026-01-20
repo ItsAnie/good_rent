@@ -28,6 +28,7 @@ import { AdsProvider } from "./store/AdsContext";
 import Advertising from "./components/Advertising/Advertising";
 import { fetchAllUsers } from "./store/slice/usersSlice";
 import { useAuthListener } from "./hooks/useAuthListener";
+import LocationMobile from "./components/LocationMobile";
 
 function App() {
   useAuthListener();
@@ -59,11 +60,13 @@ function App() {
   }, []);
 
   const location = useLocation();
-  const hideHeader = location.pathname === "/";
+  const hideHeader = location.pathname === "/" ;
+  const isChatPage = location.pathname.startsWith("/profile/messages");
+  const isMobile = window.innerWidth < 1024;
 
   return (
-    <>
-      {!hideHeader && <Header />}
+    <div className="bg-[#F6F6FA] lg:bg-white">
+      {!hideHeader && !(isChatPage && isMobile) && <Header />}
 
       <AdsProvider>
         <Routes>
@@ -93,10 +96,11 @@ function App() {
           <Route path="/card-for-client/:id" element={<CardForClient />} />
           <Route path="/card-for-user/:id" element={<CardForUser />} />
           <Route path="/feedbacks" element={<Feedbacks />} />
+          <Route path="/map" element={<LocationMobile />} />
         </Routes>
       </AdsProvider>
       <Footer />
-    </>
+    </div>
   );
 }
 
