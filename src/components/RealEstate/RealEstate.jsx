@@ -20,7 +20,7 @@ function RealEstate({onMoreFilters, newAd, selectedCategory}){
     }
     
     return(
-        <div className={`flex items-center ${!newAd ? "justify-end" : ""} gap-[30px] text-[#333333] text-lg font-normal`}>
+        <div className={`flex items-center mt-[27px] ${!newAd ? "justify-end" : ""} gap-[30px] text-[#333333] text-lg font-normal`}>
             {selectedCategory?.value !== "Транспорт" && mainFilters.map((filter) => (
                 <div key={filter}>
                     <input 
