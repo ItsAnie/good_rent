@@ -52,8 +52,8 @@ function Recomendation({ searchResults, showAds, style={ }, onSelectedAdSlot, sh
   return (
     <div className="recomendation-container lg:mt-[73px] mt-[25px]">
       <div className="recomendation container mx-auto">
-        <div className="grid-container flex items-center lg:justify-between justify-center w-full">
-          <div className="grid-scroll flex flex-col gap-[30px]">
+        <div className="grid-container flex items-center lg:justify-between xl:flex-row flex-col justify-center w-full">
+          <div className="grid-scroll flex flex-col gap-[30px] max-w-[580px] mx-auto xl:mx-0">
             {rowTitles.map((title, rowIndex) => (
               <div key={rowIndex} className="flex flex-col">
                 <h2 className="lg:text-[#18A615] text-[#333333] text-xl font-medium font-[Roboto] text-left mb-[20px]">
@@ -97,7 +97,7 @@ function Recomendation({ searchResults, showAds, style={ }, onSelectedAdSlot, sh
               </div>
             ))}
           </div>
-          <img src="./images/Map.png" alt="Map" className="hidden lg:block" />
+          <img src="./images/Map.png" alt="Map" className="hidden lg:block max-w-[825px] mx-auto xl:mx-0" />
         </div>
       </div>
       {showAds && (

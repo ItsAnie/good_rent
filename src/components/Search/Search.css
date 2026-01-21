@@ -65,3 +65,9 @@ label input.km-m-input:checked + span {
     width: 100px;
   }
 }
+
+@media(max-width: 1360px){
+  .dropdown-select{
+    flex-direction: column;
+  }
+}
