@@ -15,7 +15,7 @@ import DaggableContainer from "../DraggableContainer";
 function Search() {
   const dispatch = useDispatch();
   const locationHook = useLocation();
-  const isMobileLocation = locationHook.pathname === "/map";
+  const isMobileLocation = locationHook.pathname === "/location";
   // RESET dropdowns on mount
   useEffect(() => {
     dispatch(setSelectedType(null));

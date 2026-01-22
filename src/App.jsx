@@ -7,7 +7,6 @@ import Search from "./components/Search/Search";
 import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
 import Footer from "./components/Footer/Footer";
-import { addOptionsToDB } from "./data";
 import "./App.css";
 import EditProfile from "./components/EditProfile/EditProfile";
 import { auth } from "./firebase";
@@ -96,7 +95,7 @@ function App() {
           <Route path="/card-for-client/:id" element={<CardForClient />} />
           <Route path="/card-for-user/:id" element={<CardForUser />} />
           <Route path="/feedbacks" element={<Feedbacks />} />
-          <Route path="/map" element={<LocationMobile />} />
+          <Route path="/location" element={<LocationMobile />} />
         </Routes>
       </AdsProvider>
       <Footer />

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserProfile } from "../../store/slice/profileSlice";
+import { updateUserProfile } from "../store/slice/profileSlice";
 
 function AddCard({onClose}){
     const dispatch = useDispatch();

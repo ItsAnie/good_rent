@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useToggle } from "../../hooks/useToggle";
-import AddCard from "../AddCard/AddCard";
+import AddCard from "../AddCard";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from "../../store/slice/profileSlice";
 import "./Payment.css"
