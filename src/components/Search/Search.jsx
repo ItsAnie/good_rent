@@ -10,6 +10,7 @@ import RealEstate from "../RealEstate/RealEstate";
 import MoreFilters from "../RealEstate/MoreFilters";
 import SerachDropdowns from "../SearchDropdowns";
 import { useLocation } from "react-router-dom";
+import DaggableContainer from "../DraggableContainer";
 
 function Search() {
   const dispatch = useDispatch();
@@ -103,7 +104,7 @@ function Search() {
 
   return (
     <div className="w-full bg-[#F6F6FA] lg:bg-white pb-[70px] lg:pb-0">
-      <div className="search-container flex lg:justify-between justify-center lg:bg-gradient-to-b 
+      <DaggableContainer className="search-container flex lg:justify-between justify-center lg:bg-gradient-to-b 
                       from-[#3CC742] to-[#C2FFC5] rounded-b-[30px] lg:rounded-b-[20px] bg-[#FFFFFF] mx-auto 
                       max-w-[1520px] w-full pt-[31px] pb-[21px] lg:px-[50px] items-start relative z-[60]">
         <div>
@@ -227,8 +228,7 @@ function Search() {
            <RealEstate onMoreFilters={handleMoreFilters} selectedCategory={selectedCategory} />
           }
         </div>
-        <div className="bg-[#BDBDBD] w-[42px] h-[2px] rounded-[1.5px] absolute bottom-[10px] lg:hidden"></div>
-      </div>
+      </DaggableContainer>
       {showMoreFilters &&(
         <div className="absolute w-full z-[50]">
           <MoreFilters selectedCategory={selectedCategory} onClose={() => setShowMoreFilters(false)} />
