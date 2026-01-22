@@ -47,27 +47,31 @@ function CardForUser() {
                 </h2>
 
                 <div className="review-scroll flex flex-col gap-[10px] max-h-[658px] w-full overflow-y-auto p-[11px]">
-                    {interestedUsers.map((user) => (
-                        <div
-                            key={user.id}
-                            className="flex justify-between items-center bg-white shadow-[0_2px_10px_0_rgba(0,0,0,0.07)] py-[30px] pl-[20px] pr-[38px] rounded-[8px] cursor-pointer"
-                        >
-                            <div className="flex items-center gap-[10px]">
-                                <img
-                                    src={user.image}
-                                    className="w-[40px] h-[40px] rounded-full object-cover"
-                                />
-                                <p className="max-w-[212px] text-[#2F3C66] font-medium font-[Roboto]">
-                                    {user.name}
-                                </p>
-                            </div>
+                    {interestedUsers.length === 0 ? (
+                        <p className="text-center">Нет ожидающих пользователей․</p>
+                    ) : (
+                        interestedUsers.map((user) => (
+                            <div
+                                key={user.id}
+                                className="flex justify-between items-center bg-white shadow-[0_2px_10px_0_rgba(0,0,0,0.07)] py-[30px] pl-[20px] pr-[38px] rounded-[8px] cursor-pointer"
+                            >
+                                <div className="flex items-center gap-[10px]">
+                                    <img
+                                        src={user.image}
+                                        className="w-[40px] h-[40px] rounded-full object-cover"
+                                    />
+                                    <p className="max-w-[212px] text-[#2F3C66] font-medium font-[Roboto]">
+                                        {user.name}
+                                    </p>
+                                </div>
 
-                            <img
-                                src="/images/message.png"
-                                className="w-[20px] h-[16px]"
-                            />
-                        </div>
-                    ))}
+                                <img
+                                    src="/images/message.png"
+                                    className="w-[20px] h-[16px]"
+                                />
+                            </div>
+                        ))
+                    )}
                 </div>
 
                 <button className="w-[355px] h-[50px] bg-[#27AE60] text-white text-sm rounded-[25px] cursor-pointer">

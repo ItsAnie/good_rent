@@ -71,3 +71,18 @@ label input.km-m-input:checked + span {
     flex-direction: column;
   }
 }
+
+@media (min-width: 1024px) and (max-width: 1360px){
+  .search-container{
+    max-width: 900px;
+  }
+}
+
+@media(min-width:1280px) and (max-width: 1310px){
+  .grid-box{
+    grid-template-columns: auto auto;
+  }
+  .grid-container{
+    padding: 0 50px 0;
+  }
+}

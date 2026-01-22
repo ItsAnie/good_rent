@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Register from "../Register/Register";
-import AuthForm from "../AuthForm/AuthForm";
+import AuthForm from "../AuthForm";
 import Header from "../Header/Header";
 
 import "./Start.css";

@@ -21,3 +21,12 @@
         font-size: 14px;
     }
 }
+
+@media(max-width: 1280px){
+    .nav-list{
+        max-width: 500px;
+    }
+    .div-xl{
+        padding-right: 10px;
+    }
+}

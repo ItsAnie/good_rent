@@ -160,7 +160,7 @@ function Card({ card, forSearch, forUser, forClient, showAds }) {
                                 className="text-white bg-[#27AE60] text-sm w-[355px] h-[50px] rounded-[25px] border-none cursor-pointer"
                                 onClick={() => setIsRented(true)}
                             >
-                                {selectedCard.type === "Аренда" ? "Товар сдан в аренду" : selectedCard.type === "Продажа" ? "Товар продан" : ""}
+                                {selectedCard.type === "Аренда" ? "Товар сдан в аренду" : selectedCard.type === "Продажа" ? "Товар продан" : "Товар сдан"}
                             </button> : 
                             <h3 
                                 className="text-sm text-[#18A615] text-center cursor-pointer"

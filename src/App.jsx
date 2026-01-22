@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Start from "./components/Start/Start";
-import AuthForm from "./components/AuthForm/AuthForm";
+import AuthForm from "./components/AuthForm";
 import Search from "./components/Search/Search";
 import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";

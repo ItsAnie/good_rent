@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { registerUser, loginUser, sendPasswordReset } from "../../store/slice/authSlice";
-import "./AuthForm.css";
+import { registerUser, loginUser, sendPasswordReset } from "../store/slice/authSlice";
 
 function AuthForm({ isSignUp }) {
   const [emailValue, setEmailValue] = useState("");
@@ -47,7 +46,7 @@ function AuthForm({ isSignUp }) {
 
   return (
     <div className="sign-in flex absolute top-0 justify-between items-end">
-      <div className="logo-form flex flex-col items-center justify-between text-[#ffffff] lg:h-[874px]">
+      <div className="logo-form flex flex-col items-center justify-between text-[#ffffff] lg:h-[874px] mt-[93px] md:mt-0">
         <div className="logo-header flex items-center justify-center flex-col">
           <img src="/images/logo.png" alt="logo" className="logo hidden lg:block" />
           <h1 className="text-[64px] text-[#4f4f4f] font-medium font-[Roboto]">GoodRent.</h1>
