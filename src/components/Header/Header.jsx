@@ -15,7 +15,7 @@ function Header() {
   return (
     <div className="w-full h-auto bg-white lg:bg-transparent fixed bottom-0 left-0 lg:static">
       <header className="w-full bg-white lg:bg-[#65E36A] rounded-b-[20px] shadow-[0_2px_4px_0_rgba(0,0,0,0.07)]">
-        <div className="container mx-auto py-[15px] text-[#4F4F4F] font-medium font-[Roboto]">
+        <div className="container mx-auto py-[15px] text-[#4F4F4F] font-medium font-[Roboto] z-70">
           <div className="div-xl flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-0">
 
             {/* Logo  */}
@@ -69,9 +69,9 @@ function Header() {
               <div className="cursor-pointer">
                 <p className="hidden lg:block">Блог</p>
                 <img 
-                  src={`${location.pathname === "/profile" ? "/images/human-active.png" : "/images/human.png" }`}
+                  src={`${location.pathname === "/profile/announcement" ? "/images/human-active.png" : "/images/human.png" }`}
                   className="block lg:hidden w-[21px]" 
-                  onClick={handleProfileClick} />
+                  onClick={() => navigate("/profile/announcement")} />
               </div> 
             </div>
 

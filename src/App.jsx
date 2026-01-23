@@ -90,6 +90,7 @@ function App() {
           </Route>
 
           <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/profile/announcement" element={<MyAnnouncement />} />
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/new-add" element={<NewAd />} />
           <Route path="/card-for-client/:id" element={<CardForClient />} />

@@ -1,19 +1,21 @@
-.announcement {
-  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-}
+@media(min-width: 1024px){
+  .announcement {
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  }
 
-.announcement::-webkit-scrollbar-thumb {
-  background-color: #219653;
-  border-radius: 5px;     
-  width: 10px;     
-}
+  .announcement::-webkit-scrollbar-thumb {
+    background-color: #219653;
+    border-radius: 5px;     
+    width: 10px;     
+  }
 
-.announcement::-webkit-scrollbar {
-  width: 6px;
-}
+  .announcement::-webkit-scrollbar {
+    width: 6px;
+  }
 
-.no-gradient {
-  mask-image: none !important;
-  -webkit-mask-image: none !important;
-} 
+  .no-gradient {
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  } 
+}

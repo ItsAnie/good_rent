@@ -10,6 +10,7 @@ function Profile({ user }){
     const navigate = useNavigate();
     const location = useLocation();
     const isMessagesPage = location.pathname.includes("/profile/notifications") || location.pathname.includes("/profile/messages/");
+    const isMobile = window.innerWidth < 1024;
     const {data} = useSelector((state) => state.profile);
 
     const [showConfirm, setShowConfirm] = useState(false);
@@ -20,8 +21,8 @@ function Profile({ user }){
     }
 
     return(
-        <div className={`profile-full flex container mx-auto lg:mt-[50px] ${location.pathname === "/profile/notifications" ? "pt-[30px]" : ""} lg:pt-0 mb-[50px] min-h-screen`}>
-            <div className="mr-[19px] hidden lg:block">
+        <div className={`profile-full flex flex-col lg:flex-row container mx-auto lg:mt-[50px] ${location.pathname === "/profile/notifications" ? "pt-[30px]" : ""} lg:pt-0 mb-[50px] min-h-screen`}>
+            <div className={`mr-[19px] ${(isMessagesPage && isMobile) ? "hidden" : "block"} lg:block`}>
                 <div className="profile-info flex gap-[29px]">
                     <img src={data?.image || "/images/userpic.png"} className="w-[100px] h-[100px] rounded-full object-cover" />
                     <div>
