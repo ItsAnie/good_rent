@@ -30,9 +30,9 @@ function Recomendation({ searchResults, showAds, style={ }, onSelectedAdSlot, sh
     
     const isOwner = item.userId === user.uid;
     if (isOwner) {
-      navigate(`/card-for-user/${item.id}`, { state: { item, forUser: true } });
+      navigate(`/product/${item.id}`, { state: { item, forUser: true } });
       } else {
-        navigate(`/card-for-client/${item.id}`, { state: { item, forClient: true } });
+        navigate(`/product/${item.id}`, { state: { item, forClient: true } });
       }
     };
 
@@ -53,7 +53,7 @@ function Recomendation({ searchResults, showAds, style={ }, onSelectedAdSlot, sh
     <div className="recomendation-container lg:mt-[73px] mt-[25px]">
       <div className="recomendation container mx-auto">
         <div className="grid-container flex items-center lg:justify-between xl:flex-row flex-col justify-center w-full">
-          <div className="grid-scroll flex flex-col gap-[30px] max-w-[580px] mx-auto xl:mx-0">
+          <div className="grid-scroll flex flex-col justify gap-[30px] max-w-[580px] px-[21px] lg:px-0 sm:mx-auto">
             {rowTitles.map((title, rowIndex) => (
               <div key={rowIndex} className="flex flex-col">
                 <h2 className="lg:text-[#18A615] text-[#333333] text-xl font-medium font-[Roboto] text-left mb-[20px]">
@@ -65,7 +65,7 @@ function Recomendation({ searchResults, showAds, style={ }, onSelectedAdSlot, sh
                       key={item.id}
                       className="item rounded-[8px] h-[163px] shadow-[0_2px_10px_rgba(0,0,0,0.07)] cursor-pointer bg-[#FFFFFF]"
                     >
-                      <div className="flex justify-center border-b border-[#EDEEF3] pt-[9px] pb-[8px]">
+                      <div className="flex justify-center border-b border-[#EDEEF3] pt-[9px] pb-[8px] px-[18px]">
                         <div className="text-center text-xs w-[44px] h-[18.8px] bg-[#FFFFFF] rounded-[19px] shadow-[0_2px_10px_rgba(0,0,0,0.07)]">
                           1 км
                         </div>

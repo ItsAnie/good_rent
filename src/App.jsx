@@ -93,8 +93,8 @@ function App() {
           <Route path="/profile/announcement" element={<MyAnnouncement />} />
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/new-add" element={<NewAd />} />
-          <Route path="/card-for-client/:id" element={<CardForClient />} />
-          <Route path="/card-for-user/:id" element={<CardForUser />} />
+          <Route path="/product/:id" element={<CardForClient />} />
+          <Route path="/product/:id" element={<CardForUser />} />
           <Route path="/feedbacks" element={<Feedbacks />} />
           <Route path="/location" element={<LocationMobile />} />
         </Routes>
